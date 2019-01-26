@@ -11,9 +11,20 @@ public class Drive{
         double rightSpeed = Math.min(speed - turnSpeed, Constants.MAX_MOTOR_SPEED);
 
         //Sets the speeds
-        Actuators.getLeft1Motor().set(ControlMode.PercentOutput, leftSpeed);
-        Actuators.getLeft2Motor().set(ControlMode.PercentOutput, leftSpeed);
+        Actuators.getLeft1Motor().set(ControlMode.PercentOutput, leftSpeed);        
         Actuators.getRight1Motor().set(ControlMode.PercentOutput, rightSpeed);
-        Actuators.getRight2Motor().set(ControlMode.PercentOutput, rightSpeed);
+        
+    }
+    public static void shiftGear(double speed, boolean shiftHigh, boolean shiftLow) {
+
+        //automatic shifting
+        if (speed < 0.4 && speed > -0.4) {
+            
+        } else if (speed >= 0.6 || speed <= -0.6) {
+            
+        } else {
+            
+        }
+
     }
 }
