@@ -29,4 +29,7 @@ public class Constants{
     public static final int RAISE_HATCH_VACUUM_ARM = 6;
     public static final int LOWER_HATCH_VACUUM_ARM = 7;
 
+    //Max drive speed
+    public static final double MAX_MOTOR_SPEED = 0.9;
+    
 }

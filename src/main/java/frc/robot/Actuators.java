@@ -3,6 +3,7 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+
 import edu.wpi.first.wpilibj.*;
 public class Actuators{
 
@@ -29,7 +30,7 @@ public class Actuators{
     private static DoubleSolenoid CargoHatchDelivery;
 
 
-    public void init(){
+    public static void init(){
 
     //TODO: add 3rd motor, talk to Mars
     Left1Motor = new TalonSRX(Constants.LEFT_DRIVE_MOTOR_TALONSRX);
@@ -51,9 +52,24 @@ public class Actuators{
     HatchClampOpen = new Solenoid(Constants.OPEN_HATCH_CLAMP);
     CargoHatchDelivery = new DoubleSolenoid(Constants.ADVANCE_CARGO_HATCH_DELVERY, Constants.RETURN_CARGO_HATCH_DELIVERY);
 
-
-
     }
+
+    public static TalonSRX getLeft1Motor(){
+        return Left1Motor;
+    }
+
+    public static VictorSPX getLeft2Motor(){
+        return Left2Motor;
+    }
+
+    public static VictorSPX getRight1Motor(){
+        return Right1Motor;
+    }
+
+    public static VictorSPX getRight2Motor(){
+        return Right2Motor;
+    }
+
 }
 
 
