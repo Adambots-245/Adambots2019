@@ -1,5 +1,6 @@
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -50,7 +51,12 @@ public class Actuators{
     Right1Motor.setInverted(false);
     Right2Motor.setInverted(false);
 
-   
+    //set drive motors to coast
+    Left1Motor.setNeutralMode(NeutralMode.Coast);
+    Left2Motor.setNeutralMode(NeutralMode.Coast);
+    Right1Motor.setNeutralMode(NeutralMode.Coast);
+    Right2Motor.setNeutralMode(NeutralMode.Coast);
+
     ClimbMotor = new TalonSRX(Constants.CLIMBING_ARM_CARGO_ACQUISITION);
     LinearActuator = new TalonSRX(Constants.LINEAR_ACTUATOR_MOTOR);
     InfeedArmMotor = new VictorSPX(Constants.INFEED_BAG_MOTOR_ARM);
