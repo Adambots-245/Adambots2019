@@ -74,6 +74,9 @@ public class Actuators{
 
     }
 
+    public static Solenoid getShiftHighGear(){
+        return ShiftHighGear;
+    }
     public static TalonSRX getLeft1Motor(){
         return Left1Motor;
     }

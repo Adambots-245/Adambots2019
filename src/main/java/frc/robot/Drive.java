@@ -1,9 +1,12 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-
+import edu.wpi.first.wpilibj.Timer;
 public class Drive{
-
+    private static Timer timer = new Timer();
+    public static void init(){
+        timer.start();
+    }
     public static void tankDrive(double speed, double turnSpeed){
         
         //Makes sure speed does not go above max
@@ -18,13 +21,41 @@ public class Drive{
     public static void shiftGear(double speed, boolean shiftHigh, boolean shiftLow) {
 
         //automatic shifting
-        if (speed < 0.4 && speed > -0.4) {
+        //not implemented
+        boolean override = false;
+        double currentTime = timer.get();
+        
+        
+        
+        
+        
+        if (override == false) {
+            if ((Math.abs(Actuators.getLeft1Motor().getSelectedSensorVelocity() - Actuators.getRight1Motor().getSelectedSensorVelocity()) < Constants.TURN_THRESHOLD) && (currentTime > Constants.TIME_THRESHOLD)) {
+                if (Math.abs(Actuators.getLeft1Motor().getSelectedSensorVelocity()) > Math.abs(Actuators.getRight1Motor().getSelectedSensorVelocity()))
+                    speed = Math.abs(Actuators.getLeft1Motor().getSelectedSensorVelocity());
+                else
+                    speed = Math.abs(Actuators.getRight1Motor().getSelectedSensorVelocity());
             
-        } else if (speed >= 0.6 || speed <= -0.6) {
+                if (speed > Constants.SHIFT_UP_THRESHOLD) {
+                    Actuators.getShiftHighGear().set(true);
+                    timer.reset();
+                }
             
+                if (speed < Constants.SHIFT_DOWN_THRESHOLD) {
+                    Actuators.getShiftHighGear().set(false);
+                    timer.reset();
+                }
+            }
+        
         } else {
-            
+            Actuators.getShiftHighGear().set(false);	
         }
+        
+        if (Gamepad.secondary.getX()) {
+            override = !override;
+        }
+        
+        
 
     }
 }

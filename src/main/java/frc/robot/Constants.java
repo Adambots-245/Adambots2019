@@ -20,6 +20,7 @@ public class Constants{
 
     //Pneumatics
     //PCM ports
+    
     public static final int RAISE_CENTERING_HATCH = 0;
     public static final int LOWER_CENTERING_HATCH = 1;
     public static final int ADVANCE_CARGO_HATCH_DELVERY = 2;
@@ -28,8 +29,16 @@ public class Constants{
     public static final int OPEN_HATCH_CLAMP = 5;
     public static final int RAISE_HATCH_VACUUM_ARM = 6;
     public static final int LOWER_HATCH_VACUUM_ARM = 7;
+    
+    public static final int SHIFT_HIGH_SPEED = 0;
+
 
     //Max drive speed
     public static final double MAX_MOTOR_SPEED = 0.9;
-    
+
+    //autoshift thresholds
+    public static final double TURN_THRESHOLD = 5;
+    public static final double SHIFT_UP_THRESHOLD = 10;
+    public static final double SHIFT_DOWN_THRESHOLD = 8;
+    public static final double TIME_THRESHOLD = 3;
 }
