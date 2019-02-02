@@ -54,6 +54,13 @@ public class Actuators{
 
 
     }
+
+    public static TalonSRX getClimbMotor() {
+        return ClimbMotor;
+    }
+    public static TalonSRX getLinearActuator() {
+        return LinearActuator;
+    }
 }
 
 

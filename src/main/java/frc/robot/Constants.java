@@ -29,4 +29,6 @@ public class Constants{
     public static final int RAISE_HATCH_VACUUM_ARM = 6;
     public static final int LOWER_HATCH_VACUUM_ARM = 7;
 
+    //Limiters
+    public static final double MAX_CLIMB_SPEED = 0.9; //TODO: Update this to correct max speed
 }
