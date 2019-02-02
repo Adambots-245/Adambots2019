@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 
 public class Gamepad {
 	private Joystick joy;
+	private Button A;
 	//// CONSTANTS -------------------------------------------------------------
 	/**
 	 * Primary Driver Controller Port Number.
@@ -94,13 +95,25 @@ public class Gamepad {
 	 */
 	private Gamepad(int port) {
 		joy = new Joystick(port);
+		A = new Button(joy, BUTTON_A);
 	}
+
 
 	// initializes the primary and secondary drivers
 	public static void init() {
 		primary = new Gamepad(PRIMARY_DRIVER);
 		secondary = new Gamepad(SECONDARY_DRIVER);
+		
 	}
+
+	public void update(){
+		A.update();
+	}
+
+	public void updateLast(){
+		A.updateLast();
+	}
+
 
 	// deadzoning
 	private double deaden(double u) {
