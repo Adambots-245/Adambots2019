@@ -29,6 +29,13 @@ public class Constants{
     public static final int RAISE_HATCH_VACUUM_ARM = 6;
     public static final int LOWER_HATCH_VACUUM_ARM = 7;
 
+
+    //TODO: UPDATE ALL VALUES BELOW TO THEIR TRUE, ACCURATE VALUES
     //Limiters
-    public static final double MAX_LIFT_SPEED = 0.0; //TODO: Update this value to the actual max elevator speed
+    public static final double MAX_LIFT_SPEED = 0.0;
+    
+    //Misc
+    public static final int LIFT_LEVEL_1 = 0;
+    public static final int LIFT_LEVEL_2 = 30000;
+    public static final int LIFT_LEVEL_3 = 60000; 
 }
