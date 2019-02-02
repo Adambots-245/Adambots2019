@@ -51,8 +51,24 @@ public class Actuators{
     HatchClampOpen = new Solenoid(Constants.OPEN_HATCH_CLAMP);
     CargoHatchDelivery = new DoubleSolenoid(Constants.ADVANCE_CARGO_HATCH_DELVERY, Constants.RETURN_CARGO_HATCH_DELIVERY);
 
+    
+   
+    }
 
+    public static DoubleSolenoid getCenterHatch(){
+        return CenterHatch;
+    }
 
+    public static Solenoid getVacuum(){
+        return Vacuum;
+    }
+
+    public static DoubleSolenoid getArmRaiseLower(){
+        return ArmRaiseLower;
+    }
+
+    public static Solenoid getHatchClampOpen(){
+        return HatchClampOpen;
     }
 }
 
