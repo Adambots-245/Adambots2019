@@ -91,7 +91,9 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Gamepad.primary.update();
     Gamepad.secondary.update();
-    Drive.tankDrive(Gamepad.primary.getLeftY(), Gamepad.primary.getRightX());
+
+    Drive.tankDrive(Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightX().get());
+    
     Gamepad.primary.updateLast();
     Gamepad.secondary.updateLast();
   }
