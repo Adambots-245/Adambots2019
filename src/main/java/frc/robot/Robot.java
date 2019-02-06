@@ -103,5 +103,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    Gamepad.primary.update();
+    Gamepad.secondary.update();
+
+    ToggleDrive.toggleDrive(Gamepad.primary.getA().getPresses());
+    
+    Gamepad.primary.updateLast();
+    Gamepad.secondary.updateLast();
   }
 }
