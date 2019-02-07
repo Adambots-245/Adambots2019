@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class Gamepad {
 	private Joystick joy;
 	private Button[] buttonArray = new Button[9];
-	private Axis[] axisArray = new Axis[8];
+	private Axis[] axisArray = new Axis[6];
 	private DPad[] dpadArray = new DPad[8];
 
 	//private Button A;
@@ -75,30 +75,22 @@ public class Gamepad {
 	 * XBOX 360 Right Vertical Axis (Up=1, Down=-1)
 	 */
 	private static final int AXIS_RIGHT_Y = 5;
-	/**
-	 * XBOX 360 DPad Horizontal Axis (Left=-1, Right=1)
-	 */
-	private static final int AXIS_DPAD_HORIZONTAL = 6;
-	/**
-	 * XBOX 360 DPad Vertical Axis (Up=-1, Right=1)
-	 */
-	private static final int AXIS_DPAD_VERTICAL = 7;
 
 	//the ID/port for the whole DPad 
 	//POV returns an angle 0-315 at 45 intervals
 	//guessed value TODO: find actual DPad ID/port
-	private static final int AXIS_DPAD_POV = 6;
+	private static final int AXIS_DPAD_POV = 0;
 
 	//All 8 possible DPad POV input values in degrees
 	//N is north/up W is west/left etc.
-	private static final int DPAD_N_POV_ANGLE = 0;
-    private static final int DPAD_NE_POV_ANGLE = 45;
-    private static final int DPAD_E_POV_ANGLE = 90;
-    private static final int DPAD_SE_POV_ANGLE = 135;
-    private static final int DPAD_S_POV_ANGLE = 180;
-    private static final int DPAD_SW_POV_ANGLE = 225;
-    private static final int DPAD_W_POV_ANGLE = 270;
-    private static final int DPAD_NW_POV_ANGLE = 315;
+	private static final int DPAD_N_POV_PORT = 0;
+    private static final int DPAD_NE_POV_PORT = 1;
+    private static final int DPAD_E_POV_PORT = 2;
+    private static final int DPAD_SE_POV_PORT = 3;
+    private static final int DPAD_S_POV_PORT = 4;
+    private static final int DPAD_SW_POV_PORT = 5;
+    private static final int DPAD_W_POV_PORT = 6;
+    private static final int DPAD_NW_POV_PORT = 7;
 	
 	
 
@@ -116,14 +108,15 @@ public class Gamepad {
 	 */
 	private Gamepad(int port) {
 		joy = new Joystick(port);
-		for(int i = 1; i < 9; i++){
+		buttonArray[0] = new Button(); // creating null button for 0th index in buttonArray
+		for(int i = 1; i <= 8; i++){
 			buttonArray[i] = new Button(joy, i); 
 		}
-		for(int i = 0; i < 8; i++){
+		for(int i = 0; i <= 5; i++){
 			axisArray[i] = new Axis(joy, i);
 		}
-		for(int i = 1; i < 9; i+=45){
-			dpadArray[i] = new DPad(joy, AXIS_DPAD_POV, i); 
+		for(int i = 0; i <= 7; i++){
+			dpadArray[i] = new DPad(joy, AXIS_DPAD_POV, i*45); 
 		}
 	}
 
@@ -136,26 +129,26 @@ public class Gamepad {
 	}
 	//updates every button and trigger value ('store' variable in each object class)
 	public void update(){
-		for (int i = 1; i < 9; i++){
+		for(int i = 1; i <= 8; i++){
 			buttonArray[i].update();
 		}
-		for (int i = 0; i < 8; i++){
+		for(int i = 0; i <= 5; i++){
 			axisArray[i].update();
 		}
-		for(int i = 1; i < 9; i+=45){
+		for(int i = 0; i <= 7; i++){
 			dpadArray[i].update(); 
 		}
 		
 	}
 
 	public void updateLast(){
-		for (int i = 1; i < 9; i++){
+		for(int i = 1; i <= 8; i++){
 			buttonArray[i].updateLast();
 		}
-		for (int i = 0; i < 8; i++){
+		for(int i = 0; i <= 5; i++){
 			axisArray[i].updateLast();
 		}
-		for(int i = 1; i < 9; i+=45){
+		for(int i = 0; i <= 7; i++){
 			dpadArray[i].updateLast(); 
 		}
 	}
@@ -230,35 +223,35 @@ public class Gamepad {
 
 	//DPad getters
 	public DPad getDPadN(){
-		return dpadArray[DPAD_N_POV_ANGLE];
+		return dpadArray[DPAD_N_POV_PORT];
 	}
 
 	public DPad getDPadNE(){
-		return dpadArray[DPAD_NE_POV_ANGLE];
+		return dpadArray[DPAD_NE_POV_PORT];
 	}
 
 	public DPad getDPadE(){
-		return dpadArray[DPAD_E_POV_ANGLE];
+		return dpadArray[DPAD_E_POV_PORT];
 	}
 
 	public DPad getDPadSE(){
-		return dpadArray[DPAD_SE_POV_ANGLE];
+		return dpadArray[DPAD_SE_POV_PORT];
 	}
 
 	public DPad getDPadS(){
-		return dpadArray[DPAD_S_POV_ANGLE];
+		return dpadArray[DPAD_S_POV_PORT];
 	}
 
 	public DPad getDPadSW(){
-		return dpadArray[DPAD_SW_POV_ANGLE];
+		return dpadArray[DPAD_SW_POV_PORT];
 	}
 
 	public DPad getDPadW(){
-		return dpadArray[DPAD_W_POV_ANGLE];
+		return dpadArray[DPAD_W_POV_PORT];
 	}
 
 	public DPad getDPadNW(){
-		return dpadArray[DPAD_NW_POV_ANGLE];
+		return dpadArray[DPAD_NW_POV_PORT];
 	}
 
 	// Rumble

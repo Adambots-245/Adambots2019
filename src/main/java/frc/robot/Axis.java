@@ -14,11 +14,11 @@ public class Axis {
 
     //if no parameters are given, this method creates an Axis object
     public Axis(){
-        axisObj = new Axis();
+        //axisObj = new Axis();
     }
     //creates a new Axis object
     public Axis(Joystick joy, int port){
-        axisObj = new Axis(joy, port);
+        //axisObj = new Axis(joy, port);
         this.port = port;
         this.joy = joy;
         last = false;
@@ -33,6 +33,7 @@ public class Axis {
         else{
             isPressed = false;
         }
+        isToggled();
     }
     //returns double value of the axis
     public double get(){

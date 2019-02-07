@@ -13,19 +13,20 @@ public class Button {
 
     //if no parameters are given, this method creates a Button object
     public Button(){
-        buttonObj = new Button();
+        //buttonObj = new Button();
     }
     //creates a new Button object
     public Button(Joystick joy, int port){
-        buttonObj = new Button(joy, port);
+       // buttonObj = new Button(joy, port);
         this.port = port;
         this.joy = joy;
-        last = false;
-        presses = 0;
+        this.last = false;
+        this.presses = 0;
     }
     //stores the value of the button to boolean store
     public void update(){
         store = joy.getRawButton(port);
+        isToggled();
     }
     //returns the boolean value of the button (true or false)
     public boolean get(){
