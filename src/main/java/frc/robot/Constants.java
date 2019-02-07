@@ -41,4 +41,14 @@ public class Constants{
     public static final double SHIFT_UP_THRESHOLD = 10;
     public static final double SHIFT_DOWN_THRESHOLD = 8;
     public static final double TIME_THRESHOLD = 3;
+    
+    //TODO: UPDATE ALL VALUES BELOW TO THEIR TRUE, ACCURATE VALUES
+    //Limiters
+    public static final double MAX_LIFT_SPEED = 0.0;
+    
+    //Misc
+    public static final int LIFT_LEVEL_1 = 0;
+    public static final int LIFT_LEVEL_2 = 30000;
+    public static final int LIFT_LEVEL_3 = 60000; 
+
 }

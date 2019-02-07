@@ -95,7 +95,7 @@ public class HatchIntake {
                 suctionArmsCounter = 0;
             }
         }
-
+    
         //spear clamp/release
         if(spear == true && Actuators.getHatchClampOpen().get() == true){
             if(previousSpear == false && spearCounter == 0){

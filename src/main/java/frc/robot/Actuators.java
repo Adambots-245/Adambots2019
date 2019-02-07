@@ -71,7 +71,10 @@ public class Actuators{
     HatchClampOpen = new Solenoid(Constants.OPEN_HATCH_CLAMP);
     CargoHatchDelivery = new Solenoid(Constants.ADVANCE_CARGO_HATCH_DELVERY, Constants.RETURN_CARGO_HATCH_DELIVERY);
     ShiftHighGear = new Solenoid(Constants.SHIFT_HIGH_SPEED);
-
+    }
+    
+    public static TalonSRX getLiftMotor1() {
+        return LiftMotor1;
     }
     
     public static Solenoid getShiftHighGear(){
