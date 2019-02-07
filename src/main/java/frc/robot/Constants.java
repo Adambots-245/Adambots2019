@@ -51,4 +51,7 @@ public class Constants{
     public static final int LIFT_LEVEL_2 = 30000;
     public static final int LIFT_LEVEL_3 = 60000; 
 
+    //Limiters TODO: UPDATE MAX AND MIN CLIMB SPEEDS TO CORRECT VALUES
+    public static final double MAX_CLIMB_SPEED = 0.9;
+    public static final double MIN_CLIMB_SPEED = -0.9;
 }
