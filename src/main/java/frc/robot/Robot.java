@@ -30,9 +30,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    Gamepad.init();
+    Actuators.init();
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
+
   }
 
   /**
@@ -86,6 +89,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    
+    Drive.tankDrive(Gamepad.primary.getLeftY(), Gamepad.primary.getRightX());
+
   }
 
   /**
