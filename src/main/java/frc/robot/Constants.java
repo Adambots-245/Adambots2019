@@ -33,7 +33,8 @@ public class Constants{
     public static final int SHIFT_HIGH_SPEED = 0;
 
 
-    //Max drive speed
+    //motor speeds
+    public static final double STOP_MOTOR_SPEED = 0.0;
     public static final double MAX_MOTOR_SPEED = 0.9;
 
     //autoshift thresholds
