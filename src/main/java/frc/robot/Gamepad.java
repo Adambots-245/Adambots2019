@@ -109,13 +109,13 @@ public class Gamepad {
 	private Gamepad(int port) {
 		joy = new Joystick(port);
 		buttonArray[0] = new Button(); // creating null button for 0th index in buttonArray
-		for(int i = 1; i <= 8; i++){
+		for(int i = 1; i <= buttonArray.length - 1; i++){
 			buttonArray[i] = new Button(joy, i); 
 		}
-		for(int i = 0; i <= 5; i++){
+		for(int i = 0; i <= axisArray.length - 1; i++){
 			axisArray[i] = new Axis(joy, i);
 		}
-		for(int i = 0; i <= 7; i++){
+		for(int i = 0; i <= dpadArray.length - 1; i++){
 			dpadArray[i] = new DPad(joy, AXIS_DPAD_POV, i*45); 
 		}
 	}
@@ -129,33 +129,33 @@ public class Gamepad {
 	}
 	//updates every button and trigger value ('store' variable in each object class)
 	public void update(){
-		for(int i = 1; i <= 8; i++){
+		for(int i = 1; i <= buttonArray.length - 1; i++){
 			buttonArray[i].update();
 		}
-		for(int i = 0; i <= 5; i++){
+		for(int i = 0; i <= axisArray.length - 1; i++){
 			axisArray[i].update();
 		}
-		for(int i = 0; i <= 7; i++){
+		for(int i = 0; i <= dpadArray.length - 1; i++){
 			dpadArray[i].update(); 
 		}
 		
 	}
 
 	public void updateLast(){
-		for(int i = 1; i <= 8; i++){
+		for(int i = 1; i <= buttonArray.length - 1; i++){
 			buttonArray[i].updateLast();
 		}
-		for(int i = 0; i <= 5; i++){
+		for(int i = 0; i <= axisArray.length - 1; i++){
 			axisArray[i].updateLast();
 		}
-		for(int i = 0; i <= 7; i++){
+		for(int i = 0; i <= dpadArray.length - 1; i++){
 			dpadArray[i].updateLast(); 
 		}
 	}
 
 
 	// deadzoning
-	private double deaden(double u) {
+	protected static double deaden(double u) {
 		return Math.abs(u) < .15 ? 0 : u;
 	}
 
