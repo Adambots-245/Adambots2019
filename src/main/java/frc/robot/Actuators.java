@@ -11,8 +11,10 @@ public class Actuators{
     //Motors through motor controllers
     private static TalonSRX Left1Motor;
     private static VictorSPX Left2Motor;
-    private static VictorSPX Right1Motor;
+    private static TalonSRX Right1Motor;
     private static VictorSPX Right2Motor;
+    private static VictorSPX Left3Motor;
+    private static VictorSPX Right3Motor;    
     private static TalonSRX ClimbMotor;
     private static TalonSRX LinearActuator;
     private static VictorSPX InfeedArmMotor;
@@ -37,25 +39,32 @@ public class Actuators{
     //TODO: add 3rd motor, talk to Mars
     Left1Motor = new TalonSRX(Constants.LEFT_DRIVE_MOTOR_TALONSRX);
     Left2Motor = new VictorSPX(Constants.LEFT_DRIVE_MOTOR_VICTORSPX1);
-    Right1Motor = new VictorSPX(Constants.RIGHT_DRIVE_MOTOR_VICTORSPX1);
-    Right2Motor = new VictorSPX(Constants.RIGHT_DRIVE_MOTOR_VICTORSPX2);
-    //Right3Motor = new VictorSPX(deviceNumber);
+    Left3Motor = new VictorSPX(Constants.LEFT_DRIVE_MOTOR_VICTORSPX2);
+    Right1Motor = new TalonSRX(Constants.RIGHT_DRIVE_MOTOR_TALONSRX);
+    Right2Motor = new VictorSPX(Constants.RIGHT_DRIVE_MOTOR_VICTORSPX1);
+    Right3Motor = new VictorSPX(Constants.RIGHT_DRIVE_MOTOR_VICTORSPX2);
 
     //set follower motors
     Left2Motor.follow(Left1Motor);
+    Left3Motor.follow(Left1Motor);
     Right2Motor.follow(Right1Motor);
+    Right3Motor.follow(Right1Moto);
     
     //reverse motors
     Left1Motor.setInverted(true);
     Left2Motor.setInverted(true);
+    Left3Motor.setInverted(true);
     Right1Motor.setInverted(false);
     Right2Motor.setInverted(false);
+    Right3Motor.setInverted(false);
 
     //set drive motors to coast
     Left1Motor.setNeutralMode(NeutralMode.Coast);
     Left2Motor.setNeutralMode(NeutralMode.Coast);
+    Left3Motor.setNeutralMode(NeutralMode.Coast);
     Right1Motor.setNeutralMode(NeutralMode.Coast);
     Right2Motor.setNeutralMode(NeutralMode.Coast);
+    Right3Motor.setNeutralMode(NeutralMode.Coast);
 
     ClimbMotor = new TalonSRX(Constants.CLIMBING_ARM_CARGO_ACQUISITION);
     LinearActuator = new TalonSRX(Constants.LINEAR_ACTUATOR_MOTOR);
@@ -79,8 +88,6 @@ public class Actuators{
     public static TalonSRX getLinearActuator() {
         return LinearActuator;
     }
-
-
     
     public static TalonSRX getLiftMotor1() {
         return LiftMotor1;
@@ -109,16 +116,24 @@ public class Actuators{
         return Left1Motor;
     }
 
-    public static TalonSRX getLeft2Motor(){
+    public static VictorSPX getLeft2Motor(){
         return Left2Motor;
+    }
+
+    public static VictorSPX getLeft3Motor(){
+        return Left3Motor;
     }
 
     public static TalonSRX getRight1Motor(){
         return Right1Motor;
     }
 
-    public static TalonSRX getRight2Motor(){
+    public static VictorSPX getRight2Motor(){
         return Right2Motor;
+    }
+
+    public static VictorSPX get Right3Motor(){
+        return Right3Motor;
     }
 
 }

@@ -7,8 +7,8 @@ public class Constants{
     //CAN ports
     public static final int LEFT_DRIVE_MOTOR_TALONSRX = 0;
     public static final int LEFT_DRIVE_MOTOR_VICTORSPX1 = 1;
-    public static final int RIGHT_DRIVE_MOTOR_VICTORSPX1 = 2;
-    public static final int RIGHT_DRIVE_MOTOR_VICTORSPX2 = 3;
+    public static final int RIGHT_DRIVE_MOTOR_TALONSRX = 2;
+    public static final int RIGHT_DRIVE_MOTOR_VICTORSPX1 = 3;
     public static final int LIFT_MOTOR_TALONSRX = 4;
     public static final int LIFT_MOTOR_VICTORSPX = 5;
     public static final int CLIMBING_ARM_CARGO_ACQUISITION = 6;
@@ -16,6 +16,8 @@ public class Constants{
     public static final int INFEED_BAG_MOTOR_ARM = 8;
     public static final int INFEED_BAG_MOTOR_LIFT1 = 9;
     public static final int INFEED_BAG_MOTOR_LIFT2 = 10;
+    public static final int LEFT_DRIVE_MOTOR_VICTORSPX2 = 11;
+    public static final int RIGHT_DRIVE_MOTOR_VICTORSPX2 = 12;
 
 
     //Pneumatics
