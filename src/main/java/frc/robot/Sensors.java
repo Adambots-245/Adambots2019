@@ -26,4 +26,12 @@ public static DigitalInput getHatchPresentEncoder() {
     return hatchPresent;
 }
 
+public static DigitalInput getCargoPresentArm() {
+    return cargoPresentArm;
+}
+
+public static DigitalInput getCargoPresentLift() {
+    return cargoPresentLift;
+}
+
 }
