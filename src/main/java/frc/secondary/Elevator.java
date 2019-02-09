@@ -5,28 +5,29 @@ import frc.robot.Actuators;
 import frc.robot.Constants;
 
 public class Elevator {
-        private static boolean Level_1;
-        private static boolean Level_2;
-        private static boolean Level_3;
-        private static int currentPosition;
-        private static int level1Dist;
-        private static int level2Dist;
-        private static int level3Dist;
-        public void init() {
+    private static boolean Level_1;
+    private static boolean Level_2;
+    private static boolean Level_3;
+    private static int currentPosition;
+    private static int level1Dist;
+    private static int level2Dist;
+    private static int level3Dist;
+        
+    public void init() {
         Level_1 = true;
         Level_2 = false;
         Level_3 = false;
-        currentPosition = Constants.LIFT_LEVEL_1;
-        
+        currentPosition = Constants.LIFT_LEVEL_1; 
     }
+
     public static int findNearestLevel(){
         currentPosition = Actuators.getLiftMotor1().getSelectedSensorPosition();
         level1Dist = Math.abs(Constants.LIFT_LEVEL_1 - currentPosition);
         level2Dist = Math.abs(Constants.LIFT_LEVEL_2 - currentPosition);
         level3Dist = Math.abs(Constants.LIFT_LEVEL_3 - currentPosition);
-        if (level1Dist > level2Dist && level1Dist > level3Dist) {
+        if (level1Dist < level2Dist && level1Dist < level3Dist) {
             return Constants.LIFT_LEVEL_1;
-        } else if (level2Dist > level3Dist) {
+        } else if (level2Dist < level1Dist && level2Dist < level3Dist) {
             return Constants.LIFT_LEVEL_2;
         }
         return Constants.LIFT_LEVEL_3;
