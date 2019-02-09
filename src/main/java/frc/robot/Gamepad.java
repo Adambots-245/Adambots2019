@@ -5,6 +5,11 @@ import edu.wpi.first.wpilibj.Joystick;
 
 public class Gamepad {
 	private Joystick joy;
+	private Button[] buttonArray = new Button[9];
+	private Axis[] axisArray = new Axis[6];
+	private DPad[] dpadArray = new DPad[8];
+
+	//private Button A;
 	//// CONSTANTS -------------------------------------------------------------
 	/**
 	 * Primary Driver Controller Port Number.
@@ -70,14 +75,23 @@ public class Gamepad {
 	 * XBOX 360 Right Vertical Axis (Up=1, Down=-1)
 	 */
 	private static final int AXIS_RIGHT_Y = 5;
-	/**
-	 * XBOX 360 DPad Horizontal Axis (Left=-1, Right=1)
-	 */
-	private static final int AXIS_DPAD_HORIZONTAL = 6;
-	/**
-	 * XBOX 360 DPad Vertical Axis (Up=-1, Right=1)
-	 */
-	private static final int AXIS_DPAD_VERTICAL = 7;
+
+	//the ID/port for the whole DPad 
+	//POV returns an angle 0-315 at 45 intervals
+	//guessed value TODO: find actual DPad ID/port
+	private static final int AXIS_DPAD_POV = 0;
+
+	//All 8 possible DPad POV input values in degrees
+	//N is north/up W is west/left etc.
+	private static final int DPAD_N_POV_PORT = 0;
+    private static final int DPAD_NE_POV_PORT = 1;
+    private static final int DPAD_E_POV_PORT = 2;
+    private static final int DPAD_SE_POV_PORT = 3;
+    private static final int DPAD_S_POV_PORT = 4;
+    private static final int DPAD_SW_POV_PORT = 5;
+    private static final int DPAD_W_POV_PORT = 6;
+    private static final int DPAD_NW_POV_PORT = 7;
+	
 	
 
 	// Control Instances
@@ -94,93 +108,150 @@ public class Gamepad {
 	 */
 	private Gamepad(int port) {
 		joy = new Joystick(port);
+		buttonArray[0] = new Button(); // creating null button for 0th index in buttonArray
+		for(int i = 1; i <= buttonArray.length - 1; i++){
+			buttonArray[i] = new Button(joy, i); 
+		}
+		for(int i = 0; i <= axisArray.length - 1; i++){
+			axisArray[i] = new Axis(joy, i);
+		}
+		for(int i = 0; i <= dpadArray.length - 1; i++){
+			dpadArray[i] = new DPad(joy, AXIS_DPAD_POV, i*45); 
+		}
 	}
+
 
 	// initializes the primary and secondary drivers
 	public static void init() {
 		primary = new Gamepad(PRIMARY_DRIVER);
 		secondary = new Gamepad(SECONDARY_DRIVER);
+		
+	}
+	//updates every button and trigger value ('store' variable in each object class)
+	public void update(){
+		for(int i = 1; i <= buttonArray.length - 1; i++){
+			buttonArray[i].update();
+		}
+		for(int i = 0; i <= axisArray.length - 1; i++){
+			axisArray[i].update();
+		}
+		for(int i = 0; i <= dpadArray.length - 1; i++){
+			dpadArray[i].update(); 
+		}
+		
 	}
 
+	public void updateLast(){
+		for(int i = 1; i <= buttonArray.length - 1; i++){
+			buttonArray[i].updateLast();
+		}
+		for(int i = 0; i <= axisArray.length - 1; i++){
+			axisArray[i].updateLast();
+		}
+		for(int i = 0; i <= dpadArray.length - 1; i++){
+			dpadArray[i].updateLast(); 
+		}
+	}
+
+
 	// deadzoning
-	private double deaden(double u) {
+	protected static double deaden(double u) {
 		return Math.abs(u) < .15 ? 0 : u;
 	}
 
 	// getting joystick values
 	public double getTriggers() {
-		return deaden(joy.getRawAxis(LEFT_AXIS_TRIGGERS) - joy.getRawAxis(RIGHT_AXIS_TRIGGERS));
+		return deaden(getLeftTrigger().get() - getRightTrigger().get());
 	}
 	
-	public double getLeftTrigger() {
-		return deaden(joy.getRawAxis(LEFT_AXIS_TRIGGERS));
+	public Axis getLeftTrigger() {
+		return axisArray[LEFT_AXIS_TRIGGERS];
 	}
 
-	public double getRightTrigger() {
-		return deaden(joy.getRawAxis(RIGHT_AXIS_TRIGGERS));
+	public Axis getRightTrigger() {
+		return axisArray[RIGHT_AXIS_TRIGGERS];
 	}
 	
-	public double getLeftX() {
-		return deaden(joy.getRawAxis(AXIS_LEFT_X));
+	public Axis getLeftX() {
+		return axisArray[AXIS_LEFT_X];
 	}
 
-	public double getLeftY() {
-		return deaden(-joy.getRawAxis(AXIS_LEFT_Y));
+	public Axis getLeftY() {
+		return axisArray[AXIS_LEFT_Y];
 	}
 
-	public double getRightX() {
-		return deaden(joy.getRawAxis(AXIS_RIGHT_X));
+	public Axis getRightX() {
+		return axisArray[AXIS_RIGHT_X];
 	}
 
-	public double getRightY() {
-		return deaden(-joy.getRawAxis(AXIS_RIGHT_Y));
+	public Axis getRightY() {
+		return axisArray[AXIS_RIGHT_Y];
 	}
 
-	public boolean getLB() {
-		return joy.getRawButton(BUTTON_LB);
+	//button getters
+	public Button getLB() {
+		return buttonArray[BUTTON_LB];
 	}
 
-	public boolean getRB() {
-		return joy.getRawButton(BUTTON_RB);
+	public Button getRB() {
+		return buttonArray[BUTTON_RB];
 	}
 
-	public boolean getA() {
-		return joy.getRawButton(BUTTON_A);
+	public Button getA() {
+		return buttonArray[BUTTON_A];
 	}
 
-	public boolean getB() {
-		return joy.getRawButton(BUTTON_B);
+	public Button getB() {
+		return buttonArray[BUTTON_B];
 	}
 
-	public boolean getX() {
-		return joy.getRawButton(BUTTON_X);
+	public Button getX() {
+		return buttonArray[BUTTON_X];
 	}
 
-	public boolean getY() {
-		return joy.getRawButton(BUTTON_Y);
+	public Button getY() {
+		return buttonArray[BUTTON_Y];
 	}
 
-	public boolean getStart() {
-		return joy.getRawButton(BUTTON_START);
+	public Button getStart() {
+		return buttonArray[BUTTON_START];
 	}
 
-	public boolean getBack() {
-		return joy.getRawButton(BUTTON_BACK);
-	}
-	
-	public boolean getDPadLeft() {
-		return joy.getRawAxis(AXIS_DPAD_HORIZONTAL) < -0.05;
+	public Button getBack() {
+		return buttonArray[BUTTON_BACK];
 	}
 
-	public boolean getDPadRight() {
-		return joy.getRawAxis(AXIS_DPAD_HORIZONTAL) > 0.05;
-	}
-	public boolean getDPadDown() {
-		return joy.getRawAxis(AXIS_DPAD_VERTICAL) < -0.05;
+	//DPad getters
+	public DPad getDPadN(){
+		return dpadArray[DPAD_N_POV_PORT];
 	}
 
-	public boolean getDPadUp() {
-		return joy.getRawAxis(AXIS_DPAD_VERTICAL) > 0.05;
+	public DPad getDPadNE(){
+		return dpadArray[DPAD_NE_POV_PORT];
+	}
+
+	public DPad getDPadE(){
+		return dpadArray[DPAD_E_POV_PORT];
+	}
+
+	public DPad getDPadSE(){
+		return dpadArray[DPAD_SE_POV_PORT];
+	}
+
+	public DPad getDPadS(){
+		return dpadArray[DPAD_S_POV_PORT];
+	}
+
+	public DPad getDPadSW(){
+		return dpadArray[DPAD_SW_POV_PORT];
+	}
+
+	public DPad getDPadW(){
+		return dpadArray[DPAD_W_POV_PORT];
+	}
+
+	public DPad getDPadNW(){
+		return dpadArray[DPAD_NW_POV_PORT];
 	}
 
 	// Rumble

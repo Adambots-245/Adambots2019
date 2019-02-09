@@ -89,9 +89,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    
-    Drive.tankDrive(Gamepad.primary.getLeftY(), Gamepad.primary.getRightX());
+    Gamepad.primary.update();
+    Gamepad.secondary.update();
 
+    Drive.tankDrive(Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightX().get());
+    
+    Gamepad.primary.updateLast();
+    Gamepad.secondary.updateLast();
   }
 
   /**
@@ -99,5 +103,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    Gamepad.primary.update();
+    Gamepad.secondary.update();
+
+    ToggleDrive.toggleDrive(Gamepad.primary.getA().getPresses());
+    
+    Gamepad.primary.updateLast();
+    Gamepad.secondary.updateLast();
   }
 }
