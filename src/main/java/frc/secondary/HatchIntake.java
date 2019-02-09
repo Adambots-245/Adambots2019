@@ -24,7 +24,7 @@ public class HatchIntake {
         spearCounter = 0;
     }
 
-    public static void hatchIntake(boolean centering, boolean suction, boolean suctionArms, boolean spear){
+    public static void hatchIntake(boolean centering, boolean suctionArms, boolean suction, boolean spear){
         
         //Centering arms lowing/raising 
         if(centering == true && Actuators.getCenterHatch().get() == Value.kForward){
