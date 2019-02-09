@@ -1,22 +1,19 @@
 package frc.secondary;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
-import frc.robot.Actuators;
-import frc.robot.Constants;
+import frc.robot.*;
 
 public class Elevator {
     private static boolean level1;
     private static boolean level2;
     private static boolean level3;
-    private static int currentPosition;
         
     public void init() {
-        currentPosition = Constants.LIFT_LEVEL_1;
         setLevel();
     }
 
     public static int findNearestLevel(){
-        currentPosition = Actuators.getLiftMotor1().getSelectedSensorPosition();
+        int currentPosition = Actuators.getLiftMotor1().getSelectedSensorPosition();
         int level1Dist = Math.abs(Constants.LIFT_LEVEL_1 - currentPosition);
         int level2Dist = Math.abs(Constants.LIFT_LEVEL_2 - currentPosition);
         int level3Dist = Math.abs(Constants.LIFT_LEVEL_3 - currentPosition);
@@ -60,6 +57,10 @@ public class Elevator {
 
     public static boolean getLevel3() {
         return level3;
+    }
+
+    public static int getPosition() {
+        return Actuators.getLiftMotor1().getSelectedSensorPosition();
     }
 
 }
