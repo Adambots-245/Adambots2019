@@ -5,16 +5,14 @@ import frc.robot.Actuators;
 import frc.robot.Constants;
 
 public class Elevator {
-    private static boolean Level_1;
-    private static boolean Level_2;
-    private static boolean Level_3;
+    private static boolean level1;
+    private static boolean level2;
+    private static boolean level3;
     private static int currentPosition;
         
     public void init() {
-        Level_1 = true;
-        Level_2 = false;
-        Level_3 = false;
-        currentPosition = Constants.LIFT_LEVEL_1; 
+        currentPosition = Constants.LIFT_LEVEL_1;
+        setLevel();
     }
 
     public static int findNearestLevel(){
@@ -30,34 +28,38 @@ public class Elevator {
         return Constants.LIFT_LEVEL_3;
     }
 
-    public static void toggleElevator(double elevateSpeed, boolean height) {
-        double liftSpeed = Math.min(elevateSpeed, Constants.MAX_LIFT_SPEED);
-        Actuators.getLiftMotor1().set(ControlMode.PercentOutput, liftSpeed);
-        if (height) {
-            if (Level_1) {
-                Level_2 = true;
-                Level_1 = false;
-                Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_2);
-            }
-            else if (Level_2) {
-                Level_3 = true;
-                Level_2 = false;
-                Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_3);
-            }
-            else {
-                Level_1 = true;
-                Level_3 = false;
-                Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_1);
-            }
-        }
+    public static void move(int speed) {
+        Actuators.getLiftMotor1().set(ControlMode.PercentOutput, speed);
+        setLevel();
     }
 
     public static void goTo(int position) {
         Actuators.getLiftMotor1().set(ControlMode.Position, position);
+        setLevel();
     }
 
     public static void goToNearest() {
         Actuators.getLiftMotor1().set(ControlMode.Position, findNearestLevel());
+        setLevel();
+    }
+
+    public static void setLevel() {
+        int nearestLevel = findNearestLevel();
+        level1 = (nearestLevel == Constants.LIFT_LEVEL_1);
+        level2 = (nearestLevel == Constants.LIFT_LEVEL_2);
+        level3 = (nearestLevel == Constants.LIFT_LEVEL_3);
+    }
+
+    public static boolean getLevel1() {
+        return level1;
+    }
+
+    public static boolean getLevel2() {
+        return level2;
+    }
+
+    public static boolean getLevel3() {
+        return level3;
     }
 
 }
