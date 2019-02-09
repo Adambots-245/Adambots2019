@@ -6,19 +6,26 @@ import frc.robot.*;
 
 public class Cargo {
 
-    // If sensor is blocked, stop the intake and move the arm
-    // If not, set the intake to the input of the triggers
-    public static void cargoIntake(double speed) {
+    // If arm sensor isn't blocked, only run the intake
+    // If lift sensor is blocked, only run the outake
+    public static void cargoInOut(double speed) {
+       
         if (Sensors.getDIValue(Sensors.cargoPresentArm)){
             Actuators.getInfeedArmMotor().set(ControlMode.PercentOutput, Constants.STOP_MOTOR_SPEED);
-            moveArm(speed);
         } else {
             Actuators.getInfeedArmMotor().set(ControlMode.PercentOutput, speed);
         }
+
+        if (!Sensors.getDIValue(Sensors.cargoPresentLift)){
+            Actuators.getArmInOutLift1().set(ControlMode.PercentOutput, Constants.STOP_MOTOR_SPEED);
+        } else {
+            Actuators.getArmInOutLift1().set(ControlMode.PercentOutput, speed);
+        }
+
     }
 
     // Moves the arm so long as it is within the threshold
-    private static void moveArm(double speed) {
+    public static void moveArm(double speed) {
         boolean positive = speed > 0;
         double armPos = Sensors.getArmPotentiometer().get();
         if (positive && armPos < Constants.ARM_POTENTIOMETER_MIN) {
