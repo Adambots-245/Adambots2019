@@ -9,9 +9,6 @@ public class Elevator {
     private static boolean Level_2;
     private static boolean Level_3;
     private static int currentPosition;
-    private static int level1Dist;
-    private static int level2Dist;
-    private static int level3Dist;
         
     public void init() {
         Level_1 = true;
@@ -22,9 +19,9 @@ public class Elevator {
 
     public static int findNearestLevel(){
         currentPosition = Actuators.getLiftMotor1().getSelectedSensorPosition();
-        level1Dist = Math.abs(Constants.LIFT_LEVEL_1 - currentPosition);
-        level2Dist = Math.abs(Constants.LIFT_LEVEL_2 - currentPosition);
-        level3Dist = Math.abs(Constants.LIFT_LEVEL_3 - currentPosition);
+        int level1Dist = Math.abs(Constants.LIFT_LEVEL_1 - currentPosition);
+        int level2Dist = Math.abs(Constants.LIFT_LEVEL_2 - currentPosition);
+        int level3Dist = Math.abs(Constants.LIFT_LEVEL_3 - currentPosition);
         if (level1Dist < level2Dist && level1Dist < level3Dist) {
             return Constants.LIFT_LEVEL_1;
         } else if (level2Dist < level1Dist && level2Dist < level3Dist) {
@@ -32,6 +29,7 @@ public class Elevator {
         }
         return Constants.LIFT_LEVEL_3;
     }
+
     public static void toggleElevator(double elevateSpeed, boolean height) {
         double liftSpeed = Math.min(elevateSpeed, Constants.MAX_LIFT_SPEED);
         Actuators.getLiftMotor1().set(ControlMode.PercentOutput, liftSpeed);
@@ -53,4 +51,13 @@ public class Elevator {
             }
         }
     }
+
+    public static void goTo(int position) {
+        Actuators.getLiftMotor1().set(ControlMode.Position, position);
+    }
+
+    public static void goToNearest() {
+        Actuators.getLiftMotor1().set(ControlMode.Position, findNearestLevel());
+    }
+
 }
