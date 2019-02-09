@@ -13,6 +13,8 @@ public static void init() {
 
 liftLowered = new DigitalInput(Constants.LIFT_LOWERED_LIMIT_SWITCH);
 hatchPresent = new DigitalInput(Constants.HATCH_PRESENT_ENCODER);
+cargoPresentArm = new DigitalInput(Constants.CARGO_PRESENT_ARM);
+cargoPresentLift = new DigitalInput(Constants.CARGO_PRESENT_LIFT);
 
 }
 
