@@ -19,11 +19,17 @@ public class Elevator {
         currentPosition = Constants.LIFT_LEVEL_1;
         
     }
-    public static void findNearestLevel(){
+    public static int findNearestLevel(){
         currentPosition = Actuators.getLiftMotor1().getSelectedSensorPosition();
         level1Dist = Math.abs(Constants.LIFT_LEVEL_1 - currentPosition);
-        leve21Dist = Math.abs(Constants.LIFT_LEVEL_2 - currentPosition);
-        leve31Dist = Math.abs(Constants.LIFT_LEVEL_3 - currentPosition);
+        level2Dist = Math.abs(Constants.LIFT_LEVEL_2 - currentPosition);
+        level3Dist = Math.abs(Constants.LIFT_LEVEL_3 - currentPosition);
+        if (level1Dist > level2Dist && level1Dist > level3Dist) {
+            return Constants.LIFT_LEVEL_1;
+        } else if (level2Dist > level3Dist) {
+            return Constants.LIFT_LEVEL_2;
+        }
+        return Constants.LIFT_LEVEL_3;
     }
     public static void toggleElevator(double elevateSpeed, boolean height) {
         double liftSpeed = Math.min(elevateSpeed, Constants.MAX_LIFT_SPEED);
