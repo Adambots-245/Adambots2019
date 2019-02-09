@@ -45,6 +45,7 @@ public class Constants{
 
     //motor speeds
     public static final double STOP_MOTOR_SPEED = 0.0;
+    public static final double HALF_MOTOR_SPEED = 0.45;
     public static final double MAX_MOTOR_SPEED = 0.9;
 
     //autoshift thresholds
