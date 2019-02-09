@@ -48,7 +48,7 @@ public class Actuators{
     Left2Motor.follow(Left1Motor);
     Left3Motor.follow(Left1Motor);
     Right2Motor.follow(Right1Motor);
-    Right3Motor.follow(Right1Moto);
+    Right3Motor.follow(Right1Motor);
     
     //reverse motors
     Left1Motor.setInverted(true);
@@ -132,7 +132,7 @@ public class Actuators{
         return Right2Motor;
     }
 
-    public static VictorSPX get Right3Motor(){
+    public static VictorSPX getRight3Motor(){
         return Right3Motor;
     }
 
