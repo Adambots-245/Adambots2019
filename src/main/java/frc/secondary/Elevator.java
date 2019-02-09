@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import frc.robot.Actuators;
 import frc.robot.Constants;
+import frc.robot.Gamepad;
 
 public class Elevator {
     private static boolean Level_1;
@@ -72,6 +73,15 @@ public class Elevator {
                 Level_3 = false;
                 Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_1);
             }
+        }
+    }
+    public static void buttonsElevator(boolean low, boolean mid, boolean high){
+        if (low == true && mid == false && high == false) {
+            Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_1);
+        } else if (low == false && mid == true && high == false){
+            Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_2);
+        } else if (low == false && mid == false && high == true) {
+            Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_3);
         }
     }
 }
