@@ -49,17 +49,14 @@ public class Actuators{
     Left3Motor.follow(Left1Motor);
     Right2Motor.follow(Right1Motor);
     Right3Motor.follow(Right1Motor);
-    ArmInOutLift2.follow(ArmInOutLift1);
     
     //reverse motors
     Left1Motor.setInverted(true);
     Left2Motor.setInverted(true);
     Left3Motor.setInverted(true);
-    ArmInOutLift1.setInverted(true);
     Right1Motor.setInverted(false);
     Right2Motor.setInverted(false);
     Right3Motor.setInverted(false);
-    ArmInOutLift2.setInverted(false);
 
     //set drive motors to coast
     Left1Motor.setNeutralMode(NeutralMode.Coast);
@@ -144,14 +141,6 @@ public class Actuators{
 
     public static VictorSPX getRight3Motor(){
         return Right3Motor;
-    }
-
-    public static VictorSPX getArmInOutLift1() {
-        return ArmInOutLift1;
-    }
-
-    public static VictorSPX getArmInOutLift2() {
-        return ArmInOutLift2;
     }
 
 }
