@@ -29,4 +29,9 @@ public class Constants{
     public static final int RAISE_HATCH_VACUUM_ARM = 6;
     public static final int LOWER_HATCH_VACUUM_ARM = 7;
 
+    //Sensor Ports
+    public static final int LIFT_LOWERED_LIMIT_SWITCH = 10;
+    public static final int HATCH_PRESENT_ENCODER = 11;
+    public static final int CARGO_PRESENT_ARM = 12;
+    public static final int CARGO_PRESENT_LIFT = 13;
 }
