@@ -1,5 +1,8 @@
 package frc.secondary;
 import frc.robot.Constants;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import frc.robot.Actuators;
 
 public class Climb {

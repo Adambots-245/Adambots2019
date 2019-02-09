@@ -48,7 +48,7 @@ public class Actuators{
     Left2Motor.follow(Left1Motor);
     Left3Motor.follow(Left1Motor);
     Right2Motor.follow(Right1Motor);
-    Right3Motor.follow(Right1Moto);
+    Right3Motor.follow(Right1Motor);
     
     //reverse motors
     Left1Motor.setInverted(true);
@@ -74,13 +74,17 @@ public class Actuators{
     LiftMotor1 = new TalonSRX(Constants.LIFT_MOTOR_TALONSRX);
     LiftMotor2 = new VictorSPX(Constants.LIFT_MOTOR_VICTORSPX);
 
+    //set follower motors
+    ArmInOutLift2.follow(ArmInOutLift1);
+    LiftMotor2.follow(LiftMotor1);
+
     Vacuum = new Solenoid(Constants.VACUUM_ON);
     ArmRaiseLower = new Solenoid(Constants.RAISE_HATCH_VACUUM_ARM, Constants.LOWER_HATCH_VACUUM_ARM);
     CenterHatch = new Solenoid(Constants.RAISE_CENTERING_HATCH, Constants.LOWER_CENTERING_HATCH);
     HatchClampOpen = new Solenoid(Constants.OPEN_HATCH_CLAMP);
     CargoHatchDelivery = new Solenoid(Constants.ADVANCE_CARGO_HATCH_DELVERY, Constants.RETURN_CARGO_HATCH_DELIVERY);
     ShiftHighGear = new Solenoid(Constants.SHIFT_HIGH_SPEED);
-
+    }
     public static TalonSRX getClimbMotor() {
         return ClimbMotor;
     }
@@ -89,6 +93,9 @@ public class Actuators{
         return LinearActuator;
     }
     
+    public static VictorSPX getInfeedArmMotor(){
+        return InfeedArmMotor;
+    }
     public static TalonSRX getLiftMotor1() {
         return LiftMotor1;
     }
@@ -132,7 +139,7 @@ public class Actuators{
         return Right2Motor;
     }
 
-    public static VictorSPX get Right3Motor(){
+    public static VictorSPX getRight3Motor(){
         return Right3Motor;
     }
 

@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.secondary.CargoIntake;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -91,7 +92,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     
     Drive.tankDrive(Gamepad.primary.getLeftY(), Gamepad.primary.getRightX());
-
+    CargoIntake.cargoIntake(Gamepad.secondary.getRightY(), Gamepad.secondary.getTriggers());
   }
 
   /**
