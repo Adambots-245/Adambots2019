@@ -21,10 +21,12 @@ public class Cargo {
     private static void moveArm(double speed) {
         boolean positive = speed > 0;
         double armPos = Sensors.getArmPotentiometer().get();
-        if (positive && armPos < Constants.ARM_POTENTIOMETER_MAX) {
+        if (positive && armPos < Constants.ARM_POTENTIOMETER_MIN) {
             Actuators.getClimbMotor().set(ControlMode.PercentOutput, speed / 2);
-        } else if (!positive && armPos > Constants.ARM_POTENTIOMETER_MIN) {
+        } else if (!positive && armPos > Constants.ARM_POTENTIOMETER_MAX) {
             Actuators.getClimbMotor().set(ControlMode.PercentOutput, speed / 2);
+        } else {
+            Actuators.getClimbMotor().set(ControlMode.PercentOutput, Constants.STOP_MOTOR_SPEED);
         }
     }
 
