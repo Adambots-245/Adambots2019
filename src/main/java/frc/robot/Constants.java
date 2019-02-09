@@ -21,6 +21,14 @@ public class Constants{
 
 
     //Pneumatics
+
+    //DI ports
+    //TODO: Properly name these according to what they actually are (photo eye, limit switch...)
+    public static final int LIFT_SENSOR_PORT = 0;
+    public static final int HATCH_SENSOR_PORT = 1;
+    public static final int CARGO_ARM_SENSOR_PORT = 2;
+    public static final int CARGO_LIFT_SENSOR_PORT = 3;
+
     //PCM ports
     
     public static final int RAISE_CENTERING_HATCH = 0;
