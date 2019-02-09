@@ -54,6 +54,10 @@ public class Actuators{
 
 
     }
+
+    public static TalonSRX getLiftMotor1() {
+        return LiftMotor1;
+    }
 }
 
 
