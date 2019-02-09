@@ -19,15 +19,17 @@ public class Constants{
     public static final int LEFT_DRIVE_MOTOR_VICTORSPX2 = 11;
     public static final int RIGHT_DRIVE_MOTOR_VICTORSPX2 = 12;
 
+     //Analog Input ports
+     public static final int ARM_POTENTIOMETER_PORT = 0;
 
+     //Digital Input ports
+     //TODO: Properly name these according to what they actually are (photo eye, limit switch...)
+     public static final int LIFT_SENSOR_PORT = 0;
+     public static final int HATCH_SENSOR_PORT = 1;
+     public static final int CARGO_ARM_SENSOR_PORT = 2;
+     public static final int CARGO_LIFT_SENSOR_PORT = 3;
+    
     //Pneumatics
-
-    //DI ports
-    //TODO: Properly name these according to what they actually are (photo eye, limit switch...)
-    public static final int LIFT_SENSOR_PORT = 0;
-    public static final int HATCH_SENSOR_PORT = 1;
-    public static final int CARGO_ARM_SENSOR_PORT = 2;
-    public static final int CARGO_LIFT_SENSOR_PORT = 3;
 
     //PCM ports
     
@@ -53,6 +55,8 @@ public class Constants{
     public static final double SHIFT_UP_THRESHOLD = 10;
     public static final double SHIFT_DOWN_THRESHOLD = 8;
     public static final double TIME_THRESHOLD = 3;
+    public static final double ARM_POTENTIOMETER_MAX = 0.5;
+    public static final double ARM_POTENTIOMETER_MIN = 0;
     
     //TODO: UPDATE ALL VALUES BELOW TO THEIR TRUE, ACCURATE VALUES
     //Limiters
