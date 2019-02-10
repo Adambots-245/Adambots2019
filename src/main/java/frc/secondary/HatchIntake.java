@@ -1,6 +1,5 @@
 package frc.secondary;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import frc.robot.Actuators;
 
 public class HatchIntake {
@@ -27,15 +26,15 @@ public class HatchIntake {
     public static void hatchIntake(boolean centering, boolean suction, boolean suctionArms, boolean spear){
         
         //Centering arms lowing/raising 
-        if(centering && Actuators.getCenterHatch().get() == Value.kForward){
+        if(centering && Actuators.getCenterHatch().get() == true){
             if(previousCentering == false){
-            Actuators.getCenterHatch().set(Value.kReverse);
+            Actuators.getCenterHatch().set(false);
             previousCentering = true;
             }
         }
-        if(centering && Actuators.getCenterHatch().get() == Value.kReverse){
+        if(centering && Actuators.getCenterHatch().get() == false){
             if(!previousCentering){
-            Actuators.getCenterHatch().set(Value.kForward);
+            Actuators.getCenterHatch().set(true);
             previousCentering = true;
             }
         }
@@ -71,18 +70,18 @@ public class HatchIntake {
         }
 
         //suction arms lowing/raising
-        if(suctionArms && Actuators.getArmRaiseLower().get() == Value.kForward){
+        if(suctionArms && Actuators.getArmRaiseLower().get() == true){
             if(!previousSuctionArms && suctionArmsCounter == 0){
-            Actuators.getArmRaiseLower().set(Value.kReverse);
-            Actuators.getCenterHatch().set(Value.kReverse);
+            Actuators.getArmRaiseLower().set(false);
+            Actuators.getCenterHatch().set(false);
             Actuators.getHatchClampOpen().set(false);
             previousSuctionArms = true;
             previousCentering = true;
             }
         }
-        if(suctionArms && Actuators.getArmRaiseLower().get() == Value.kReverse){
+        if(suctionArms && Actuators.getArmRaiseLower().get() == false){
             if(!previousSuctionArms && suctionArmsCounter == 0){
-            Actuators.getArmRaiseLower().set(Value.kForward);
+            Actuators.getArmRaiseLower().set(true);
             Actuators.getVacuum().set(true);
             previousSuctionArms = true;
             }
