@@ -33,6 +33,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     Gamepad.init();
     Actuators.init();
+    Elevator.init();
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
@@ -92,13 +93,18 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Gamepad.primary.update();
     Gamepad.secondary.update();
+   
+    Drive.drive(Gamepad.primary.getLeftY(), Gamepad.primary.getRightX(), Gamepad.primary.getA(), Gamepad.primary.getY(), Gamepad.primary.getStart().getPresses());
+    Climb.climb(Gamepad.primary.getBack(), Gamepad.primary.getLeftY(), Gamepad.primary.getRightY(), Gamepad.primary.getRightTrigger(), Gamepad.primary.getLeftTrigger());
 
-    Drive.tankDrive(Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightX().get());
-    Cargo.cargoIntake(-Gamepad.secondary.getTriggers());
+    Elevator.elevator(Gamepad.secondary.getLeftY());
+    Cargo.cargo(Gamepad.secondary.getTriggers());
+    HatchIntake.hatchintake(Gamepad.secondary.getDPadN(), Gamepad.secondary.getDPadE(), Gamepad.secondary.getDPadS(), Gamepad.secondary.getDPadW());
+
     Gamepad.primary.updateLast();
     Gamepad.secondary.updateLast();
   }
-
+ 
   /**
    * This function is called periodically during test mode.
    */
