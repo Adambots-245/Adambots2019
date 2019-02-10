@@ -4,29 +4,28 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import frc.robot.Actuators;
 import frc.robot.Constants;
-import frc.robot.Gamepad;
 
 public class Elevator {
     private static boolean Level_1;
     private static boolean Level_2;
     private static boolean Level_3;
-    private static int currentPosition;
     private static int level1Dist;
     private static int level2Dist;
     private static int level3Dist;
     private static int nearestDistance;
     private static int targetPosition;
 
-        public void init() {
+    public static void init() {
         Level_1 = true;
         Level_2 = false;
         Level_3 = false;
-        currentPosition = Constants.LIFT_LEVEL_1;
-        
-    }
 
+    }
+    public static void elevator(double liftSpeed){
+        setLiftMotorSpeed(liftSpeed);
+        passiveGotoNearestLevel(liftSpeed);
+    }
     public static int findNearestLevel(int currentPosition) {
-        Actuators.getLiftMotor1().set(ControlMode.Position, position);
         level1Dist = Math.abs(Constants.LIFT_LEVEL_1 - currentPosition);
         level2Dist = Math.abs(Constants.LIFT_LEVEL_2 - currentPosition);
         level3Dist = Math.abs(Constants.LIFT_LEVEL_3 - currentPosition);
@@ -40,13 +39,15 @@ public class Elevator {
         }
         return targetPosition;
     }
-    public static void passiveGotoNearestLevel(double speed){
-        if (speed == 0){
+
+    public static void passiveGotoNearestLevel(double speed) {
+        if (speed == 0) {
             int currentPosition = Actuators.getLiftMotor1().getSelectedSensorPosition();
             int targetPosition = findNearestLevel(currentPosition);
             Actuators.getLiftMotor1().set(ControlMode.Position, targetPosition);
         }
     }
+
     public static void gotoNearestLevel(boolean go) {
         if (go) {
             int currentPosition = Actuators.getLiftMotor1().getSelectedSensorPosition();
@@ -55,7 +56,7 @@ public class Elevator {
         }
     }
 
-    public static void setLiftMotorSpeed(double speed){
+    public static void setLiftMotorSpeed(double speed) {
         Actuators.getLiftMotor1().set(ControlMode.PercentOutput, speed);
     }
 
@@ -78,10 +79,11 @@ public class Elevator {
             }
         }
     }
-    public static void buttonsElevator(boolean low, boolean mid, boolean high){
+
+    public static void buttonsElevator(boolean low, boolean mid, boolean high) {
         if (low == true && mid == false && high == false) {
             Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_1);
-        } else if (low == false && mid == true && high == false){
+        } else if (low == false && mid == true && high == false) {
             Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_2);
         } else if (low == false && mid == false && high == true) {
             Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_3);

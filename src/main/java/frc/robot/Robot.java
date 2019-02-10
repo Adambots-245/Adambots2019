@@ -10,7 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.secondary.Cargo;
+import frc.secondary.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -93,12 +93,12 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Gamepad.primary.update();
     Gamepad.secondary.update();
-   
-    Drive.drive(Gamepad.primary.getLeftY(), Gamepad.primary.getRightX(), Gamepad.primary.getA(), Gamepad.primary.getY(), Gamepad.primary.getStart().getPresses());
-    Climb.climb(Gamepad.primary.getBack(), Gamepad.primary.getLeftY(), Gamepad.primary.getRightY(), Gamepad.primary.getRightTrigger(), Gamepad.primary.getLeftTrigger());
-
-    Elevator.elevator(Gamepad.secondary.getLeftY());
-    Cargo.cargo(Gamepad.secondary.getTriggers());
+    //primary controls
+    Drive.drive(Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightX().get(), Gamepad.primary.getA().get(), Gamepad.primary.getY().get(), Gamepad.primary.getStart().getPresses());
+    Climb.climb(Gamepad.primary.getBack().getPresses(), Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightY().get(), Gamepad.primary.getLeftTrigger().get(), Gamepad.primary.getRightTrigger().get());
+    //secondary controls
+    Elevator.elevator(Gamepad.secondary.getLeftY().get());
+    Cargo.cargo(Gamepad.primary.getBack().getPresses(), Gamepad.secondary.getTriggers(), Gamepad.secondary.getRightY());
     HatchIntake.hatchintake(Gamepad.secondary.getDPadN(), Gamepad.secondary.getDPadE(), Gamepad.secondary.getDPadS(), Gamepad.secondary.getDPadW());
 
     Gamepad.primary.updateLast();
