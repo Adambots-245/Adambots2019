@@ -10,20 +10,23 @@ public class Elevator {
     private static boolean Level_1;
     private static boolean Level_2;
     private static boolean Level_3;
+    private static int currentPosition;
     private static int level1Dist;
     private static int level2Dist;
     private static int level3Dist;
     private static int nearestDistance;
     private static int targetPosition;
 
-    public void init() {
+        public void init() {
         Level_1 = true;
         Level_2 = false;
         Level_3 = false;
-
+        currentPosition = Constants.LIFT_LEVEL_1;
+        
     }
 
     public static int findNearestLevel(int currentPosition) {
+        Actuators.getLiftMotor1().set(ControlMode.Position, position);
         level1Dist = Math.abs(Constants.LIFT_LEVEL_1 - currentPosition);
         level2Dist = Math.abs(Constants.LIFT_LEVEL_2 - currentPosition);
         level3Dist = Math.abs(Constants.LIFT_LEVEL_3 - currentPosition);
