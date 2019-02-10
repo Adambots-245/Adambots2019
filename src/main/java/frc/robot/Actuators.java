@@ -74,13 +74,17 @@ public class Actuators{
     LiftMotor1 = new TalonSRX(Constants.LIFT_MOTOR_TALONSRX);
     LiftMotor2 = new VictorSPX(Constants.LIFT_MOTOR_VICTORSPX);
 
+    //set follower motors
+    ArmInOutLift2.follow(ArmInOutLift1);
+    LiftMotor2.follow(LiftMotor1);
+
     Vacuum = new Solenoid(Constants.VACUUM_ON);
     ArmRaiseLower = new DoubleSolenoid(Constants.RAISE_HATCH_VACUUM_ARM, Constants.LOWER_HATCH_VACUUM_ARM);
     CenterHatch = new DoubleSolenoid(Constants.RAISE_CENTERING_HATCH, Constants.LOWER_CENTERING_HATCH);
     HatchClampOpen = new Solenoid(Constants.OPEN_HATCH_CLAMP);
     CargoHatchDelivery = new Solenoid(Constants.ADVANCE_CARGO_HATCH_DELVERY);
     ShiftHighGear = new Solenoid(Constants.SHIFT_HIGH_SPEED);
-
+    }
     public static TalonSRX getClimbMotor() {
         return ClimbMotor;
     }
@@ -89,6 +93,9 @@ public class Actuators{
         return LinearActuator;
     }
     
+    public static VictorSPX getInfeedArmMotor(){
+        return InfeedArmMotor;
+    }
     public static TalonSRX getLiftMotor1() {
         return LiftMotor1;
     }

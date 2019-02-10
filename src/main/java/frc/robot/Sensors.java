@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class Sensors{
 
@@ -19,13 +20,20 @@ Actuators.getLiftMotor1().configReverseSoftLimitThreshold(Constants.MAX_REVERSE_
 Actuators.getLiftMotor1().configForwardSoftLimitEnable(Constants.FORWARD_LIMIT_ENABLED, 0);
 Actuators.getLiftMotor1().configReverseSoftLimitEnable(Constants.REVERSE_LIMIT_ENABLED, 0);
 Actuators.getLiftMotor1().setSensorPhase(Constants.LIFT_MOTOR_PHASE);
+    public static AnalogPotentiometer armPotentiometer = new AnalogPotentiometer(Constants.ARM_POTENTIOMETER_PORT);
 
+    public static boolean getDIValue(DigitalInput d) {
+        return d.get();
+    }
 
-//Encoder ports set
-liftLowered = new DigitalInput(Constants.LIFT_LOWERED_LIMIT_SWITCH);
-hatchPresent = new DigitalInput(Constants.HATCH_PRESENT_ENCODER);
-cargoPresentArm = new DigitalInput(Constants.CARGO_PRESENT_ARM);
-cargoPresentLift = new DigitalInput(Constants.CARGO_PRESENT_LIFT);
+	//Encoder ports set
+	liftLowered = new DigitalInput(Constants.LIFT_LOWERED_LIMIT_SWITCH);
+	hatchPresent = new DigitalInput(Constants.HATCH_PRESENT_ENCODER);
+	cargoPresentArm = new DigitalInput(Constants.CARGO_PRESENT_ARM);
+	cargoPresentLift = new DigitalInput(Constants.CARGO_PRESENT_LIFT);
+    public static AnalogPotentiometer getArmPotentiometer() {
+        return armPotentiometer;
+	}
 
 }
 
