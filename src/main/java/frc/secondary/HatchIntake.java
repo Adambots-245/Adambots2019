@@ -1,11 +1,12 @@
 package frc.secondary;
 
 import frc.robot.Actuators;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class HatchIntake {
-    private static boolean previousCentering;
+    private static DoubleSolenoid.Value previousCentering;
     private static boolean previousSuction;
-    private static boolean previousSuctionArms;
+    private static DoubleSolenoid.Value previousSuctionArms;
     private static boolean previousSpear;
     private static int centeringCounter;
     private static int suctionCounter;
@@ -13,9 +14,9 @@ public class HatchIntake {
     private static int spearCounter;
 
     public static void init(){
-        previousCentering = false;
+        previousCentering = DoubleSolenoid.Value.kReverse;
         previousSuction = false;
-        previousSuctionArms = false;
+        previousSuctionArms = DoubleSolenoid.Value.kReverse;
         previousSpear = false;
         centeringCounter = 0;
         suctionCounter = 0;
@@ -26,23 +27,23 @@ public class HatchIntake {
     public static void hatchIntake(boolean centering, boolean suctionArms, boolean suction, boolean spear){
         
         //Centering arms lowing/raising 
-        if(centering && Actuators.getCenterHatch().get() == true){
-            if(previousCentering == false){
-            Actuators.getCenterHatch().set(false);
-            previousCentering = true;
+        if(centering && Actuators.getCenterHatch().get() == DoubleSolenoid.Value.kForward){
+            if(previousCentering == DoubleSolenoid.Value.kReverse){
+            Actuators.getCenterHatch().set(DoubleSolenoid.Value.kReverse);
+            previousCentering = DoubleSolenoid.Value.kForward;
             }
         }
-        if(centering && Actuators.getCenterHatch().get() == false){
-            if(!previousCentering){
-            Actuators.getCenterHatch().set(true);
-            previousCentering = true;
+        if(centering && Actuators.getCenterHatch().get() == DoubleSolenoid.Value.kReverse){
+            if(previousCentering == DoubleSolenoid.Value.kReverse){
+            Actuators.getCenterHatch().set(DoubleSolenoid.Value.kForward);
+            previousCentering = DoubleSolenoid.Value.kForward;
             }
         }
         //toggle functionality
-        else if(previousCentering){
+        else if(previousCentering == DoubleSolenoid.Value.kForward){
             centeringCounter++;
             if(centeringCounter == 16){
-                previousCentering = false;
+                previousCentering = DoubleSolenoid.Value.kReverse;
                 centeringCounter = 0;
             }
         }
@@ -70,27 +71,27 @@ public class HatchIntake {
         }
 
         //suction arms lowing/raising
-        if(suctionArms && Actuators.getArmRaiseLower().get() == true){
-            if(!previousSuctionArms && suctionArmsCounter == 0){
-            Actuators.getArmRaiseLower().set(false);
-            Actuators.getCenterHatch().set(false);
+        if(suctionArms && Actuators.getArmRaiseLower().get() == DoubleSolenoid.Value.kForward){
+            if(previousSuctionArms == DoubleSolenoid.Value.kReverse && suctionArmsCounter == 0){
+            Actuators.getArmRaiseLower().set(DoubleSolenoid.Value.kReverse);
+            Actuators.getCenterHatch().set(DoubleSolenoid.Value.kReverse);
             Actuators.getHatchClampOpen().set(false);
-            previousSuctionArms = true;
-            previousCentering = true;
+            previousSuctionArms = DoubleSolenoid.Value.kForward;
+            previousCentering = DoubleSolenoid.Value.kForward;
             }
         }
-        if(suctionArms && Actuators.getArmRaiseLower().get() == false){
-            if(!previousSuctionArms && suctionArmsCounter == 0){
-            Actuators.getArmRaiseLower().set(true);
+        if(suctionArms && Actuators.getArmRaiseLower().get() == DoubleSolenoid.Value.kReverse){
+            if(previousSuctionArms == DoubleSolenoid.Value.kReverse && suctionArmsCounter == 0){
+            Actuators.getArmRaiseLower().set(DoubleSolenoid.Value.kForward);
             Actuators.getVacuum().set(true);
-            previousSuctionArms = true;
+            previousSuctionArms = DoubleSolenoid.Value.kForward;
             }
         }
         //toggle functionality
-        else if(previousSuctionArms){
+        else if(previousSuctionArms == DoubleSolenoid.Value.kForward){
             suctionArmsCounter++;
             if(suctionArmsCounter == 16){
-                previousSuctionArms = false;
+                previousSuctionArms = DoubleSolenoid.Value.kReverse;
                 suctionArmsCounter = 0;
             }
         }
