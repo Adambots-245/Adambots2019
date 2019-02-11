@@ -51,12 +51,16 @@ public class Constants{
     public static final double MAX_MOTOR_SPEED = 0.9;
 
     //autoshift thresholds
-    public static final double TURN_THRESHOLD = 5;
+    public static final double SHIFT_TURN_THRESHOLD = 5;
     public static final double SHIFT_UP_THRESHOLD = 10;
     public static final double SHIFT_DOWN_THRESHOLD = 8;
-    public static final double TIME_THRESHOLD = 3;
+    public static final double SHIFT_TIME_THRESHOLD = 3;
+    
+    //arm thresholds
+    public static final double ARM_DOWN_POSITION_THRESHOLD = .3;
     public static final double ARM_POTENTIOMETER_MAX = 0.5;
     public static final double ARM_POTENTIOMETER_MIN = 0;
+    public static final double ARM_INTAKE_STOP_DELAY_TIME = .25;
     
     //TODO: UPDATE ALL VALUES BELOW TO THEIR TRUE, ACCURATE VALUES
     //Limiters

@@ -93,13 +93,15 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Gamepad.primary.update();
     Gamepad.secondary.update();
+
     //primary controls
     Drive.drive(Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightX().get(), Gamepad.primary.getA().get(), Gamepad.primary.getY().get(), Gamepad.primary.getStart().getPresses());
     Climb.climb(Gamepad.primary.getBack().getPresses(), Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightY().get(), Gamepad.primary.getLeftTrigger().get(), Gamepad.primary.getRightTrigger().get());
+    
     //secondary controls
     Elevator.elevator(Gamepad.secondary.getLeftY().get());
-    Cargo.cargo(Gamepad.primary.getBack().getPresses(), Gamepad.secondary.getTriggers(), Gamepad.secondary.getRightY());
-    HatchIntake.hatchintake(Gamepad.secondary.getDPadN(), Gamepad.secondary.getDPadE(), Gamepad.secondary.getDPadS(), Gamepad.secondary.getDPadW());
+    Cargo.cargo(Gamepad.primary.getBack().getPresses(), Gamepad.secondary.getTriggers(), Gamepad.secondary.getRightY().get());
+    HatchIntake.hatchIntake(Gamepad.secondary.getDPadN().isToggled(), Gamepad.secondary.getDPadE().isToggled(), Gamepad.secondary.getDPadS().isToggled(), Gamepad.secondary.getDPadW().isToggled());
 
     Gamepad.primary.updateLast();
     Gamepad.secondary.updateLast();

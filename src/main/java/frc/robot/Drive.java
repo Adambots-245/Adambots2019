@@ -46,8 +46,8 @@ public class Drive {
         double leftSpeed = Math.min(speed + turnSpeed, Constants.MAX_MOTOR_SPEED);
         double rightSpeed = Math.min(speed - turnSpeed, Constants.MAX_MOTOR_SPEED);
         if ((Math.abs(Actuators.getLeft1Motor().getSelectedSensorVelocity()
-                - Actuators.getRight1Motor().getSelectedSensorVelocity()) < Constants.TURN_THRESHOLD)
-                && (currentTime > Constants.TIME_THRESHOLD)) {
+                - Actuators.getRight1Motor().getSelectedSensorVelocity()) < Constants.SHIFT_TURN_THRESHOLD)
+                && (currentTime > Constants.SHIFT_TIME_THRESHOLD)) {
             if (Math.abs(Actuators.getLeft1Motor().getSelectedSensorVelocity()) > Math
                     .abs(Actuators.getRight1Motor().getSelectedSensorVelocity()))
                 speed = Math.abs(Actuators.getLeft1Motor().getSelectedSensorVelocity());
