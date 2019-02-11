@@ -21,10 +21,15 @@ public class Elevator {
         Level_3 = false;
 
     }
-    public static void elevator(double liftSpeed){
+    public static void elevator(double liftSpeed, double intakeSpeed){
         setLiftMotorSpeed(liftSpeed);
         passiveGotoNearestLevel(liftSpeed);
+        setCarriageWheelsSpeed(intakeSpeed);
     }
+    public static void setCarriageWheelsSpeed(double speed){
+        Actuators.getArmInOutLift1().set(ControlMode.PercentOutput, speed);
+    }
+
     public static int findNearestLevel(int currentPosition) {
         level1Dist = Math.abs(Constants.LIFT_LEVEL_1 - currentPosition);
         level2Dist = Math.abs(Constants.LIFT_LEVEL_2 - currentPosition);

@@ -42,7 +42,7 @@ public class Button {
         // System.out.println(last);
     }
 
-    // check if the button went from unpressed to pressed (meaning the buttin has
+    // check if the button went from unpressed to pressed (meaning the button has
     // been toggled)
     public boolean isToggled() {
         boolean toggled = false;

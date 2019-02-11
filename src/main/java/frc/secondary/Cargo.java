@@ -6,10 +6,11 @@ import frc.robot.*;
 
 public class Cargo {
     private static Timer timer = new Timer();
-    private static boolean armPhotoEyeOpenLast = false;
+    private static boolean armPhotoEyeOpenLast;
 
     public static void init() {
         timer.start();
+        armPhotoEyeOpenLast = false;
     }
 
     public static void cargo(int modeTogglePresses, double intakeSpeed, double armSpeed) {
