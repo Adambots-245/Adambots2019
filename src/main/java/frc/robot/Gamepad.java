@@ -226,11 +226,11 @@ public class Gamepad {
 	}
 
 	public Button getLeftStickButton(){
-		return buttonArray[BUTTON_LEFT_STICK]
+		return buttonArray[BUTTON_LEFT_STICK];
 	}
 
 	public Button getRightStickButton(){
-		return buttonArray[BUTTON_RIGHT_STICK]
+		return buttonArray[BUTTON_RIGHT_STICK];
 	}
 
 	// DPad getters
