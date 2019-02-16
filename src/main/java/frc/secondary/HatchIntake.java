@@ -1,6 +1,5 @@
 package frc.secondary;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import frc.robot.Actuators;
 
 public class HatchIntake {
@@ -24,23 +23,23 @@ public class HatchIntake {
         spearCounter = 0;
     }
 
-    public static void hatchIntake(boolean centering, boolean suction, boolean suctionArms, boolean spear){
+    public static void hatchIntake(boolean centering, boolean suctionArms, boolean suction, boolean spear){
         
         //Centering arms lowing/raising 
-        if(centering == true && Actuators.getCenterHatch().get() == Value.kForward){
+        if(centering && Actuators.getCenterHatch().get() == true){
             if(previousCentering == false){
-            Actuators.getCenterHatch().set(Value.kReverse);
+            Actuators.getCenterHatch().set(false);
             previousCentering = true;
             }
         }
-        if(centering == true && Actuators.getCenterHatch().get() == Value.kReverse){
-            if(previousCentering == false){
-            Actuators.getCenterHatch().set(Value.kForward);
+        if(centering && Actuators.getCenterHatch().get() == false){
+            if(!previousCentering){
+            Actuators.getCenterHatch().set(true);
             previousCentering = true;
             }
         }
         //toggle functionality
-        else if(previousCentering == true){
+        else if(previousCentering){
             centeringCounter++;
             if(centeringCounter == 16){
                 previousCentering = false;
@@ -49,20 +48,20 @@ public class HatchIntake {
         }
         
         // on, off for suction
-        if(suction == true && Actuators.getVacuum().get() == false){
+        if(suction && !Actuators.getVacuum().get()){
             if(previousSuction == false && suctionCounter == 0){
             Actuators.getVacuum().set(true);
             previousSuction = true;
             }
         }
-        if(suction == true && Actuators.getVacuum().get() == true){
+        if(suction && Actuators.getVacuum().get()){
             if(previousSuction == false && suctionCounter == 0){
             Actuators.getVacuum().set(false);
             previousSuction = true;
             }
         }
         //toggle functionality
-        else if(previousSuction == true){
+        else if(previousSuction){
             suctionCounter++;
             if(suctionCounter == 16){
                 previousSuction = false;
@@ -71,24 +70,24 @@ public class HatchIntake {
         }
 
         //suction arms lowing/raising
-        if(suctionArms == true && Actuators.getArmRaiseLower().get() == Value.kForward){
-            if(previousSuctionArms == false && suctionArmsCounter == 0){
-            Actuators.getArmRaiseLower().set(Value.kReverse);
-            Actuators.getCenterHatch().set(Value.kReverse);
+        if(suctionArms && Actuators.getArmRaiseLower().get() == true){
+            if(!previousSuctionArms && suctionArmsCounter == 0){
+            Actuators.getArmRaiseLower().set(false);
+            Actuators.getCenterHatch().set(false);
             Actuators.getHatchClampOpen().set(false);
             previousSuctionArms = true;
             previousCentering = true;
             }
         }
-        if(suctionArms == true && Actuators.getArmRaiseLower().get() == Value.kReverse){
-            if(previousSuctionArms == false && suctionArmsCounter == 0){
-            Actuators.getArmRaiseLower().set(Value.kForward);
+        if(suctionArms && Actuators.getArmRaiseLower().get() == false){
+            if(!previousSuctionArms && suctionArmsCounter == 0){
+            Actuators.getArmRaiseLower().set(true);
             Actuators.getVacuum().set(true);
             previousSuctionArms = true;
             }
         }
         //toggle functionality
-        else if(previousSuctionArms == true){
+        else if(previousSuctionArms){
             suctionArmsCounter++;
             if(suctionArmsCounter == 16){
                 previousSuctionArms = false;
@@ -97,20 +96,20 @@ public class HatchIntake {
         }
     
         //spear clamp/release
-        if(spear == true && Actuators.getHatchClampOpen().get() == true){
-            if(previousSpear == false && spearCounter == 0){
+        if(spear && Actuators.getHatchClampOpen().get()){
+            if(!previousSpear && spearCounter == 0){
             Actuators.getHatchClampOpen().set(false);
             previousSpear = true;
             }
         }
-        if(spear == true && Actuators.getHatchClampOpen().get() == false){
-            if(previousSpear== false && spearCounter == 0){
+        if(spear && !Actuators.getHatchClampOpen().get()){
+            if(!previousSpear && spearCounter == 0){
             Actuators.getHatchClampOpen().set(true);
             previousSpear = true;
             }
         }
         //toggle functionality
-        else if(previousSpear == true){
+        else if(previousSpear){
             spearCounter++;
             if(spearCounter == 16){
                 previousSpear = false;

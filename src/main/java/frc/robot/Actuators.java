@@ -27,8 +27,8 @@ public class Actuators{
     // Pneumatics
 
     private static Solenoid Vacuum;
-    private static Solenoid ArmRaiseLower;
-    private static Solenoid CenterHatch;
+    private static DoubleSolenoid ArmRaiseLower;
+    private static DoubleSolenoid CenterHatch;
     private static Solenoid HatchClampOpen;
     private static Solenoid CargoHatchDelivery;
     private static Solenoid ShiftHighGear;
@@ -82,10 +82,10 @@ public class Actuators{
     LiftMotor2.follow(LiftMotor1);
 
     Vacuum = new Solenoid(Constants.VACUUM_ON);
-    ArmRaiseLower = new Solenoid(Constants.RAISE_HATCH_VACUUM_ARM, Constants.LOWER_HATCH_VACUUM_ARM);
-    CenterHatch = new Solenoid(Constants.RAISE_CENTERING_HATCH, Constants.LOWER_CENTERING_HATCH);
+    ArmRaiseLower = new DoubleSolenoid(Constants.RAISE_HATCH_VACUUM_ARM, Constants.LOWER_HATCH_VACUUM_ARM);
+    CenterHatch = new DoubleSolenoid(Constants.RAISE_CENTERING_HATCH, Constants.LOWER_CENTERING_HATCH);
     HatchClampOpen = new Solenoid(Constants.OPEN_HATCH_CLAMP);
-    CargoHatchDelivery = new Solenoid(Constants.ADVANCE_CARGO_HATCH_DELVERY, Constants.RETURN_CARGO_HATCH_DELIVERY);
+    CargoHatchDelivery = new Solenoid(Constants.ADVANCE_CARGO_HATCH_DELVERY);
     ShiftHighGear = new Solenoid(Constants.SHIFT_HIGH_SPEED);
     }
     public static TalonSRX getClimbMotor() {
@@ -107,7 +107,7 @@ public class Actuators{
         return ShiftHighGear;
     }
 
-    public static Solenoid getCenterHatch(){
+    public static DoubleSolenoid getCenterHatch(){
         return CenterHatch;
     }
 
@@ -115,7 +115,7 @@ public class Actuators{
         return Vacuum;
     }
 
-    public static Solenoid getArmRaiseLower(){
+    public static DoubleSolenoid getArmRaiseLower(){
         return ArmRaiseLower;
     }
 

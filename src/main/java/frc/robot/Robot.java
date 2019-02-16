@@ -10,7 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.secondary.Cargo;
+import frc.secondary.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,6 +33,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     Gamepad.init();
     Actuators.init();
+    Elevator.init();
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
@@ -93,6 +94,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+<<<<<<< HEAD
     
     Drive.tankDrive(Gamepad.primary.getLeftY(), Gamepad.primary.getRightX());
     Cargo.cargoInOut(-Gamepad.secondary.getTriggers());
@@ -101,11 +103,33 @@ public class Robot extends TimedRobot {
     Recorder.recording();
 
   }
+=======
+    Gamepad.primary.update();
+    Gamepad.secondary.update();
+    //primary controls
+    Drive.drive(Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightX().get(), Gamepad.primary.getA().get(), Gamepad.primary.getY().get(), Gamepad.primary.getStart().getPresses());
+    Climb.climb(Gamepad.primary.getBack().getPresses(), Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightY().get(), Gamepad.primary.getLeftTrigger().get(), Gamepad.primary.getRightTrigger().get());
+    //secondary controls
+    Elevator.elevator(Gamepad.secondary.getLeftY().get());
+    Cargo.cargo(Gamepad.primary.getBack().getPresses(), Gamepad.secondary.getTriggers(), Gamepad.secondary.getRightY());
+    HatchIntake.hatchintake(Gamepad.secondary.getDPadN(), Gamepad.secondary.getDPadE(), Gamepad.secondary.getDPadS(), Gamepad.secondary.getDPadW());
+>>>>>>> 9504994e8d2ac26837d0d953a3842395fa8d86db
 
+    Gamepad.primary.updateLast();
+    Gamepad.secondary.updateLast();
+  }
+ 
   /**
    * This function is called periodically during test mode.
    */
   @Override
   public void testPeriodic() {
+    Gamepad.primary.update();
+    Gamepad.secondary.update();
+
+    ToggleDrive.toggleDrive(Gamepad.primary.getA().getPresses());
+    
+    Gamepad.primary.updateLast();
+    Gamepad.secondary.updateLast();
   }
 }

@@ -114,4 +114,17 @@ public class Constants{
     public static final int SECONDARY_DPAD_LEFT = 35;
     public static final int SECONDARY_DPAD_RIGHT = 36;
 
+    //Sensor Ports
+    public static final int LIFT_LOWERED_LIMIT_SWITCH = 10;
+    public static final int HATCH_PRESENT_ENCODER = 11;
+    public static final int CARGO_PRESENT_ARM = 12;
+    public static final int CARGO_PRESENT_LIFT = 13;
+    //Limit Switch Constants
+    public static final com.ctre.phoenix.motorcontrol.FeedbackDevice QUAD_ENCODER = com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder;
+    public static final int MAX_FORWARD_LIFT_LIMIT = 1024;
+    public static final int MAX_REVERSE_LIFT_LIMIT = -1024;
+    public static final boolean FORWARD_LIMIT_ENABLED = false;
+    public static final boolean REVERSE_LIMIT_ENABLED = false;
+    public static final boolean LIFT_MOTOR_PHASE = false;
+
 }
