@@ -80,7 +80,10 @@ public class Robot extends TimedRobot {
         break;
       case kDefaultAuto:
       default:
-        // Put default auto code here
+        Reader.read("/Documents/ghostMode.txt");
+        while (Reader.playing()) {
+          Reader.play();
+        }
         break;
     }
   }
