@@ -12,21 +12,23 @@ public class Recorder {
 	private static boolean writing = false;
 	private static boolean recording = true;
 	
-	private static double boolToDouble(boolean condition){
-        if(condition) return 1.0;
+	private static double boolToDouble(boolean condition) {
+        if (condition) return 1.0;
         return 0.0;
 	}
 	
 	public static void recording(){
-		if(index <= 0){
+		if (index <= 0) {
 			index = 0;
 			startTime = System.nanoTime();
-		}
-		if (index >= Constants.MAX_INDEX){
+        }
+        
+		if (index >= Constants.MAX_INDEX) {
 			writing = true;
 			recording = false;
-		}
-		if (recording){
+        }
+        
+		if (recording) {
             // p: primary
             // s: secondary
 
@@ -38,8 +40,8 @@ public class Recorder {
             // lb/rb: left/right shoulder button
             // du/dd/dl/dr: d-pad up/down/left/right
             
-            double plx = Gamepad.primary.getLeftX(); 	
-            double ply = Gamepad.primary.getLeftY();	
+            double plx = Gamepad.primary.getLeftX();
+            double ply = Gamepad.primary.getLeftY();
             double prx = Gamepad.primary.getRightX();
             double pry = Gamepad.primary.getRightY();
             double plt = Gamepad.primary.getLeftTrigger();
@@ -57,8 +59,8 @@ public class Recorder {
             double pdl = boolToDouble(Gamepad.primary.getDPadLeft());
             double pdr = boolToDouble(Gamepad.primary.getDPadRight());
 
-            double slx = Gamepad.secondary.getLeftX(); 	
-            double sly = Gamepad.secondary.getLeftY();	
+            double slx = Gamepad.secondary.getLeftX();
+            double sly = Gamepad.secondary.getLeftY();
             double srx = Gamepad.secondary.getRightX();
             double sry = Gamepad.secondary.getRightY();
             double slt = Gamepad.secondary.getLeftTrigger();
@@ -80,36 +82,35 @@ public class Recorder {
             double [] myDoubleArray = {timeStamp, plx, ply, prx, pry, plt, prt, pba, pbb, pbx, pby, pst, pbk, plb, prb, pdu, pdd, pdl, pdr, slx, sly, srx, sry, slt, srt, sba, sbb, sbx, sby, sst, sbk, slb, srb, sdu, sdd, sdl, sdr};
             indexArray[index] = myDoubleArray;
             index++;
-		}
+
+        }
+        
 	}
 	
-	public static void writing(){
-		if(writing){
-			return;
-		}
+	public static void writing() {
 		System.out.println("Starting to write");
-			try{
+			try {
                 PrintWriter writer = new PrintWriter("/Documents/ghostMode.txt", "UTF-8");
-                    if (recording && indexArray.length >= Constants.MAX_INDEX - 1) {
-                        for(index = 0; index <= Constants.MAX_INDEX - 1; index++) {
+                if (recording && indexArray.length >= Constants.MAX_INDEX - 1) {
+                    for (index = 0; index < Constants.MAX_INDEX; index++) {
                         writer.print(index);
-                            for(int i = 0; i < Constants.RECORDED_VALUES_AMOUNT; i++){
-                                writer.print(" ");
-                                writer.print(indexArray[index][i]);
-                            }
+                        for (int i = 0; i < Constants.RECORDED_VALUES_AMOUNT; i++) {
+                            writer.print(" ");
+                            writer.print(indexArray[index][i]);
                         }
-                        Arrays.toString(indexArray);
-                        writer.close();
-                        writing = true;
                     }
-                    
-                } catch (IOException e){
-                    System.out.println(e.getMessage());
+                    Arrays.toString(indexArray);
+                    writer.close();
+                    writing = true;
                 }
+                    
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
 			
-			}
+		}
 	
-	public static void initRecorder(){
+	public static void initRecorder() {
 		startTime = System.nanoTime();
 		index = 0;
 		indexArray = new double[Constants.MAX_INDEX][Constants.RECORDED_VALUES_AMOUNT];
@@ -117,11 +118,11 @@ public class Recorder {
 
 	public static void main(String Args[]) throws InterruptedException{
 		initRecorder();
-		while(!writing){
-			recording();
-			Thread.sleep(Constants.RECORDER_SLEEP_TIME);
+		while (!writing) {
+            recording(); 
+            Thread.sleep(Constants.RECORDER_SLEEP_TIME);
 		}
-	
+        writing();
 	}
 
 }
