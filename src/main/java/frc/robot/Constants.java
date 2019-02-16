@@ -73,7 +73,7 @@ public class Constants{
 
     // Recorder constants
     public static final int MAX_INDEX = 750;
-    public static final int RECORDED_VALUES_AMOUNT = 38;
+    public static final int RECORDED_VALUES_AMOUNT = 37;
     public static final int RECORDER_SLEEP_TIME = 20;
 
 	public static final int TIME_INDEX = 0; 
@@ -95,5 +95,23 @@ public class Constants{
     public static final int PRIMARY_DPAD_DOWN = 16;
     public static final int PRIMARY_DPAD_LEFT = 17;
     public static final int PRIMARY_DPAD_RIGHT = 18;
+    public static final int SECONDARY_LEFT_JOY_X = 19;
+    public static final int SECONDARY_LEFT_JOY_Y = 20;
+    public static final int SECONDARY_RIGHT_JOY_X = 21;
+    public static final int SECONDARY_RIGHT_JOY_Y = 22;
+    public static final int SECONDARY_LEFT_TRIGGER = 23;
+    public static final int SECONDARY_RIGHT_TRIGGER = 24;
+    public static final int SECONDARY_A = 25;
+    public static final int SECONDARY_B = 26;
+    public static final int SECONDARY_X = 27;
+    public static final int SECONDARY_Y = 28;
+    public static final int SECONDARY_START = 29;
+    public static final int SECONDARY_BACK = 30;
+    public static final int SECONDARY_LB = 31;
+    public static final int SECONDARY_RB = 32;
+    public static final int SECONDARY_DPAD_UP = 33;
+    public static final int SECONDARY_DPAD_DOWN = 34;
+    public static final int SECONDARY_DPAD_LEFT = 35;
+    public static final int SECONDARY_DPAD_RIGHT = 36;
 
 }
