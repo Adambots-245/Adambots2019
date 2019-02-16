@@ -96,19 +96,17 @@ public class Recorder {
 		System.out.println("Starting to write");
 			try {
                 PrintWriter writer = new PrintWriter("/Documents/ghostMode.txt", "UTF-8");
-                if (recording && indexArray.length >= Constants.MAX_INDEX - 1) {
-                    for (index = 0; index < Constants.MAX_INDEX; index++) {
-                        writer.print(index);
-                        for (int i = 0; i < Constants.RECORDED_VALUES_AMOUNT; i++) {
-                            writer.print(" ");
-                            writer.print(indexArray[index][i]);
-                        }
+                for (index = 0; index < Constants.MAX_INDEX; index++) {
+                    writer.print(index);
+                    for (int i = 0; i < Constants.RECORDED_VALUES_AMOUNT; i++) {
+                        writer.print(" ");
+                        writer.print(indexArray[index][i]);
                     }
-
-                    Arrays.toString(indexArray);
-                    writer.close();
-                    writing = true;
                 }
+
+                Arrays.toString(indexArray);
+                writer.close();
+                writing = false;
                     
             } catch (IOException e) {
                 System.out.println(e.getMessage());
