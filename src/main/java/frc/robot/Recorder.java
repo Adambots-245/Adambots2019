@@ -17,13 +17,18 @@ public class Recorder {
         return 0.0;
 	}
 	
-	public static void recording(){
+	public static void recording() {
 		if (index <= 0) {
 			index = 0;
 			startTime = System.nanoTime();
         }
         
-		if (index >= Constants.MAX_INDEX) {
+        // sets the last input to all zero to stop everything and then stops recording, starts writing
+		if (index >= Constants.MAX_INDEX - 1) {
+            double timeStamp = (double)(System.nanoTime() - startTime);
+            double [] myDoubleArray = {timeStamp, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            indexArray[Constants.MAX_INDEX] = myDoubleArray;
+
 			writing = true;
 			recording = false;
         }
@@ -31,7 +36,7 @@ public class Recorder {
 		if (recording) {
             // p: primary
             // s: secondary
-
+            
             // lx/ly: left joy x/y
             // rx/ry: right joy x/y
             // lt/rt: left/right trigger
@@ -99,6 +104,7 @@ public class Recorder {
                             writer.print(indexArray[index][i]);
                         }
                     }
+
                     Arrays.toString(indexArray);
                     writer.close();
                     writing = true;
