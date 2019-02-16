@@ -94,6 +94,9 @@ public class Robot extends TimedRobot {
     Drive.tankDrive(Gamepad.primary.getLeftY(), Gamepad.primary.getRightX());
     Cargo.cargoInOut(-Gamepad.secondary.getTriggers());
     Cargo.moveArm(Gamepad.secondary.getRightY());
+
+    Recorder.recording();
+
   }
 
   /**
