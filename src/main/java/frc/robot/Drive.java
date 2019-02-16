@@ -4,10 +4,16 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.Timer;
 public class Drive{
     private static Timer timer = new Timer();
+
     public static void init(){
         timer.start();
     }
-    public static void tankDrive(double speed, double turnSpeed){
+
+    public static void autonDrive(double[] inputs) {
+        
+    }
+
+    public static void tankDrive(double speed, double turnSpeed) {
         
         //Makes sure speed does not go above max
         double leftSpeed = Math.min(speed + turnSpeed, Constants.MAX_MOTOR_SPEED);
@@ -18,16 +24,13 @@ public class Drive{
         Actuators.getRight1Motor().set(ControlMode.PercentOutput, rightSpeed);
         
     }
+
     public static void shiftGear(double speed, boolean shiftHigh, boolean shiftLow) {
 
         //automatic shifting
         //not implemented
         boolean override = false;
         double currentTime = timer.get();
-        
-        
-        
-        
         
         if (override == false) {
             if ((Math.abs(Actuators.getLeft1Motor().getSelectedSensorVelocity() - Actuators.getRight1Motor().getSelectedSensorVelocity()) < Constants.TURN_THRESHOLD) && (currentTime > Constants.TIME_THRESHOLD)) {
@@ -53,9 +56,8 @@ public class Drive{
         
         if (Gamepad.secondary.getX()) {
             override = !override;
-        }
-        
-        
+        } 
 
     }
+
 }
