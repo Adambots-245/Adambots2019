@@ -2,6 +2,7 @@ package frc.secondary;
 
 import frc.robot.Actuators;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class HatchIntake {
     private static DoubleSolenoid.Value previousCentering;
@@ -14,18 +15,58 @@ public class HatchIntake {
     private static int spearCounter;
 
     public static void init(){
-        previousCentering = DoubleSolenoid.Value.kReverse;
-        previousSuction = false;
-        previousSuctionArms = DoubleSolenoid.Value.kReverse;
-        previousSpear = false;
-        centeringCounter = 0;
-        suctionCounter = 0;
-        suctionArmsCounter = 0;
-        spearCounter = 0;
+
     }
 
+    public static void centeringArms(boolean posToggle) {
+        if (posToggle) {
+            if (Actuators.getCenterHatch().get() == Value.kForward) {
+                Actuators.getCenterHatch().set(Value.kReverse);
+            } else {
+                Actuators.getCenterHatch().set(Value.kReverse);
+            }
+        }
+    }
+    public static void suctionArms(boolean posToggle){
+        if (posToggle) {
+            if (Actuators.getArmRaiseLower().get() == Value.kForward) {
+                Actuators.getArmRaiseLower().set(Value.kReverse);
+            } else {
+                Actuators.getArmRaiseLower().set(Value.kReverse);
+            }
+        }
+    }
+    public static void vacuum (boolean posToggle){
+        if (posToggle) {
+            if (Actuators.getVacuum().get() == true) {
+                Actuators.getVacuum().set(false);
+            } else {
+                Actuators.getVacuum().set(false);
+            }
+        }
+    }
+    public static void spear(boolean posToggle){
+        if (posToggle) {
+            if (Actuators.getVacuum().get() == true) {
+                Actuators.getVacuum().set(false);
+            } else {
+                Actuators.getVacuum().set(false);
+            }
+        }
+    }
+    public static void clamp(boolean posToggle){
+        if (posToggle) {
+            if (Actuators.getVacuum().get() == true) {
+                Actuators.getVacuum().set(false);
+            } else {
+                Actuators.getVacuum().set(false);
+            }
+        }
+    }    
+    
     public static void hatchIntake(boolean centering, boolean suctionArms, boolean suction, boolean spear){
-        
+
+        /*
         //Centering arms lowing/raising 
         if(centering && Actuators.getCenterHatch().get() == DoubleSolenoid.Value.kForward){
             if(previousCentering == DoubleSolenoid.Value.kReverse){
@@ -116,6 +157,6 @@ public class HatchIntake {
                 previousSpear = false;
                 spearCounter = 0;
             }
-        }
+        }*/
     }
 }
