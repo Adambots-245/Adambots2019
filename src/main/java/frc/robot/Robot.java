@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
     Gamepad.init();
     Actuators.init();
     Elevator.init();
+    Drive.init();
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
@@ -96,12 +97,12 @@ public class Robot extends TimedRobot {
 
     //primary controls
     Drive.drive(Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightX().get(), Gamepad.primary.getA().get(), Gamepad.primary.getY().get(), Gamepad.primary.getStart().getPresses());
-    Climb.climb(Gamepad.primary.getBack().getPresses(), Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightY().get(), Gamepad.primary.getLeftTrigger().get(), Gamepad.primary.getRightTrigger().get());
+    //Climb.climb(Gamepad.primary.getBack().getPresses(), Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightY().get(), Gamepad.primary.getLeftTrigger().get(), Gamepad.primary.getRightTrigger().get());
     
     //secondary controls
-    Elevator.elevator(Gamepad.secondary.getLeftY().get(), Gamepad.secondary.getTriggers());
-    Cargo.cargo(Gamepad.primary.getBack().getPresses(), Gamepad.secondary.getTriggers(), Gamepad.secondary.getRightY().get());
-    HatchIntake.hatchIntake(Gamepad.secondary.getDPadN().isToggled(), Gamepad.secondary.getDPadE().isToggled(), Gamepad.secondary.getDPadS().isToggled(), Gamepad.secondary.getDPadW().isToggled());
+    //Elevator.elevator(Gamepad.secondary.getLeftY().get(), Gamepad.secondary.getTriggers());
+    //Cargo.cargo(Gamepad.primary.getBack().getPresses(), Gamepad.secondary.getTriggers(), Gamepad.secondary.getRightY().get());
+    //HatchIntake.hatchIntake(Gamepad.secondary.getDPadN().getPresses(), Gamepad.secondary.getDPadE().getPresses(), Gamepad.secondary.getDPadS().getPresses(), Gamepad.secondary.getDPadW().getPresses());
 
     Gamepad.primary.updateLast();
     Gamepad.secondary.updateLast();
