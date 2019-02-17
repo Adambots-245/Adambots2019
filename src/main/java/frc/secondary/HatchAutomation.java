@@ -9,38 +9,96 @@ public class HatchAutomation {
     public static void init(){
         timer.start();
     }
-
-    /*private enum State {
-        s_ARMS_UP;
-        S_CENT_ARM_DOWN;
+    public static void timedFloorIntake(int intakeToggles){
+        if (intakeToggles % 2 == 1){
+            //logic to start/cut sequence
+            //at the end of the sequence, reset presses so it doesn't loop 
+        }
     }
-    public static void setArmsPosition(int currentState) {
-		switch (currentState) {
+    public static void cycleFloorIntake(boolean isToggled, int intakeToggles){
+        if (isToggled){
+            // logic to increment stage with presses
+            // and call the setIntake method here, not outside of the if so it isn't called everytime this method is called
+        }
+    }
+    public static void timedWallIntake(int intakeToggles){
+        if (intakeToggles % 2 == 1){
+            //logic to start/cut sequence
+            //at the end of the sequence, reset presses so it doesn't loop 
+        }
+    }
+    public static void cycleWallIntake(boolean isToggled, int intakeToggles){
+        if (isToggled){
+            // logic to increment stage with presses
+            // and call the setIntake method here, not outside of the if so it isn't called everytime this method is called
+        }
+    }
+    
+    public static void timedOuttake(int intakeToggles){
+        if (intakeToggles % 2 == 1){
+            //logic to start/cut sequence
+            //at the end of the sequence, reset presses so it doesn't loop 
+        }
+    }
+    public static void cycleOuttake(boolean isToggled, int intakeToggles){
+        if (isToggled){
+            // logic to increment stage with presses
+            // and call the setIntake method here, not outside of the if so it isn't called everytime this method is called
+        }
+    }
+    public static void setHatchFloorIntakeState(int state){
+        switch(state){
+            case 0:
+            // return to normal state (arms up, vacuum off, unclamp) 
+            break;
             case 1:
-                if (Actuators.getArmRaiseLower(true)){
-                    Actuators.getCenterHatch().set(true);
-                    //newState(State.S_2);
-                }
-                break;
-                
-            case S_2 :
-                if (Actuators.getCenterHatch(true)) {
-                    Actuators.getVacuum().set(true);
-                    //newState.();
-                }
-                break;
-                
+            // ca down, elevator down
+            break;
+            case 2:
+            // sa down, v on, unclamp
+            break;
             case 3:
-                if (Actuators.getVacuum(true)) {
-                    
-                }
-                break;
-            }
-
+            // sa up, ca up
+            break;
             case 4:
-                if (Actuators.getArmRaiseLower(false) && timer.get() > 1) {
-
-                }
-                break;
-	} */
+            // spear clamp
+            break;
+            case 5:
+            // v off
+            break;
+        }
+        
+    } 
+    public static void setHatchWallIntakeState(int state){
+        switch (state){
+            case 0:
+            // change nothing
+            break;
+            case 1:
+            // unclamp
+            break;
+            case 2:
+            // spear out
+            break;
+            case 3:
+            // clamp
+            break;
+            case 4:
+            // spear in
+            break;
+        }
+    }
+    public static void setHatchOuttake(int state){
+        switch (state){
+            case 0:
+            // spear out
+            break;
+            case 1:
+            // unclamp
+            break;
+            case 2:
+            // spear in
+            break;
+        }
+    }
 }
