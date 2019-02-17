@@ -26,7 +26,7 @@ public class Sensors {
 
         armLimitSwitch = new DigitalInput(Constants.CARGO_ARM_SENSOR_PORT);
         liftLowered = new DigitalInput(Constants.LIFT_LOWERED_LIMIT_SWITCH);
-        hatchPresent = new DigitalInput(Constants.HATCH_PRESENT_ENCODER);
+        hatchPresent = new DigitalInput(Constants.HATCH_PRESENT_PORT);
         cargoPresentArm = new DigitalInput(Constants.CARGO_PRESENT_ARM);
         cargoPresentLift = new DigitalInput(Constants.CARGO_PRESENT_LIFT);
         armPotentiometer = new AnalogPotentiometer(Constants.ARM_POTENTIOMETER_PORT); // https://wpilib.screenstepslive.com/s/4485/m/13810/l/241877-potentiometers-measuring-joint-angle-or-linear-motion
@@ -48,7 +48,7 @@ public class Sensors {
         return liftLowered;
     }
 
-    public static DigitalInput getHatchPresentEncoder() {
+    public static DigitalInput getHatchPresent() {
         return hatchPresent;
     }
 

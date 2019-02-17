@@ -14,56 +14,38 @@ public class HatchIntake {
     private static int suctionArmsCounter;
     private static int spearCounter;
 
-    public static void init(){
+    public static void init() {
 
     }
 
-    public static void centeringArms(boolean posToggle) {
-        if (posToggle) {
-            if (Actuators.getCenterHatch().get() == Value.kForward) {
-                Actuators.getCenterHatch().set(Value.kReverse);
-            } else {
-                Actuators.getCenterHatch().set(Value.kReverse);
-            }
+    public static void centeringArms(boolean pos) {
+        if (pos) {
+            Actuators.getCenterHatch().set(Value.kForward);
+        } else {
+            Actuators.getCenterHatch().set(Value.kReverse);
         }
     }
-    public static void suctionArms(boolean posToggle){
-        if (posToggle) {
-            if (Actuators.getArmRaiseLower().get() == Value.kForward) {
-                Actuators.getArmRaiseLower().set(Value.kReverse);
-            } else {
-                Actuators.getArmRaiseLower().set(Value.kReverse);
-            }
+
+    public static void suctionArms(boolean pos) {
+        if (pos) {
+            Actuators.getArmRaiseLower().set(Value.kForward);
+        } else {
+            Actuators.getArmRaiseLower().set(Value.kReverse);
         }
     }
-    public static void vacuum (boolean posToggle){
-        if (posToggle) {
-            if (Actuators.getVacuum().get() == true) {
-                Actuators.getVacuum().set(false);
-            } else {
-                Actuators.getVacuum().set(false);
-            }
-        }
+
+    public static void vacuum(boolean pos) {
+        Actuators.getVacuum().set(pos);
     }
-    public static void spear(boolean posToggle){
-        if (posToggle) {
-            if (Actuators.getVacuum().get() == true) {
-                Actuators.getVacuum().set(false);
-            } else {
-                Actuators.getVacuum().set(false);
-            }
-        }
+
+    public static void spear(boolean pos) {
+        Actuators.getSpearExtend().set(pos);
     }
-    public static void clamp(boolean posToggle){
-        if (posToggle) {
-            if (Actuators.getVacuum().get() == true) {
-                Actuators.getVacuum().set(false);
-            } else {
-                Actuators.getVacuum().set(false);
-            }
-        }
-    }    
-    
+
+    public static void clamp(boolean pos) {
+        Actuators.getHatchClampOpen().set(pos);
+    }
+
     public static void hatchIntake(boolean centering, boolean suctionArms, boolean suction, boolean spear){
 
         /*

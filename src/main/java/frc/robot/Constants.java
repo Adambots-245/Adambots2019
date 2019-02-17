@@ -76,10 +76,10 @@ public class Constants{
     public static final double MIN_CLIMB_SPEED = -0.9;
 
     //Sensor Ports
-    public static final int LIFT_LOWERED_LIMIT_SWITCH = 10;
-    public static final int HATCH_PRESENT_ENCODER = 11;
-    public static final int CARGO_PRESENT_ARM = 12;
-    public static final int CARGO_PRESENT_LIFT = 13;
+    public static final int LIFT_LOWERED_LIMIT_SWITCH = 0;
+    public static final int HATCH_PRESENT_PORT = 1;
+    public static final int CARGO_PRESENT_ARM = 2;
+    public static final int CARGO_PRESENT_LIFT = 3;
     //Limit Switch Constants
     public static final com.ctre.phoenix.motorcontrol.FeedbackDevice QUAD_ENCODER = com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder;
     public static final int MAX_FORWARD_LIFT_LIMIT = 1024;

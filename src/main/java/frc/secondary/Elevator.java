@@ -22,8 +22,8 @@ public class Elevator {
 
     }
     public static void elevator(double liftSpeed, double intakeSpeed){
-        setLiftMotorSpeed(liftSpeed);
-        passiveGotoNearestLevel(liftSpeed);
+        setLiftMotorSpeed(liftSpeed/2);
+        //passiveGotoNearestLevel(liftSpeed);
         setCarriageWheelsSpeed(intakeSpeed);
     }
     public static void setCarriageWheelsSpeed(double speed){

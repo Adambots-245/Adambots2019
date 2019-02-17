@@ -42,6 +42,21 @@ public class Actuators {
         Right2Motor = new VictorSPX(Constants.RIGHT_DRIVE_MOTOR_VICTORSPX1);
         Right3Motor = new VictorSPX(Constants.RIGHT_DRIVE_MOTOR_VICTORSPX2);
 
+        ClimbMotor = new TalonSRX(Constants.CLIMBING_ARM_CARGO_ACQUISITION);
+        LinearActuator = new TalonSRX(Constants.LINEAR_ACTUATOR_MOTOR);
+        InfeedArmMotor = new VictorSPX(Constants.INFEED_BAG_MOTOR_ARM);
+        ArmInOutLift1 = new VictorSPX(Constants.INFEED_BAG_MOTOR_LIFT1);
+        ArmInOutLift2 = new VictorSPX(Constants.INFEED_BAG_MOTOR_LIFT2);
+        LiftMotor1 = new TalonSRX(Constants.LIFT_MOTOR_TALONSRX);
+        LiftMotor2 = new VictorSPX(Constants.LIFT_MOTOR_VICTORSPX);
+
+        Vacuum = new Solenoid(Constants.VACUUM_ON);
+        ArmRaiseLower = new DoubleSolenoid(Constants.RAISE_HATCH_VACUUM_ARM, Constants.LOWER_HATCH_VACUUM_ARM);
+        CenterHatch = new DoubleSolenoid(Constants.RAISE_CENTERING_HATCH, Constants.LOWER_CENTERING_HATCH);
+        HatchClampOpen = new Solenoid(Constants.OPEN_HATCH_CLAMP);
+        CargoHatchDelivery = new Solenoid(Constants.ADVANCE_CARGO_HATCH_DELVERY);
+        ShiftHighGear = new Solenoid(1, Constants.SHIFT_HIGH_SPEED);
+
         // set follower motors
         Left2Motor.follow(Left1Motor);
         Left3Motor.follow(Left1Motor);
@@ -66,24 +81,12 @@ public class Actuators {
         Right2Motor.setNeutralMode(NeutralMode.Coast);
         Right3Motor.setNeutralMode(NeutralMode.Coast);
 
-        ClimbMotor = new TalonSRX(Constants.CLIMBING_ARM_CARGO_ACQUISITION);
-        LinearActuator = new TalonSRX(Constants.LINEAR_ACTUATOR_MOTOR);
-        InfeedArmMotor = new VictorSPX(Constants.INFEED_BAG_MOTOR_ARM);
-        ArmInOutLift1 = new VictorSPX(Constants.INFEED_BAG_MOTOR_LIFT1);
-        ArmInOutLift2 = new VictorSPX(Constants.INFEED_BAG_MOTOR_LIFT2);
-        LiftMotor1 = new TalonSRX(Constants.LIFT_MOTOR_TALONSRX);
-        LiftMotor2 = new VictorSPX(Constants.LIFT_MOTOR_VICTORSPX);
 
         // set follower motors
         ArmInOutLift2.follow(ArmInOutLift1);
         LiftMotor2.follow(LiftMotor1);
 
-        Vacuum = new Solenoid(Constants.VACUUM_ON);
-        ArmRaiseLower = new DoubleSolenoid(Constants.RAISE_HATCH_VACUUM_ARM, Constants.LOWER_HATCH_VACUUM_ARM);
-        CenterHatch = new DoubleSolenoid(Constants.RAISE_CENTERING_HATCH, Constants.LOWER_CENTERING_HATCH);
-        HatchClampOpen = new Solenoid(Constants.OPEN_HATCH_CLAMP);
-        CargoHatchDelivery = new Solenoid(Constants.ADVANCE_CARGO_HATCH_DELVERY);
-        ShiftHighGear = new Solenoid(Constants.SHIFT_HIGH_SPEED);
+       
     }
 
     public static TalonSRX getClimbMotor() {
@@ -124,6 +127,10 @@ public class Actuators {
 
     public static Solenoid getHatchClampOpen() {
         return HatchClampOpen;
+    }
+
+    public static Solenoid getSpearExtend() {
+        return CargoHatchDelivery;
     }
 
     public static TalonSRX getLeft1Motor() {
