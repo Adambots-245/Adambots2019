@@ -10,9 +10,9 @@ public class Actuators {
 
     // Motors through motor controllers
     private static TalonSRX Left1Motor;
-    private static VictorSPX Left2Motor;
+    private static TalonSRX Left2Motor;
     private static TalonSRX Right1Motor;
-    private static VictorSPX Right2Motor;
+    private static TalonSRX Right2Motor;
     private static VictorSPX Left3Motor;
     private static VictorSPX Right3Motor;
     private static TalonSRX ClimbMotor;
@@ -36,11 +36,26 @@ public class Actuators {
 
         // TODO: add 3rd motor, talk to Mars
         Left1Motor = new TalonSRX(Constants.LEFT_DRIVE_MOTOR_TALONSRX);
-        Left2Motor = new VictorSPX(Constants.LEFT_DRIVE_MOTOR_VICTORSPX1);
+        Left2Motor = new TalonSRX(Constants.LEFT_DRIVE_MOTOR_VICTORSPX1);
         Left3Motor = new VictorSPX(Constants.LEFT_DRIVE_MOTOR_VICTORSPX2);
         Right1Motor = new TalonSRX(Constants.RIGHT_DRIVE_MOTOR_TALONSRX);
-        Right2Motor = new VictorSPX(Constants.RIGHT_DRIVE_MOTOR_VICTORSPX1);
+        Right2Motor = new TalonSRX(Constants.RIGHT_DRIVE_MOTOR_VICTORSPX1);
         Right3Motor = new VictorSPX(Constants.RIGHT_DRIVE_MOTOR_VICTORSPX2);
+
+        Vacuum = new Solenoid(Constants.VACUUM_ON);
+        ArmRaiseLower = new DoubleSolenoid(Constants.RAISE_HATCH_VACUUM_ARM, Constants.LOWER_HATCH_VACUUM_ARM);
+        //CenterHatch = new DoubleSolenoid(Constants.RAISE_CENTERING_HATCH, Constants.LOWER_CENTERING_HATCH);
+        HatchClampOpen = new Solenoid(Constants.OPEN_HATCH_CLAMP);
+        CargoHatchDelivery = new Solenoid(Constants.ADVANCE_CARGO_HATCH_DELVERY);
+        ShiftHighGear = new Solenoid(Constants.SHIFT_HIGH_SPEED);
+      
+        ClimbMotor = new TalonSRX(Constants.CLIMBING_ARM_CARGO_ACQUISITION);
+        LinearActuator = new TalonSRX(Constants.LINEAR_ACTUATOR_MOTOR);
+        InfeedArmMotor = new VictorSPX(Constants.INFEED_BAG_MOTOR_ARM);
+        ArmInOutLift1 = new VictorSPX(Constants.INFEED_BAG_MOTOR_LIFT1);
+        ArmInOutLift2 = new VictorSPX(Constants.INFEED_BAG_MOTOR_LIFT2);
+        LiftMotor1 = new TalonSRX(Constants.LIFT_MOTOR_TALONSRX);
+        LiftMotor2 = new VictorSPX(Constants.LIFT_MOTOR_VICTORSPX);
 
         // set follower motors
         Left2Motor.follow(Left1Motor);
@@ -66,24 +81,12 @@ public class Actuators {
         Right2Motor.setNeutralMode(NeutralMode.Coast);
         Right3Motor.setNeutralMode(NeutralMode.Coast);
 
-        ClimbMotor = new TalonSRX(Constants.CLIMBING_ARM_CARGO_ACQUISITION);
-        LinearActuator = new TalonSRX(Constants.LINEAR_ACTUATOR_MOTOR);
-        InfeedArmMotor = new VictorSPX(Constants.INFEED_BAG_MOTOR_ARM);
-        ArmInOutLift1 = new VictorSPX(Constants.INFEED_BAG_MOTOR_LIFT1);
-        ArmInOutLift2 = new VictorSPX(Constants.INFEED_BAG_MOTOR_LIFT2);
-        LiftMotor1 = new TalonSRX(Constants.LIFT_MOTOR_TALONSRX);
-        LiftMotor2 = new VictorSPX(Constants.LIFT_MOTOR_VICTORSPX);
-
+       
         // set follower motors
         ArmInOutLift2.follow(ArmInOutLift1);
         LiftMotor2.follow(LiftMotor1);
 
-        Vacuum = new Solenoid(Constants.VACUUM_ON);
-        ArmRaiseLower = new DoubleSolenoid(Constants.RAISE_HATCH_VACUUM_ARM, Constants.LOWER_HATCH_VACUUM_ARM);
-        CenterHatch = new DoubleSolenoid(Constants.RAISE_CENTERING_HATCH, Constants.LOWER_CENTERING_HATCH);
-        HatchClampOpen = new Solenoid(Constants.OPEN_HATCH_CLAMP);
-        CargoHatchDelivery = new Solenoid(Constants.ADVANCE_CARGO_HATCH_DELVERY);
-        ShiftHighGear = new Solenoid(Constants.SHIFT_HIGH_SPEED);
+
     }
 
     public static TalonSRX getClimbMotor() {
@@ -126,11 +129,15 @@ public class Actuators {
         return HatchClampOpen;
     }
 
+    public static Solenoid getCargoHatchDelivery(){
+        return CargoHatchDelivery;
+    }
+
     public static TalonSRX getLeft1Motor() {
         return Left1Motor;
     }
 
-    public static VictorSPX getLeft2Motor() {
+    public static TalonSRX getLeft2Motor() {
         return Left2Motor;
     }
 
@@ -142,7 +149,7 @@ public class Actuators {
         return Right1Motor;
     }
 
-    public static VictorSPX getRight2Motor() {
+    public static TalonSRX getRight2Motor() {
         return Right2Motor;
     }
 
