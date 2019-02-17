@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,6 +22,7 @@ import frc.secondary.*;
  * project.
  */
 public class Robot extends TimedRobot {
+  AHRS ahrs;
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
@@ -31,6 +34,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    Gyro.init();
     Gamepad.init();
     Actuators.init();
     Elevator.init();
@@ -95,8 +99,10 @@ public class Robot extends TimedRobot {
     Gamepad.secondary.update();
 
     //primary controls
-    Drive.drive(Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightX().get(), Gamepad.primary.getA().get(), Gamepad.primary.getY().get(), Gamepad.primary.getStart().getPresses());
-    Climb.climb(Gamepad.primary.getBack().getPresses(), Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightY().get(), Gamepad.primary.getLeftTrigger().get(), Gamepad.primary.getRightTrigger().get());
+    Drive.drive(Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightX().get(), Gamepad.primary.getA().get(), 
+              Gamepad.primary.getY().get(), Gamepad.primary.getStart().getPresses());
+    Climb.climb(Gamepad.primary.getBack().getPresses(), Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightY().get(), 
+              Gamepad.primary.getLeftTrigger().get(), Gamepad.primary.getRightTrigger().get());
     
     //secondary controls
     Elevator.elevator(Gamepad.secondary.getLeftY().get(), Gamepad.secondary.getTriggers());
