@@ -6,10 +6,17 @@ import edu.wpi.first.wpilibj.Timer;
 public class Drive {
     private static Timer timer = new Timer();
     private static boolean state;
-
+    private static boolean currentShift;
+    private static boolean lastShift;
+    private static int downShiftState;
+    private static int upShiftState;
     public static void init() {
         timer.start();
         state = false;
+        currentShift = false;
+        lastShift = false;
+        downShiftState = 0;
+        upShiftState = 0;
     }
 
     public static void drive(double speed, double turnSpeed, boolean shiftLow, boolean shiftHigh, int override) {
@@ -55,20 +62,39 @@ public class Drive {
         double rightSpeed = Math.min(speed - turnSpeed, Constants.MAX_MOTOR_SPEED);
         if ((Math.abs(leftVelocity - rightVelocity) < Constants.SHIFT_TURN_THRESHOLD)
                 && (currentTime > Constants.SHIFT_TIME_THRESHOLD)) {
-            avgVelocity = (leftVelocity + rightVelocity) / 2;
+            avgVelocity = Math.abs((leftVelocity + rightVelocity) / 2);
             if (avgVelocity > Constants.SHIFT_UP_THRESHOLD) {
-                Actuators.getShiftHighGear().set(true);
+                currentShift = true;
                 timer.reset();
             }
 
             if (avgVelocity < Constants.SHIFT_DOWN_THRESHOLD) {
-                Actuators.getShiftHighGear().set(false);
+                currentShift = false;
                 timer.reset();
             }
         }
         else if (currentTime > Constants.SHIFT_TIME_THRESHOLD){
-            Actuators.getShiftHighGear().set(false);
+            currentShift = false;
         }
+        if (currentShift && !lastShift){
+            upShiftState++; 
+        }
+        else if (!currentShift && lastShift){
+            downShiftState++;
+        }
+        else{
+            upShiftState = 0;
+            downShiftState = 0;
+        }
+
+        if (upShiftState == 1 || downShiftState == 1){
+            rightSpeed = Constants.STOP_MOTOR_SPEED;
+            leftSpeed = Constants.STOP_MOTOR_SPEED;
+        }
+        else{
+            Actuators.getShiftHighGear().set(currentShift);
+        }
+        lastShift = currentShift;
         Actuators.getLeft1Motor().set(ControlMode.PercentOutput, leftSpeed);
         Actuators.getRight1Motor().set(ControlMode.PercentOutput, rightSpeed);
     }
