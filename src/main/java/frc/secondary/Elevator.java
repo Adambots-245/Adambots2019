@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import frc.robot.Actuators;
 import frc.robot.Constants;
+import frc.robot.Sensors;
 
 public class Elevator {
     private static boolean Level_1;
@@ -22,9 +23,11 @@ public class Elevator {
 
     }
     public static void elevator(double liftSpeed, double intakeSpeed){
+        liftSpeed += Constants.ELEVATOR_HOLD_SPEED;
         setLiftMotorSpeed(liftSpeed/2);
         //passiveGotoNearestLevel(liftSpeed);
         setCarriageWheelsSpeed(intakeSpeed);
+        //System.out.println("elevator pos = " + Sensors.getLiftSensorPosition());
     }
     public static void setCarriageWheelsSpeed(double speed){
         Actuators.getArmInOutLift1().set(ControlMode.PercentOutput, speed);

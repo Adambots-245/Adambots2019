@@ -65,7 +65,7 @@ public class Sensors {
     }
 
     public static int getLiftSensorPosition() {
-        return Actuators.getLiftMotor1().getSelectedSensorPosition(0);
+        return Math.abs(Actuators.getLiftMotor1().getSelectedSensorPosition(0));
     }
 
     public static void resetLiftEncoder() {

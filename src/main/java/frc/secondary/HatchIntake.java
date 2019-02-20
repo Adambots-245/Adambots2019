@@ -19,7 +19,7 @@ public class HatchIntake {
     }
 
     public static void centeringArms(boolean pos) {
-        if (pos) {
+        if (!pos) {
             Actuators.getCenterHatch().set(Value.kForward);
         } else {
             Actuators.getCenterHatch().set(Value.kReverse);
