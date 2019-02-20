@@ -2,6 +2,7 @@ package frc.robot;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 public class Recorder {
     //
@@ -12,7 +13,9 @@ public class Recorder {
 	private static double indexArray [][] = new double[Constants.MAX_INDEX][Constants.RECORDED_VALUES_AMOUNT];
     private static int index;
 	private static boolean writing = false;
-	private static boolean recording = true;
+    private static boolean recording = true;
+    private static String name;
+    private static Scanner in = new Scanner(System.in);
     
     //
     // METHODS
@@ -117,7 +120,7 @@ public class Recorder {
 	public static void writing() {
 		System.out.println("Starting to write");
 			try {
-                PrintWriter writer = new PrintWriter("/Documents/ghostMode.txt", "UTF-8");
+                PrintWriter writer = new PrintWriter("/Documents/" + name, "UTF-8");
                 for (index = 0; index < Constants.MAX_INDEX; index++) {
                     writer.print(index);
                     for (int i = 0; i < Constants.RECORDED_VALUES_AMOUNT; i++) {
@@ -140,14 +143,21 @@ public class Recorder {
 		startTime = System.nanoTime();
 		index = 0;
         indexArray = new double[Constants.MAX_INDEX][Constants.RECORDED_VALUES_AMOUNT];
-	}
+    }
+    
+    public static void setName() {
+        System.out.print("Name: ");
+        name = in.nextLine() + ".txt";
+        System.out.println("Saving to " + name);
+    }
 
     //
     // MAIN
     //
 
 	public static void main(String Args[]) throws InterruptedException{
-		initRecorder();
+        initRecorder();
+        setName();
 		while (!writing) {
             recording(); 
             Thread.sleep(Constants.RECORDER_SLEEP_TIME);
