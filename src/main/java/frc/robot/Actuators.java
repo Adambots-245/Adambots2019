@@ -30,7 +30,7 @@ public class Actuators {
     private static DoubleSolenoid CenterHatch;
     private static Solenoid HatchClampOpen;
     private static Solenoid CargoHatchDelivery;
-    private static Solenoid ShiftHighGear;
+    private static DoubleSolenoid ShiftHighGear;
 
     public static void init() {
 
@@ -53,9 +53,9 @@ public class Actuators {
         Vacuum = new Solenoid(Constants.VACUUM_ON);
         ArmRaiseLower = new DoubleSolenoid(Constants.RAISE_HATCH_VACUUM_ARM, Constants.LOWER_HATCH_VACUUM_ARM);
         CenterHatch = new DoubleSolenoid(Constants.RAISE_CENTERING_HATCH, Constants.LOWER_CENTERING_HATCH);
-        HatchClampOpen = new Solenoid(Constants.OPEN_HATCH_CLAMP);
+        HatchClampOpen = new Solenoid(1, Constants.OPEN_HATCH_CLAMP);
         CargoHatchDelivery = new Solenoid(Constants.ADVANCE_CARGO_HATCH_DELVERY);
-        ShiftHighGear = new Solenoid(1, Constants.SHIFT_HIGH_SPEED);
+        ShiftHighGear = new DoubleSolenoid(Constants.SHIFT_HIGH_SPEED, Constants.SHIFT_LOW_SPEED);
 
         // set follower motors
         Left2Motor.follow(Left1Motor);
@@ -65,12 +65,12 @@ public class Actuators {
 
         ArmInOutLift2.follow(ArmInOutLift1);
         // reverse motors
-        Left1Motor.setInverted(true);
-        Left2Motor.setInverted(true);
-        Left3Motor.setInverted(true);
-        Right1Motor.setInverted(false);
-        Right2Motor.setInverted(false);
-        Right3Motor.setInverted(false);
+        Left1Motor.setInverted(false);
+        Left2Motor.setInverted(false);
+        Left3Motor.setInverted(false);
+        Right1Motor.setInverted(true);
+        Right2Motor.setInverted(true);
+        Right3Motor.setInverted(true);
 
         ArmInOutLift2.setInverted(true);
         // set drive motors to coast
@@ -81,11 +81,27 @@ public class Actuators {
         Right2Motor.setNeutralMode(NeutralMode.Coast);
         Right3Motor.setNeutralMode(NeutralMode.Coast);
 
-
+        //set brake motors
+        LiftMotor1.setNeutralMode(NeutralMode.Brake);
+        LiftMotor2.setNeutralMode(NeutralMode.Brake);
+        
         // set follower motors
         ArmInOutLift2.follow(ArmInOutLift1);
         LiftMotor2.follow(LiftMotor1);
 
+        //disable limits
+        Right1Motor.configForwardSoftLimitEnable(false);
+        Right1Motor.configReverseSoftLimitEnable(false);
+        Right2Motor.configForwardSoftLimitEnable(false);
+        Right2Motor.configReverseSoftLimitEnable(false);
+        Right3Motor.configForwardSoftLimitEnable(false);
+        Right3Motor.configReverseSoftLimitEnable(false);
+        Left1Motor.configForwardSoftLimitEnable(false);
+        Left1Motor.configReverseSoftLimitEnable(false);;
+        Left2Motor.configForwardSoftLimitEnable(false);
+        Left2Motor.configReverseSoftLimitEnable(false);;
+        Left3Motor.configForwardSoftLimitEnable(false);
+        Left3Motor.configReverseSoftLimitEnable(false);
        
     }
 
@@ -93,8 +109,8 @@ public class Actuators {
         return ClimbMotor;
     }
 
-    public static TalonSRX getArmInOutLift1() {
-        return LinearActuator;
+    public static VictorSPX getArmInOutLift1() {
+        return ArmInOutLift1;
     }
 
     public static TalonSRX getLinearActuator() {
@@ -109,7 +125,7 @@ public class Actuators {
         return LiftMotor1;
     }
 
-    public static Solenoid getShiftHighGear() {
+    public static DoubleSolenoid getShiftHighGear() {
         return ShiftHighGear;
     }
 

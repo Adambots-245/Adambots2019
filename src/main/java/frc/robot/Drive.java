@@ -2,6 +2,8 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class Drive {
     private static Timer timer = new Timer();
@@ -10,6 +12,7 @@ public class Drive {
     private static boolean lastShift;
     private static int downShiftState;
     private static int upShiftState;
+    private static boolean autoShiftState;
     public static void init() {
         timer.start();
         state = false;
@@ -18,25 +21,40 @@ public class Drive {
         downShiftState = 0;
         upShiftState = 0;
     }
+    public static boolean getAutoShiftState(){
+        return autoShiftState;
+    }
+    public static Value shiftingValue(boolean state){
+        Value value;
+        if (state) {
+            value = Value.kForward;
+        } else {
+            value = Value.kReverse;
+        }
+        return value;
+    }
 
     public static void drive(double speed, double turnSpeed, boolean shiftLow, boolean shiftHigh, int override) {
         // if override has been pressd an even # of times, then manual shifting. else
         // autoshift
         if (override % 2 == 0) {
-            System.out.println("tank");
+            //System.out.println("tank");
+            autoShiftState = false;
             tankDrive(speed, turnSpeed, shiftLow, shiftHigh);
         } else {
-            System.out.println("shift");
+            //System.out.println("shift");
+            autoShiftState = true;
             shiftDrive(speed, turnSpeed);
         }
-        System.out.println("Left Velocity: " + -
-        Actuators.getLeft2Motor().getSelectedSensorVelocity());
-        System.out.println("Right Velocity: " + Actuators.getRight2Motor().getSelectedSensorVelocity());
+        //System.out.println("Left Velocity: " + -
+        //Actuators.getLeft2Motor().getSelectedSensorVelocity());
+        //System.out.println("Right Velocity: " + Actuators.getRight2Motor().getSelectedSensorVelocity());
     }
 
     public static void tankDrive(double speed, double turnSpeed, boolean shiftLow, boolean shiftHigh) {
 
         // Makes sure speed does not go above max
+        speed = speed * -1; // fix forward = back
         double leftSpeed = Math.min(speed + turnSpeed, Constants.MAX_MOTOR_SPEED);
         double rightSpeed = Math.min(speed - turnSpeed, Constants.MAX_MOTOR_SPEED);
         if (shiftHigh) {
@@ -47,14 +65,15 @@ public class Drive {
         // Sets the speeds
         Actuators.getLeft1Motor().set(ControlMode.PercentOutput, leftSpeed);
         Actuators.getRight1Motor().set(ControlMode.PercentOutput, rightSpeed);
-        Actuators.getShiftHighGear().set(state);
+   
+        Actuators.getShiftHighGear().set(shiftingValue(state));
     }
 
     public static void shiftDrive(double speed, double turnSpeed) {
         // automatic shifting
         // not implemented
-        double leftVelocity = -1 * Actuators.getLeft2Motor().getSelectedSensorVelocity();
-        double rightVelocity = Actuators.getRight2Motor().getSelectedSensorVelocity();
+        double leftVelocity = -1 * Actuators.getLeft1Motor().getSelectedSensorVelocity();
+        double rightVelocity = Actuators.getRight1Motor().getSelectedSensorVelocity();
         double currentTime = timer.get();
         double avgVelocity;
         // Makes sure speed does not go above max
@@ -92,7 +111,7 @@ public class Drive {
             leftSpeed = Constants.STOP_MOTOR_SPEED;
         }
         else{
-            Actuators.getShiftHighGear().set(currentShift);
+            Actuators.getShiftHighGear().set(shiftingValue(currentShift));
         }
         lastShift = currentShift;
         Actuators.getLeft1Motor().set(ControlMode.PercentOutput, leftSpeed);
