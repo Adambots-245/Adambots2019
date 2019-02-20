@@ -89,21 +89,27 @@ public class Robot extends TimedRobot {
     }
   }
 
+  //TODO: does this even work lmao
+  public static void ghostDrive(double[] inputs) {
+    Gamepad.virtualPrimary.update(inputs, true);
+    Gamepad.virtualSecondary.update(inputs, false);
+    //primary controls
+    Drive.drive(Gamepad.virtualPrimary.getLeftY().get(), Gamepad.virtualPrimary.getRightX().get(), Gamepad.virtualPrimary.getA().get(), Gamepad.virtualPrimary.getY().get(), Gamepad.virtualPrimary.getStart().getPresses());
+    Climb.climb(Gamepad.virtualPrimary.getBack().getPresses(), Gamepad.virtualPrimary.getLeftY().get(), Gamepad.virtualPrimary.getRightY().get(), Gamepad.virtualPrimary.getLeftTrigger().get(), Gamepad.virtualPrimary.getRightTrigger().get());
+    //secondary controls
+    Elevator.elevator(Gamepad.virtualSecondary.getLeftY().get());
+    Cargo.cargo(Gamepad.virtualSecondary.getBack().getPresses(), Gamepad.virtualSecondary.getTriggers(), Gamepad.virtualSecondary.getRightY().get());
+    HatchIntake.hatchIntake(Gamepad.virtualSecondary.getDPadN().get(), Gamepad.virtualSecondary.getDPadE().get(), Gamepad.virtualSecondary.getDPadS().get(), Gamepad.secondary.getDPadW().get());
+
+    Gamepad.virtualPrimary.updateLast();
+    Gamepad.virtualSecondary.updateLast();
+  }
+
   /**
    * This function is called periodically during operator control.
    */
   @Override
   public void teleopPeriodic() {
-<<<<<<< HEAD
-    
-    Drive.tankDrive(Gamepad.primary.getLeftY(), Gamepad.primary.getRightX());
-    Cargo.cargoInOut(-Gamepad.secondary.getTriggers());
-    Cargo.moveArm(Gamepad.secondary.getRightY());
-
-    Recorder.recording();
-
-  }
-=======
     Gamepad.primary.update();
     Gamepad.secondary.update();
     //primary controls
@@ -111,9 +117,8 @@ public class Robot extends TimedRobot {
     Climb.climb(Gamepad.primary.getBack().getPresses(), Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightY().get(), Gamepad.primary.getLeftTrigger().get(), Gamepad.primary.getRightTrigger().get());
     //secondary controls
     Elevator.elevator(Gamepad.secondary.getLeftY().get());
-    Cargo.cargo(Gamepad.primary.getBack().getPresses(), Gamepad.secondary.getTriggers(), Gamepad.secondary.getRightY());
-    HatchIntake.hatchintake(Gamepad.secondary.getDPadN(), Gamepad.secondary.getDPadE(), Gamepad.secondary.getDPadS(), Gamepad.secondary.getDPadW());
->>>>>>> 9504994e8d2ac26837d0d953a3842395fa8d86db
+    Cargo.cargo(Gamepad.primary.getBack().getPresses(), Gamepad.secondary.getTriggers(), Gamepad.secondary.getRightY().get());
+    HatchIntake.hatchIntake(Gamepad.secondary.getDPadN().get(), Gamepad.secondary.getDPadE().get(), Gamepad.secondary.getDPadS().get(), Gamepad.secondary.getDPadW().get());
 
     Gamepad.primary.updateLast();
     Gamepad.secondary.updateLast();
