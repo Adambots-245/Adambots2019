@@ -33,17 +33,17 @@ public class Constants{
 
     //PCM ports
     
-    public static final int RAISE_CENTERING_HATCH = 0;
-    public static final int LOWER_CENTERING_HATCH = 1;
-    public static final int ADVANCE_CARGO_HATCH_DELVERY = 2;
-    public static final int RETURN_CARGO_HATCH_DELIVERY = 3;
-    public static final int VACUUM_ON = 4;
-    public static final int OPEN_HATCH_CLAMP = 5;
-    public static final int RAISE_HATCH_VACUUM_ARM = 6;
-    public static final int LOWER_HATCH_VACUUM_ARM = 7;
+    public static final int RAISE_CENTERING_HATCH = 1;
+    public static final int LOWER_CENTERING_HATCH = 2;
+    public static final int ADVANCE_CARGO_HATCH_DELVERY = 3;
+    //public static final int RETURN_CARGO_HATCH_DELIVERY = 3;
+    public static final int VACUUM_ON = 0;
+    public static final int OPEN_HATCH_CLAMP = 1;//pcm 1
+    public static final int RAISE_HATCH_VACUUM_ARM = 4; //5?
+    public static final int LOWER_HATCH_VACUUM_ARM = 5; //4?
     
-    public static final int SHIFT_HIGH_SPEED = 0;
-
+    public static final int SHIFT_HIGH_SPEED = 6;
+    public static final int SHIFT_LOW_SPEED = 7;
 
     //motor speeds
     public static final double STOP_MOTOR_SPEED = 0.0;
@@ -66,10 +66,12 @@ public class Constants{
     //Limiters
     public static final double MAX_LIFT_SPEED = 0.0;
     
+    //set elevator hold speed
+    public static final double ELEVATOR_HOLD_SPEED = .12;
     //Misc
-    public static final int LIFT_LEVEL_1 = 0;
+    public static final int LIFT_LEVEL_1 = 200;
     public static final int LIFT_LEVEL_2 = 30000;
-    public static final int LIFT_LEVEL_3 = 60000; 
+    public static final int LIFT_LEVEL_3 = 55000; 
 
     //Limiters TODO: UPDATE MAX AND MIN CLIMB SPEEDS TO CORRECT VALUES
     public static final double MAX_CLIMB_SPEED = 0.9;
