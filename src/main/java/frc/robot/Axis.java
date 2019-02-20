@@ -38,6 +38,16 @@ public class Axis {
         isToggled();
     }
 
+    public void update(double input) {
+        store = input;
+        if (Math.abs(store) > .05) {
+            isPressed = true;
+        } else {
+            isPressed = false;
+        }
+        isToggled();
+    }
+
     // returns double value of the axis
     public double get() {
         return Gamepad.deaden(store);

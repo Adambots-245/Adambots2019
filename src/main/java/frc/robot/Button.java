@@ -31,6 +31,11 @@ public class Button {
         isToggled();
     }
 
+    public void update(double input) {
+        store = (input == 1.0);
+        isToggled();
+    }
+
     // returns the boolean value of the button (true or false)
     public boolean get() {
         return store;

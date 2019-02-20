@@ -30,4 +30,11 @@ public class DPad extends Button {
         isToggled();
         // System.out.println(direction + ", " + DPadValue + ", " + store);
     }
+
+    public void update(double input) {
+        store = (input == 1.0);
+        isToggled();
+        // System.out.println(direction + ", " + DPadValue + ", " + store);
+    }
+
 }
