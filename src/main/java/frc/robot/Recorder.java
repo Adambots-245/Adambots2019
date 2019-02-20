@@ -2,21 +2,29 @@ package frc.robot;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
 
 public class Recorder {
+    //
+    // VARIABLES
+    // 
 
     private static long startTime = System.nanoTime();
 	private static double indexArray [][] = new double[Constants.MAX_INDEX][Constants.RECORDED_VALUES_AMOUNT];
-	private static int index;
+    private static int index;
 	private static boolean writing = false;
 	private static boolean recording = true;
-	
+    
+    //
+    // METHODS
+    //
+
+    // turns booleans into doubles (I swear its useful)
 	private static double boolToDouble(boolean condition) {
         if (condition) return 1.0;
         return 0.0;
 	}
-	
+    
+    // records movements to indexArray
 	public static void recording() {
 		if (index <= 0) {
 			index = 0;
@@ -26,13 +34,14 @@ public class Recorder {
         // sets the last input to all zero to stop everything and then stops recording, starts writing
 		if (index >= Constants.MAX_INDEX - 1) {
             double timeStamp = (double)(System.nanoTime() - startTime);
-            double [] myDoubleArray = {timeStamp, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            double[] myDoubleArray = {timeStamp, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
             indexArray[Constants.MAX_INDEX] = myDoubleArray;
 
 			writing = true;
 			recording = false;
         }
         
+        // if actually recording, records actual values
 		if (recording) {
             // p: primary
             // s: secondary
@@ -40,58 +49,71 @@ public class Recorder {
             // lx/ly: left joy x/y
             // rx/ry: right joy x/y
             // lt/rt: left/right trigger
+            // ls/rs: left/right stick button 
             // ba/bb/bx/by: a/b/x/y button
             // st/bk: start/back button
             // lb/rb: left/right shoulder button
-            // du/dd/dl/dr: d-pad up/down/left/right
+            // dn/de/ds/dw: d-pad north/east/south/west
             
-            double plx = Gamepad.primary.getLeftX();
-            double ply = Gamepad.primary.getLeftY();
-            double prx = Gamepad.primary.getRightX();
-            double pry = Gamepad.primary.getRightY();
-            double plt = Gamepad.primary.getLeftTrigger();
-            double prt = Gamepad.primary.getRightTrigger();
-            double pba = boolToDouble(Gamepad.primary.getA());
-            double pbb = boolToDouble(Gamepad.primary.getB());
-            double pbx = boolToDouble(Gamepad.primary.getX());
-            double pby = boolToDouble(Gamepad.primary.getY());
-            double pst = boolToDouble(Gamepad.primary.getStart());
-            double pbk = boolToDouble(Gamepad.primary.getBack());
-            double plb = boolToDouble(Gamepad.primary.getLB());
-            double prb = boolToDouble(Gamepad.primary.getRB());
-            double pdu = boolToDouble(Gamepad.primary.getDPadUp());
-            double pdd = boolToDouble(Gamepad.primary.getDPadDown());
-            double pdl = boolToDouble(Gamepad.primary.getDPadLeft());
-            double pdr = boolToDouble(Gamepad.primary.getDPadRight());
-
-            double slx = Gamepad.secondary.getLeftX();
-            double sly = Gamepad.secondary.getLeftY();
-            double srx = Gamepad.secondary.getRightX();
-            double sry = Gamepad.secondary.getRightY();
-            double slt = Gamepad.secondary.getLeftTrigger();
-            double srt = Gamepad.secondary.getRightTrigger();
-            double sba = boolToDouble(Gamepad.secondary.getA());
-            double sbb = boolToDouble(Gamepad.secondary.getB());
-            double sbx = boolToDouble(Gamepad.secondary.getX());
-            double sby = boolToDouble(Gamepad.secondary.getY());
-            double sst = boolToDouble(Gamepad.secondary.getStart());
-            double sbk = boolToDouble(Gamepad.secondary.getBack());
-            double slb = boolToDouble(Gamepad.secondary.getLB());
-            double srb = boolToDouble(Gamepad.secondary.getRB());
-            double sdu = boolToDouble(Gamepad.secondary.getDPadUp());
-            double sdd = boolToDouble(Gamepad.secondary.getDPadDown());
-            double sdl = boolToDouble(Gamepad.secondary.getDPadLeft());
-            double sdr = boolToDouble(Gamepad.secondary.getDPadRight());
+            // none of these variables are really useful but they make the array look (slightly) less bad
+            double plx = Gamepad.primary.getLeftX().get();
+            double ply = Gamepad.primary.getLeftY().get();
+            double prx = Gamepad.primary.getRightX().get();
+            double pry = Gamepad.primary.getRightY().get();
+            double plt = Gamepad.primary.getLeftTrigger().get();
+            double prt = Gamepad.primary.getRightTrigger().get();
+            double pba = boolToDouble(Gamepad.primary.getA().get());
+            double pbb = boolToDouble(Gamepad.primary.getB().get());
+            double pbx = boolToDouble(Gamepad.primary.getX().get());
+            double pby = boolToDouble(Gamepad.primary.getY().get());
+            double pst = boolToDouble(Gamepad.primary.getStart().get());
+            double pbk = boolToDouble(Gamepad.primary.getBack().get());
+            double plb = boolToDouble(Gamepad.primary.getLB().get());
+            double prb = boolToDouble(Gamepad.primary.getRB().get());
+            double pdn = boolToDouble(Gamepad.primary.getDPadN().get());
+            double pdne = boolToDouble(Gamepad.primary.getDPadNE().get());
+            double pde = boolToDouble(Gamepad.primary.getDPadE().get());
+            double pdse = boolToDouble(Gamepad.primary.getDPadSE().get());
+            double pds = boolToDouble(Gamepad.primary.getDPadS().get());
+            double pdsw = boolToDouble(Gamepad.primary.getDPadSW().get());
+            double pdw = boolToDouble(Gamepad.primary.getDPadW().get());
+            double pdnw = boolToDouble(Gamepad.primary.getDPadNW().get());
+           
+            double slx = Gamepad.secondary.getLeftX().get();
+            double sly = Gamepad.secondary.getLeftY().get();
+            double srx = Gamepad.secondary.getRightX().get();
+            double sry = Gamepad.secondary.getRightY().get();
+            double slt = Gamepad.secondary.getLeftTrigger().get();
+            double srt = Gamepad.secondary.getRightTrigger().get();
+            double sba = boolToDouble(Gamepad.secondary.getA().get());
+            double sbb = boolToDouble(Gamepad.secondary.getB().get());
+            double sbx = boolToDouble(Gamepad.secondary.getX().get());
+            double sby = boolToDouble(Gamepad.secondary.getY().get());
+            double sst = boolToDouble(Gamepad.secondary.getStart().get());
+            double sbk = boolToDouble(Gamepad.secondary.getBack().get());
+            double slb = boolToDouble(Gamepad.secondary.getLB().get());
+            double srb = boolToDouble(Gamepad.secondary.getRB().get());
+            double sdn = boolToDouble(Gamepad.secondary.getDPadN().get());
+            double sdne = boolToDouble(Gamepad.secondary.getDPadNE().get());
+            double sde = boolToDouble(Gamepad.secondary.getDPadE().get());
+            double sdse = boolToDouble(Gamepad.secondary.getDPadSE().get());
+            double sds = boolToDouble(Gamepad.secondary.getDPadS().get());
+            double sdsw = boolToDouble(Gamepad.secondary.getDPadSW().get());
+            double sdw = boolToDouble(Gamepad.secondary.getDPadW().get());
+            double sdnw = boolToDouble(Gamepad.secondary.getDPadNW().get());
 
             double timeStamp = (double)(System.nanoTime() - startTime);
-            double [] myDoubleArray = {timeStamp, plx, ply, prx, pry, plt, prt, pba, pbb, pbx, pby, pst, pbk, plb, prb, pdu, pdd, pdl, pdr, slx, sly, srx, sry, slt, srt, sba, sbb, sbx, sby, sst, sbk, slb, srb, sdu, sdd, sdl, sdr};
+            double [] myDoubleArray = {timeStamp, plx, ply, prx, pry, plt, prt, pba, pbb, pbx, pby, pst, pbk, plb, prb, pdn, pdne, pde, pdse, pds, pdsw, pdw, pdnw,
+                slx, sly, srx, sry, slt, srt, sba, sbb, sbx, sby, sst, sbk, slb, srb, sdn, sdne, sde, sdse, sds, sdsw, sdw, sdnw};
             indexArray[index] = myDoubleArray;
+
             index++;
 
         }
         
 	}
-	
+    
+    // writes array to file
 	public static void writing() {
 		System.out.println("Starting to write");
 			try {
@@ -104,7 +126,6 @@ public class Recorder {
                     }
                 }
 
-                Arrays.toString(indexArray);
                 writer.close();
                 writing = false;
                     
@@ -113,12 +134,17 @@ public class Recorder {
             }
 			
 		}
-	
+    
+    // inits the recorder (what did you want it to do?)
 	public static void initRecorder() {
 		startTime = System.nanoTime();
 		index = 0;
-		indexArray = new double[Constants.MAX_INDEX][Constants.RECORDED_VALUES_AMOUNT];
+        indexArray = new double[Constants.MAX_INDEX][Constants.RECORDED_VALUES_AMOUNT];
 	}
+
+    //
+    // MAIN
+    //
 
 	public static void main(String Args[]) throws InterruptedException{
 		initRecorder();

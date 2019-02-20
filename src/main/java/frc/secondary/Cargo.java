@@ -5,14 +5,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.*;
 
 public class Cargo {
-<<<<<<< HEAD
-
-    // If arm sensor isn't blocked, only run the intake
-    // If lift sensor is blocked, only run the outake
-    public static void cargoInOut(double speed) {
-       
-        if (Sensors.getDIValue(Sensors.cargoPresentArm)){
-=======
     public static void cargo(int modeTogglePresses, double intakeSpeed, double armSpeed) {
         if (modeTogglePresses % 2 == 0) {
             cargoIntake(intakeSpeed);
@@ -26,13 +18,12 @@ public class Cargo {
     // If not, set the intake to the input of the triggers
     public static void combinedCargoIntake(double speed) {
         if (Sensors.getDIValue(Sensors.getCargoPresentArm())) {
->>>>>>> 9504994e8d2ac26837d0d953a3842395fa8d86db
             Actuators.getInfeedArmMotor().set(ControlMode.PercentOutput, Constants.STOP_MOTOR_SPEED);
         } else {
             Actuators.getInfeedArmMotor().set(ControlMode.PercentOutput, speed);
         }
 
-        if (!Sensors.getDIValue(Sensors.cargoPresentLift)){
+        if (!Sensors.getDIValue(Sensors.getCargoPresentLift())){
             Actuators.getArmInOutLift1().set(ControlMode.PercentOutput, Constants.STOP_MOTOR_SPEED);
         } else {
             Actuators.getArmInOutLift1().set(ControlMode.PercentOutput, speed);
