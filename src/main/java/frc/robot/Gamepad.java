@@ -103,6 +103,8 @@ public class Gamepad {
 	// Control Instances
 	public static Gamepad primary;
 	public static Gamepad secondary;
+	public static Gamepad virtualPrimary;
+	public static Gamepad virtualSecondary;
 
 	// Constructor
 	/**
@@ -142,6 +144,22 @@ public class Gamepad {
 		}
 		for (int i = 0; i <= dpadArray.length - 1; i++) {
 			dpadArray[i].update();
+		}
+
+	}
+
+	public void update(double[] inputs, boolean primary) {
+		int offset = 0;
+		if (!primary) offset = Constants.SECONDARY_OFFSET;
+		
+		for (int i = 1; i < buttonArray.length; i++) {
+			buttonArray[i].update(inputs[i + Constants.BUTTON_START_INDEX + offset]);
+		}
+		for (int i = 0; i < axisArray.length; i++) {
+			axisArray[i].update(inputs[i + Constants.AXIS_START_INDEX + offset]);
+		}
+		for (int i = 0; i < dpadArray.length; i++) {
+			dpadArray[i].update(inputs[i + Constants.DPAD_START_INDEX + offset]);
 		}
 
 	}
@@ -226,11 +244,11 @@ public class Gamepad {
 	}
 
 	public Button getLeftStickButton(){
-		return buttonArray[BUTTON_LEFT_STICK]
+		return buttonArray[BUTTON_LEFT_STICK];
 	}
 
 	public Button getRightStickButton(){
-		return buttonArray[BUTTON_RIGHT_STICK]
+		return buttonArray[BUTTON_RIGHT_STICK];
 	}
 
 	// DPad getters
