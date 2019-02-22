@@ -151,6 +151,14 @@ public class Recorder {
         System.out.println("Saving to " + name);
     }
 
+    // waits until the controller sends an input so that there aren't wasted frames at the beginnning
+    public static void waitForStart() {
+        System.out.println("Press the start button on the primary controller to start");
+        while (!Gamepad.virtualPrimary.getStart().get()) {
+            // do nothing
+        }
+    }
+
     //
     // MAIN
     //
@@ -158,6 +166,7 @@ public class Recorder {
 	public static void main(String Args[]) throws InterruptedException{
         initRecorder();
         setName();
+        waitForStart();
 		while (!writing) {
             recording(); 
             Thread.sleep(Constants.RECORDER_SLEEP_TIME);
