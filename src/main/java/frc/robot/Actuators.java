@@ -31,6 +31,7 @@ public class Actuators {
     private static Solenoid HatchClampOpen;
     private static Solenoid CargoHatchDelivery;
     private static DoubleSolenoid ShiftHighGear;
+    private static Solenoid RingLight;
 
     public static void init() {
 
@@ -56,6 +57,7 @@ public class Actuators {
         HatchClampOpen = new Solenoid(1, Constants.OPEN_HATCH_CLAMP);
         CargoHatchDelivery = new Solenoid(Constants.ADVANCE_CARGO_HATCH_DELVERY);
         ShiftHighGear = new DoubleSolenoid(Constants.SHIFT_HIGH_SPEED, Constants.SHIFT_LOW_SPEED);
+        RingLight = new Solenoid(1, Constants.RING_LIGHT);
 
         // set follower motors
         Left2Motor.follow(Left1Motor);
@@ -147,6 +149,10 @@ public class Actuators {
 
     public static Solenoid getSpearExtend() {
         return CargoHatchDelivery;
+    }
+
+    public static Solenoid getRingLight() {
+        return RingLight;
     }
 
     public static TalonSRX getLeft1Motor() {
