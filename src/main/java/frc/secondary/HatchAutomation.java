@@ -104,7 +104,7 @@ public class HatchAutomation {
             HatchIntake.vacuum(false);
             HatchIntake.clamp(true);
             // next state
-            if (toggleState) {
+            if (toggleState || timer.get() > 2.0) {
                 floorIntakeState++;
                 timer.reset();
             }
@@ -118,7 +118,7 @@ public class HatchAutomation {
             /*if (Sensors.getDIValue(Sensors.getHatchPresent())) {
                 floorIntakeState++;
                 timer.reset();
-            } else*/ if (toggleState) {
+            } else*/ if (toggleState || timer.get() > 2.0) {
                 floorIntakeState++;
                 timer.reset();
             }
@@ -128,7 +128,7 @@ public class HatchAutomation {
             HatchIntake.suctionArms(true);
             HatchIntake.vacuum(true);
             HatchIntake.clamp(true);
-            if (toggleState) {
+            if (toggleState || timer.get() > 2.0) {
                 floorIntakeState++;
             }
             break;
@@ -137,14 +137,14 @@ public class HatchAutomation {
             HatchIntake.suctionArms(false);
             HatchIntake.centeringArms(false);
 
-            if (toggleState) {
+            if (toggleState || timer.get() > 2.0) {
                 floorIntakeState++;
             }
             break;
         case 5:
             // spear clamp
             HatchIntake.clamp(false);
-            if (toggleState) {
+            if (toggleState || timer.get() > 2.0) {
                 floorIntakeState++;
             }
             break;
