@@ -35,7 +35,7 @@ public class Constants{
     
     public static final int RAISE_CENTERING_HATCH = 1;
     public static final int LOWER_CENTERING_HATCH = 2;
-    public static final int ADVANCE_CARGO_HATCH_DELVERY = 3;
+    public static final int ADVANCE_CARGO_HATCH_DELVERY = 3;//1.0
     //public static final int RETURN_CARGO_HATCH_DELIVERY = 3;
     public static final int VACUUM_ON = 0;
     public static final int OPEN_HATCH_CLAMP = 1;//pcm 1

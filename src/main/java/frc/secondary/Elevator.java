@@ -23,8 +23,8 @@ public class Elevator {
 
     }
     public static void elevator(double liftSpeed, double intakeSpeed){
-        liftSpeed += Constants.ELEVATOR_HOLD_SPEED;
-        setLiftMotorSpeed(liftSpeed/2);
+        liftSpeed += Constants.ELEVATOR_HOLD_SPEED - .02;
+        setLiftMotorSpeed(liftSpeed);
         //passiveGotoNearestLevel(liftSpeed);
         setCarriageWheelsSpeed(intakeSpeed);
         //System.out.println("elevator pos = " + Sensors.getLiftSensorPosition());
@@ -48,8 +48,8 @@ public class Elevator {
         return targetPosition;
     }
 
-    public static void passiveGotoNearestLevel(double speed) {
-        if (speed == 0) {
+    public static void passiveGotoNearestLevel(boolean isToggled) {
+        if (!isToggled) {
             int currentPosition = Actuators.getLiftMotor1().getSelectedSensorPosition();
             int targetPosition = findNearestLevel(currentPosition);
             Actuators.getLiftMotor1().set(ControlMode.Position, targetPosition);
