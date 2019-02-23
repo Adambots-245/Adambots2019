@@ -96,6 +96,7 @@ public class HatchAutomation {
             if (toggleState) {
               floorIntakeState++;
               timer.reset();
+              timer.start();
             }
         break;
         case 1:
@@ -107,6 +108,7 @@ public class HatchAutomation {
             if (toggleState || timer.get() > 2.0) {
                 floorIntakeState++;
                 timer.reset();
+                timer.start();
             }
             break;
         case 2:
@@ -121,6 +123,7 @@ public class HatchAutomation {
             } else*/ if (toggleState || timer.get() > 2.0) {
                 floorIntakeState++;
                 timer.reset();
+                timer.start();
             }
             break;
         case 3:
@@ -130,6 +133,8 @@ public class HatchAutomation {
             HatchIntake.clamp(true);
             if (toggleState || timer.get() > 2.0) {
                 floorIntakeState++;
+                timer.reset();
+                timer.start();
             }
             break;
         case 4:
@@ -139,6 +144,8 @@ public class HatchAutomation {
 
             if (toggleState || timer.get() > 2.0) {
                 floorIntakeState++;
+                timer.reset();
+                timer.start();
             }
             break;
         case 5:
@@ -146,6 +153,8 @@ public class HatchAutomation {
             HatchIntake.clamp(false);
             if (toggleState || timer.get() > 2.0) {
                 floorIntakeState++;
+                timer.reset();
+                timer.start();
             }
             break;
         case 6:
