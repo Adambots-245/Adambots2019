@@ -32,6 +32,8 @@ public class Actuators {
     private static Solenoid CargoHatchDelivery;
     private static DoubleSolenoid ShiftHighGear;
 
+    private static Compressor Compressor1;
+
     public static void init() {
 
         // TODO: add 3rd motor, talk to Mars
@@ -56,6 +58,8 @@ public class Actuators {
         HatchClampOpen = new Solenoid(1, Constants.OPEN_HATCH_CLAMP);
         CargoHatchDelivery = new Solenoid(Constants.ADVANCE_CARGO_HATCH_DELVERY);
         ShiftHighGear = new DoubleSolenoid(Constants.SHIFT_HIGH_SPEED, Constants.SHIFT_LOW_SPEED);
+
+        Compressor1 = new Compressor(Constants.COMPRESSOR_1_PORT);        
 
         // set follower motors
         Left2Motor.follow(Left1Motor);
@@ -171,6 +175,10 @@ public class Actuators {
 
     public static VictorSPX getRight3Motor() {
         return Right3Motor;
+    }
+
+    public static Compressor getCompressor1() {
+        return compressor1;
     }
 
 }
