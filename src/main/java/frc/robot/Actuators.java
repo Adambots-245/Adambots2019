@@ -178,7 +178,7 @@ public class Actuators {
     }
 
     public static Compressor getCompressor1() {
-        return compressor1;
+        return Compressor1;
     }
 
 }
