@@ -89,11 +89,11 @@ public class HatchAutomation {
     }
 
     public static void setHatchFloorIntakeState(boolean toggleState) {
-        System.out.println("floor state is " + floorIntakeState);
+        System.out.println("floor state is " + floorIntakeState + "Timer is " + timer.get());
         switch (floorIntakeState) {
         case 0:
             // do nothing
-            if (toggleState) {
+            if (toggleState || timer.get() > 2.0) {
               floorIntakeState++;
               timer.reset();
               timer.start();
@@ -134,7 +134,7 @@ public class HatchAutomation {
             if (toggleState || timer.get() > 2.0) {
                 floorIntakeState++;
                 timer.reset();
-                timer.start();
+             //   timer.start();
             }
             break;
         case 4:
