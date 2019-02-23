@@ -41,7 +41,8 @@ public class Recorder {
             indexArray[Constants.MAX_INDEX] = myDoubleArray;
 
 			writing = true;
-			recording = false;
+            recording = false;
+            
         }
         
         // if actually recording, records actual values
@@ -127,6 +128,7 @@ public class Recorder {
                         writer.print(" ");
                         writer.print(indexArray[index][i]);
                     }
+
                 }
 
                 writer.close();
@@ -143,12 +145,14 @@ public class Recorder {
 		startTime = System.nanoTime();
 		index = 0;
         indexArray = new double[Constants.MAX_INDEX][Constants.RECORDED_VALUES_AMOUNT];
+
     }
     
     public static void setName() {
         System.out.print("Name: ");
         name = in.nextLine() + ".txt";
         System.out.println("Saving to " + name);
+
     }
 
     // waits until the controller sends an input so that there aren't wasted frames at the beginnning
@@ -157,6 +161,7 @@ public class Recorder {
         while (!Gamepad.virtualPrimary.getStart().get()) {
             // do nothing
         }
+
     }
 
     //
@@ -167,13 +172,16 @@ public class Recorder {
         initRecorder();
         setName();
         waitForStart();
+
 		while (!writing) {
             recording(); 
             while ((System.nanoTime() - startTime) < Constants.RECORDER_SLEEP_TIME * index) {
                 // do nothing; wait
             }
-		}
+        }
+        
         writing();
+
 	}
 
 }
