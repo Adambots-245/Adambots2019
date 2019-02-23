@@ -61,6 +61,7 @@ public class HatchAutomation {
 
     }
 
+
     public static void cycleFloorIntake(boolean isToggled) {
         setHatchFloorIntakeState(isToggled);
     }
@@ -91,11 +92,11 @@ public class HatchAutomation {
         System.out.println("floor state is " + floorIntakeState);
         switch (floorIntakeState) {
         case 0:
-        // do nothing
-        if (toggleState) {
-            floorIntakeState++;
-            timer.reset();
-        }
+            // do nothing
+            if (toggleState) {
+              floorIntakeState++;
+              timer.reset();
+            }
         break;
         case 1:
             // return to normal state (arms up, vacuum off, unclamp)
@@ -190,6 +191,7 @@ public class HatchAutomation {
             break;
         case 4:
             // spear in
+            HatchIntake.clamp(false);
             HatchIntake.spear(false);
             if (toggleState) {
                 wallIntakeState = 0;
