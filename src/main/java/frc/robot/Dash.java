@@ -10,6 +10,7 @@ public class Dash {
         putDriveVelocity();
         putSecondaryLeftYValue();
         putLimitSwitches();
+        putCameraData();
     }
     public static void dash(){
         putMotorOutputs();
@@ -39,5 +40,8 @@ public class Dash {
     public static void putLimitSwitches() {
         SmartDashboard.putBoolean("arm limit switch", Sensors.getArmLimitSwitch().get());
         SmartDashboard.putBoolean("lift limit switch", Sensors.getLiftLoweredLimitSwitch().get());
+    }
+    public static void putCameraData() {
+        CameraServer.getInstance().startAutomaticCapture();
     }
 }
