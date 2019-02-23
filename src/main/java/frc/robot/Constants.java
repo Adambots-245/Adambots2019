@@ -65,6 +65,7 @@ public class Constants{
     //TODO: UPDATE ALL VALUES BELOW TO THEIR TRUE, ACCURATE VALUES
     //Limiters
     public static final double MAX_LIFT_SPEED = 0.0;
+    public static final double MAX_BROWNOUT_MARGIN = 8.0;
     
     //set elevator hold speed
     public static final double ELEVATOR_HOLD_SPEED = .12;
