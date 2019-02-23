@@ -9,12 +9,14 @@ public class Dash {
         putAutoShiftEnabled();
         putDriveVelocity();
         putSecondaryLeftYValue();
+        putLimitSwitches();
     }
     public static void dash(){
         putMotorOutputs();
         putAutoShiftEnabled();
         putDriveVelocity();
         putSecondaryLeftYValue();
+        putLimitSwitches();
     }
     public static void putAutoShiftEnabled(){
         SmartDashboard.putBoolean("auto shift enabled", Drive.getAutoShiftState());
@@ -36,6 +38,6 @@ public class Dash {
     }
     public static void putLimitSwitches() {
         SmartDashboard.putBoolean("arm limit switch", Sensors.getArmLimitSwitch().get());
-        SmartDashboard.putBoolean("lift limit switch", Sensors.getLiftLoweredLimitSwitch().get()));
+        SmartDashboard.putBoolean("lift limit switch", Sensors.getLiftLoweredLimitSwitch().get());
     }
 }
