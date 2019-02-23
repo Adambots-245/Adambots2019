@@ -53,6 +53,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
   }
 
+
   /**
    * This autonomous (along with the chooser code above) shows how to select
    * between different autonomous modes using the dashboard. The sendable
@@ -72,6 +73,38 @@ public class Robot extends TimedRobot {
   }
 
   /**
+   * This is a function for all the robot controlls
+   */
+  public void controls() {
+    Gamepad.primary.update();
+    Gamepad.secondary.update();
+    Dash.dash();
+    Actuators.getRingLight().set(true);
+    // primary controls
+    Drive.drive(Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightX().get(), Gamepad.primary.getA().get(),
+        Gamepad.primary.getY().get(), Gamepad.primary.getStart().getPresses());
+    // Climb.climb(Gamepad.primary.getBack().getPresses(),
+    // Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightY().get(),
+    // Gamepad.primary.getLeftTrigger().get(),
+    // Gamepad.primary.getRightTrigger().get());
+
+    // secondary controls
+    Elevator.elevator(Gamepad.secondary.getLeftY().get(), Gamepad.secondary.getTriggers());
+    Cargo.cargo(Gamepad.primary.getBack().getPresses(), Gamepad.secondary.getTriggers(),
+        Gamepad.secondary.getRightY().get());
+    // HatchIntake.centeringArms(Gamepad.secondary.getDPadN().get());
+    // HatchIntake.suctionArms(Gamepad.secondary.getDPadE().get());
+    // HatchIntake.vacuum(Gamepad.secondary.getDPadS().get());
+    // HatchIntake.spear(Gamepad.secondary.getDPadW().get());
+    // HatchIntake.clamp(Gamepad.secondary.getB().get());
+    // HatchAutomation.cycleHatch(Gamepad.secondary.getDPadN(),
+    // Gamepad.secondary.getDPadE(), Gamepad.secondary.getDPadS());
+    HatchAutomation.cycleHatch(Gamepad.secondary.getY(), Gamepad.secondary.getB(), Gamepad.secondary.getA());
+    Gamepad.primary.updateLast();
+    Gamepad.secondary.updateLast();
+  }
+
+  /**
    * This function is called periodically during autonomous.
    */
   @Override
@@ -85,32 +118,15 @@ public class Robot extends TimedRobot {
         // Put default auto code here
         break;
     }
+    controls();
   }
-
+  
   /**
    * This function is called periodically during operator control.
    */
   @Override
   public void teleopPeriodic() {
-    Gamepad.primary.update();
-    Gamepad.secondary.update();
-    Dash.dash();
-    //primary controls
-    Drive.drive(Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightX().get(), Gamepad.primary.getA().get(), Gamepad.primary.getY().get(), Gamepad.primary.getStart().getPresses());
-    //Climb.climb(Gamepad.primary.getBack().getPresses(), Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightY().get(), Gamepad.primary.getLeftTrigger().get(), Gamepad.primary.getRightTrigger().get());
-    
-    //secondary controls
-    Elevator.elevator(Gamepad.secondary.getLeftY().get(), Gamepad.secondary.getTriggers());
-    Cargo.cargo(Gamepad.primary.getBack().getPresses(), Gamepad.secondary.getTriggers(), Gamepad.secondary.getRightY().get());
-    //HatchIntake.centeringArms(Gamepad.secondary.getDPadN().get());
-    //HatchIntake.suctionArms(Gamepad.secondary.getDPadE().get());
-    //HatchIntake.vacuum(Gamepad.secondary.getDPadS().get());
-    //HatchIntake.spear(Gamepad.secondary.getDPadW().get());
-    //HatchIntake.clamp(Gamepad.secondary.getB().get());
-    //HatchAutomation.cycleHatch(Gamepad.secondary.getDPadN(), Gamepad.secondary.getDPadE(), Gamepad.secondary.getDPadS());
-    HatchAutomation.cycleHatch(Gamepad.secondary.getY(), Gamepad.secondary.getB(), Gamepad.secondary.getA());
-    Gamepad.primary.updateLast();
-    Gamepad.secondary.updateLast();
+    controls();
   }
  
   /**
