@@ -34,4 +34,8 @@ public class Dash {
     public static void putSecondaryLeftYValue(){
         SmartDashboard.putNumber("secondary left y", -Gamepad.secondary.getLeftY().get());
     }
+    public static void putLimitSwitches() {
+        SmartDashboard.putBoolean("arm limit switch", Sensors.getArmLimitSwitch().get());
+        SmartDashboard.putBoolean("lift limit switch", Sensors.getLiftLoweredLimitSwitch().get()));
+    }
 }
