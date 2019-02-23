@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.RobotController;
 
 public class Dash {
     public static void dash(){
@@ -13,6 +14,7 @@ public class Dash {
         putCameraData();
         putEncoder();
         putSensors();
+        putVoltage();
     }
     public static void init() {
         dash();
@@ -50,5 +52,8 @@ public class Dash {
         SmartDashboard.putBoolean("hatch present", Sensors.getHatchPresent().get());
         SmartDashboard.putBoolean("cargo present arm", Sensors.getCargoPresentArm().get());
         SmartDashboard.putBoolean("cargo present lift", Sensors.getCargoPresentLift().get());
+    }
+    public static void putVoltage() {
+        SmartDashboard.putNumber("battery voltage", RobotController.getBatteryVoltage());
     }
 }
