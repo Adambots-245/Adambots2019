@@ -169,7 +169,9 @@ public class Recorder {
         waitForStart();
 		while (!writing) {
             recording(); 
-            Thread.sleep(Constants.RECORDER_SLEEP_TIME);
+            while ((System.nanoTime() - startTime) < Constants.RECORDER_SLEEP_TIME * index) {
+                // do nothing; wait
+            }
 		}
         writing();
 	}
