@@ -4,20 +4,18 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Dash {
-    public static void init() {
-        putMotorOutputs();
-        putAutoShiftEnabled();
-        putDriveVelocity();
-        putSecondaryLeftYValue();
-        putLimitSwitches();
-        putCameraData();
-    }
     public static void dash(){
         putMotorOutputs();
         putAutoShiftEnabled();
         putDriveVelocity();
         putSecondaryLeftYValue();
         putLimitSwitches();
+        putCameraData();
+        putEncoder();
+        putSensors();
+    }
+    public static void init() {
+        dash();
     }
     public static void putAutoShiftEnabled(){
         SmartDashboard.putBoolean("auto shift enabled", Drive.getAutoShiftState());
@@ -43,5 +41,14 @@ public class Dash {
     }
     public static void putCameraData() {
         CameraServer.getInstance().startAutomaticCapture();
+    }
+    public static void putEncoder() {
+        SmartDashboard.putNumber("lift encoder", Math.abs(Actuators.getLiftMotor1().getSelectedSensorPosition(0)));
+    }
+    public static void putSensors() {
+        SmartDashboard.putNumber("arm potentiometer", Sensors.getArmPotentiometerValue());
+        SmartDashboard.putBoolean("hatch present", Sensors.getHatchPresent().get());
+        SmartDashboard.putBoolean("cargo present arm", Sensors.getCargoPresentArm().get());
+        SmartDashboard.putBoolean("cargo present lift", Sensors.getCargoPresentLift().get());
     }
 }
