@@ -55,8 +55,8 @@ public class Drive {
 
         // Makes sure speed does not go above max
         speed = speed * -1; // fix forward = back
-        double leftSpeed = Math.min(speed + turnSpeed, Constants.MAX_MOTOR_SPEED);
-        double rightSpeed = Math.min(speed - turnSpeed, Constants.MAX_MOTOR_SPEED);
+        double leftSpeed = Math.min(speed + turnSpeed, Brownout.SMART_MOTOR_SPEED);
+        double rightSpeed = Math.min(speed - turnSpeed, Brownout.SMART_MOTOR_SPEED);
         if (shiftHigh) {
             state = true;
         } else if (shiftLow) {
@@ -77,8 +77,8 @@ public class Drive {
         double currentTime = timer.get();
         double avgVelocity;
         // Makes sure speed does not go above max
-        double leftSpeed = Math.min(speed + turnSpeed, Constants.MAX_MOTOR_SPEED);
-        double rightSpeed = Math.min(speed - turnSpeed, Constants.MAX_MOTOR_SPEED);
+        double leftSpeed = Math.min(speed + turnSpeed, Brownout.SMART_MOTOR_SPEED);
+        double rightSpeed = Math.min(speed - turnSpeed, Brownout.SMART_MOTOR_SPEED);
         if ((Math.abs(leftVelocity - rightVelocity) < Constants.SHIFT_TURN_THRESHOLD)
                 && (currentTime > Constants.SHIFT_TIME_THRESHOLD)) {
             avgVelocity = Math.abs((leftVelocity + rightVelocity) / 2);
