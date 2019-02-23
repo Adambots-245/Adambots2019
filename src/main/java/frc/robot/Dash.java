@@ -9,7 +9,7 @@ public class Dash {
         putAutoShiftEnabled();
         putDriveVelocity();
         putSecondaryLeftYValue();
-        putLimitSwitches();
+        //putLimitSwitches();
         putCameraData();
         putEncoder();
         putSensors();
@@ -36,19 +36,19 @@ public class Dash {
         SmartDashboard.putNumber("secondary left y", -Gamepad.secondary.getLeftY().get());
     }
     public static void putLimitSwitches() {
-        SmartDashboard.putBoolean("arm limit switch", Sensors.getArmLimitSwitch().get());
-        SmartDashboard.putBoolean("lift limit switch", Sensors.getLiftLoweredLimitSwitch().get());
+       // SmartDashboard.putBoolean("arm limit switch", Sensors.getArmLimitSwitch().get());
+       // SmartDashboard.putBoolean("lift limit switch", Sensors.getLiftLoweredLimitSwitch().get());
     }
     public static void putCameraData() {
-        CameraServer.getInstance().startAutomaticCapture();
+       // CameraServer.getInstance().startAutomaticCapture();
     }
     public static void putEncoder() {
-        SmartDashboard.putNumber("lift encoder", Math.abs(Actuators.getLiftMotor1().getSelectedSensorPosition(0)));
+        //SmartDashboard.putNumber("lift encoder", Math.abs(Actuators.getLiftMotor1().getSelectedSensorPosition(0)));
     }
     public static void putSensors() {
-        SmartDashboard.putNumber("arm potentiometer", Sensors.getArmPotentiometerValue());
-        SmartDashboard.putBoolean("hatch present", Sensors.getHatchPresent().get());
-        SmartDashboard.putBoolean("cargo present arm", Sensors.getCargoPresentArm().get());
-        SmartDashboard.putBoolean("cargo present lift", Sensors.getCargoPresentLift().get());
+       // SmartDashboard.putNumber("arm potentiometer", Sensors.getArmPotentiometerValue());
+       // SmartDashboard.putBoolean("hatch present", Sensors.getHatchPresent().get());
+       // SmartDashboard.putBoolean("cargo present arm", Sensors.getCargoPresentArm().get());
+       // SmartDashboard.putBoolean("cargo present lift", Sensors.getCargoPresentLift().get());
     }
 }
