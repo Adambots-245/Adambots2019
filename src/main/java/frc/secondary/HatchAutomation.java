@@ -89,29 +89,27 @@ public class HatchAutomation {
     }
 
     public static void setHatchFloorIntakeState(boolean toggleState) {
-        System.out.println("floor state is " + floorIntakeState + "Timer is " + timer.get());
+        System.out.println("floor state is " + floorIntakeState + " Timer is " + timer.get());
         switch (floorIntakeState) {
         case 0:
             // do nothing
             if (toggleState || timer.get() > 2.0) {
               floorIntakeState++;
               timer.reset();
-              timer.start();
-            }
+             }
         break;
         case 1:
             // return to normal state (arms up, vacuum off, unclamp)
-            HatchIntake.centeringArms(false);
+            HatchIntake.centeringArms(true);
             HatchIntake.vacuum(false);
             HatchIntake.clamp(true);
             // next state
             if (toggleState || timer.get() > 2.0) {
                 floorIntakeState++;
                 timer.reset();
-                timer.start();
-            }
+                }
             break;
-        case 2:
+        /*case 2:
             // ca down, elevator down
             HatchIntake.centeringArms(true);
             //elevator down
@@ -120,13 +118,14 @@ public class HatchAutomation {
             /*if (Sensors.getDIValue(Sensors.getHatchPresent())) {
                 floorIntakeState++;
                 timer.reset();
-            } else*/ if (toggleState || timer.get() > 2.0) {
+            } else if (toggleState || timer.get() > 2.0) {
                 floorIntakeState++;
                 timer.reset();
                 timer.start();
             }
             break;
-        case 3:
+            */
+        case 2:
             // sa down, v on, unclamp
             HatchIntake.suctionArms(true);
             HatchIntake.vacuum(true);
@@ -137,7 +136,7 @@ public class HatchAutomation {
              //   timer.start();
             }
             break;
-        case 4:
+        case 3:
             // sa up, ca up
             HatchIntake.suctionArms(false);
             HatchIntake.centeringArms(false);
@@ -145,19 +144,17 @@ public class HatchAutomation {
             if (toggleState || timer.get() > 2.0) {
                 floorIntakeState++;
                 timer.reset();
-                timer.start();
-            }
+                }
             break;
-        case 5:
+        case 4:
             // spear clamp
             HatchIntake.clamp(false);
             if (toggleState || timer.get() > 2.0) {
                 floorIntakeState++;
                 timer.reset();
-                timer.start();
-            }
+                }
             break;
-        case 6:
+        case 5:
             // v off
             HatchIntake.vacuum(false);
             if (toggleState) {

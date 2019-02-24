@@ -3,7 +3,6 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
 import edu.wpi.first.wpilibj.*;
 
 public class Actuators {
@@ -91,19 +90,36 @@ public class Actuators {
         ArmInOutLift2.follow(ArmInOutLift1);
         LiftMotor2.follow(LiftMotor1);
 
-        //disable limits
-        Right1Motor.configForwardSoftLimitEnable(false);
-        Right1Motor.configReverseSoftLimitEnable(false);
-        Right2Motor.configForwardSoftLimitEnable(false);
-        Right2Motor.configReverseSoftLimitEnable(false);
-        Right3Motor.configForwardSoftLimitEnable(false);
-        Right3Motor.configReverseSoftLimitEnable(false);
-        Left1Motor.configForwardSoftLimitEnable(false);
-        Left1Motor.configReverseSoftLimitEnable(false);;
-        Left2Motor.configForwardSoftLimitEnable(false);
-        Left2Motor.configReverseSoftLimitEnable(false);;
-        Left3Motor.configForwardSoftLimitEnable(false);
-        Left3Motor.configReverseSoftLimitEnable(false);
+        //limits
+        boolean enableDriveSoftLimit = false;
+        Right1Motor.configForwardSoftLimitEnable(enableDriveSoftLimit);
+        Right1Motor.configReverseSoftLimitEnable(enableDriveSoftLimit);
+        Right2Motor.configForwardSoftLimitEnable(enableDriveSoftLimit);
+        Right2Motor.configReverseSoftLimitEnable(enableDriveSoftLimit);
+        Right3Motor.configForwardSoftLimitEnable(enableDriveSoftLimit);
+        Right3Motor.configReverseSoftLimitEnable(enableDriveSoftLimit);
+        Left1Motor.configForwardSoftLimitEnable(enableDriveSoftLimit);
+        Left1Motor.configReverseSoftLimitEnable(enableDriveSoftLimit);
+        Left2Motor.configForwardSoftLimitEnable(enableDriveSoftLimit);
+        Left2Motor.configReverseSoftLimitEnable(enableDriveSoftLimit);
+        Left3Motor.configForwardSoftLimitEnable(enableDriveSoftLimit);
+        Left3Motor.configReverseSoftLimitEnable(enableDriveSoftLimit);
+
+        LiftMotor1.configReverseSoftLimitEnable(enableDriveSoftLimit);
+        LiftMotor2.configReverseSoftLimitEnable(enableDriveSoftLimit);
+
+        double liftMaxMotorSpeed = Constants.LIFT_MAX_MOTOR_SPEED; 
+        LiftMotor1.configPeakOutputForward(liftMaxMotorSpeed);
+        LiftMotor1.configPeakOutputReverse(-liftMaxMotorSpeed);
+        LiftMotor2.configPeakOutputForward(liftMaxMotorSpeed);
+        LiftMotor2.configPeakOutputReverse(-liftMaxMotorSpeed);
+
+        //PID Config
+        //LiftMotor1.selectProfileSlot(Constants.PID_SLOT, Constants.PID_LOOP);
+        //LiftMotor1.config_kF(Constants.PID_SLOT, Constants.LIFT_F_VALUE, Constants.PID_TIMEOUT);
+        //LiftMotor1.config_kP(Constants.PID_SLOT, Constants.LIFT_P_VALUE, Constants.PID_TIMEOUT);
+        //LiftMotor1.config_kI(Constants.PID_SLOT, Constants.LIFT_I_VALUE, Constants.PID_TIMEOUT);
+        //LiftMotor1.config_kD(Constants.PID_SLOT, Constants.LIFT_D_VALUE, Constants.PID_TIMEOUT);
        
     }
 

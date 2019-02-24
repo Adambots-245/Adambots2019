@@ -9,10 +9,13 @@ public class Dash {
         putAutoShiftEnabled();
         putDriveVelocity();
         putSecondaryLeftYValue();
+        putLiftOutput();
+        putLiftEncoderValue();
         //putLimitSwitches();
         putCameraData();
         putEncoder();
         putSensors();
+        putAxis();
     }
     public static void init() {
         dash();
@@ -35,6 +38,12 @@ public class Dash {
     public static void putSecondaryLeftYValue(){
         SmartDashboard.putNumber("secondary left y", -Gamepad.secondary.getLeftY().get());
     }
+    public static void putLiftOutput(){
+        SmartDashboard.putNumber("lift output", Actuators.getLiftMotor1().getMotorOutputPercent());
+    } 
+    public static void putLiftEncoderValue(){
+        SmartDashboard.putNumber("lift encoder", Actuators.getLiftMotor1().getSelectedSensorPosition());     
+    }
     public static void putLimitSwitches() {
        // SmartDashboard.putBoolean("arm limit switch", Sensors.getArmLimitSwitch().get());
        // SmartDashboard.putBoolean("lift limit switch", Sensors.getLiftLoweredLimitSwitch().get());
@@ -43,7 +52,12 @@ public class Dash {
        // CameraServer.getInstance().startAutomaticCapture();
     }
     public static void putEncoder() {
-        //SmartDashboard.putNumber("lift encoder", Math.abs(Actuators.getLiftMotor1().getSelectedSensorPosition(0)));
+        SmartDashboard.putNumber("l drive encoder", Actuators.getLeft1Motor().getSelectedSensorPosition());
+        SmartDashboard.putNumber("r drive encoder", Actuators.getRight1Motor().getSelectedSensorPosition());        
+    }
+    public static void putAxis(){
+        SmartDashboard.putBoolean("secondary left y isUntoggled", Gamepad.secondary.getLeftY().isUntoggled());
+        SmartDashboard.putNumber("secondary left y presses", Gamepad.secondary.getLeftY().getPresses());
     }
     public static void putSensors() {
        // SmartDashboard.putNumber("arm potentiometer", Sensors.getArmPotentiometerValue());

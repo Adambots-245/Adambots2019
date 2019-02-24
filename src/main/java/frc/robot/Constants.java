@@ -29,10 +29,7 @@ public class Constants{
      public static final int CARGO_ARM_SENSOR_PORT = 2;
      public static final int CARGO_LIFT_SENSOR_PORT = 3;
     
-    //Pneumatics
-
     //PCM ports
-    
     public static final int RAISE_CENTERING_HATCH = 1;
     public static final int LOWER_CENTERING_HATCH = 2;
     public static final int ADVANCE_CARGO_HATCH_DELVERY = 3; //1.0
@@ -47,10 +44,43 @@ public class Constants{
 
     public static final int RING_LIGHT = 7; //pcm 1
 
+    //PID Constants
+    /**
+	 * Which PID slot to pull gains from. Starting 2018, you can choose from
+	 * 0,1,2 or 3. Only the first two (0,1) are visible in web-based
+	 * configuration.
+	 */
+	public static final int PID_SLOT = 0;
+
+	/**
+	 * Talon SRX/ Victor SPX will supported multiple (cascaded) PID loops. For
+	 * now we just want the primary one.
+	 */
+	public static final int PID_LOOP = 0;
+
+	/**
+	 * Set to zero to skip waiting for confirmation, set to nonzero to wait and
+	 * report to DS if action fails. 
+     * in milliseconds
+	 */
+    public static final int PID_TIMEOUT = 0;
+
+    public static final double LIFT_F_VALUE = .5;
+    public static final double LIFT_P_VALUE = 1;
+    public static final double LIFT_I_VALUE = 0;
+    public static final double LIFT_D_VALUE = 0;
+
+    //lift slowdown thresholds
+    public static final int LIFT_LOWER_SPEED_ENCODER_THRESHOLD = 45000;
+    public static final int LIFT_UPPER_SPEED_ENCODER_THRESHOLD = 1000;
+    public static final double LIFT_SLOW_MODIFIER = .5;
+    public static final double LIFT_NORMAL_MODIFIER = 1;
+
     //motor speeds
     public static final double STOP_MOTOR_SPEED = 0.0;
     public static final double HALF_MOTOR_SPEED = 0.45;
     public static final double MAX_MOTOR_SPEED = 0.9;
+    public static final double LIFT_MAX_MOTOR_SPEED = 1;
 
     //autoshift thresholds
     public static final double SHIFT_TURN_THRESHOLD = 100;
