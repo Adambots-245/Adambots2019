@@ -170,31 +170,34 @@ public class HatchAutomation {
         switch (wallIntakeState) {
         case 0:
             // do nothing
+            HatchIntake.vacuum(false);
             if (toggleState) {
                 wallIntakeState++;
             }
             break;
         case 1:
             // unclamp
+            HatchIntake.vacuum(false);
             HatchIntake.clamp(true);
             if (toggleState) {
                 wallIntakeState++;
             }
             break;
-        case 2:
+        /*case 2:
             // spear out
             HatchIntake.spear(true);
             if (toggleState) {
                 wallIntakeState++;
             }
-            break;
-        case 3:
+            break;*/
+        case 2:
             // clamp
+            HatchIntake.vacuum(false);
             HatchIntake.clamp(false);
             if (toggleState) {
-                wallIntakeState++;
+                wallIntakeState = 0;
             }
-            break;
+            break;/*
         case 4:
             // spear in
             HatchIntake.clamp(false);
@@ -202,7 +205,7 @@ public class HatchAutomation {
             if (toggleState) {
                 wallIntakeState = 0;
             }
-            break;
+            break;*/
         }
     }
 

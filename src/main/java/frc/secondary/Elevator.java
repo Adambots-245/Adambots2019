@@ -29,6 +29,9 @@ public class Elevator {
         //updateLiftSpeedModifier();
         double liftSpeed = (liftSpeedModifier) * (liftAxis.get());
         setLiftMotorSpeed(-liftSpeed);
+        if (Math.abs(liftSpeed) > 0.1) {
+            HatchIntake.spear(false);
+        }
         //passiveGotoNearestLevel(liftAxis.isUntoggled());
         setCarriageWheelsSpeed(intakeSpeed);
         //System.out.println("elevator pos = " + Sensors.getLiftSensorPosition());

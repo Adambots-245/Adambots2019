@@ -115,11 +115,11 @@ public class Actuators {
         LiftMotor2.configPeakOutputReverse(-liftMaxMotorSpeed);
 
         //PID Config
-        //LiftMotor1.selectProfileSlot(Constants.PID_SLOT, Constants.PID_LOOP);
-        //LiftMotor1.config_kF(Constants.PID_SLOT, Constants.LIFT_F_VALUE, Constants.PID_TIMEOUT);
-        //LiftMotor1.config_kP(Constants.PID_SLOT, Constants.LIFT_P_VALUE, Constants.PID_TIMEOUT);
-        //LiftMotor1.config_kI(Constants.PID_SLOT, Constants.LIFT_I_VALUE, Constants.PID_TIMEOUT);
-        //LiftMotor1.config_kD(Constants.PID_SLOT, Constants.LIFT_D_VALUE, Constants.PID_TIMEOUT);
+        LiftMotor1.selectProfileSlot(Constants.PID_SLOT, Constants.PID_LOOP);
+        LiftMotor1.config_kF(Constants.PID_SLOT, Constants.LIFT_F_VALUE, Constants.PID_TIMEOUT);
+        LiftMotor1.config_kP(Constants.PID_SLOT, Constants.LIFT_P_VALUE, Constants.PID_TIMEOUT);
+        LiftMotor1.config_kI(Constants.PID_SLOT, Constants.LIFT_I_VALUE, Constants.PID_TIMEOUT);
+        LiftMotor1.config_kD(Constants.PID_SLOT, Constants.LIFT_D_VALUE, Constants.PID_TIMEOUT);
        
     }
 
