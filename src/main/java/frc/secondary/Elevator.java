@@ -29,6 +29,7 @@ public class Elevator {
         //updateLiftSpeedModifier();
         double liftSpeed = (liftSpeedModifier) * (liftAxis.get());
         setLiftMotorSpeed(liftSpeed);
+       
         if (Math.abs(liftSpeed) > 0.1) {
             HatchIntake.spear(false);
         }
@@ -36,6 +37,13 @@ public class Elevator {
         setCarriageWheelsSpeed(intakeSpeed);
         //System.out.println("elevator pos = " + Sensors.getLiftSensorPosition());
     }
+
+    public static void resetEncoderOnLimitSwitch() {
+		if (Sensors.getLiftLoweredLimitSwitch().get()) {
+			Sensors.resetLiftEncoder();
+		}
+	}
+
     public static void updateLiftSpeedModifier(){
         if (Actuators.getLiftMotor1().getSelectedSensorPosition() > Constants.LIFT_UPPER_SPEED_ENCODER_THRESHOLD || Actuators.getLiftMotor1().getSelectedSensorPosition() < Constants.LIFT_LOWER_SPEED_ENCODER_THRESHOLD ){
             liftSpeedModifier = Constants.LIFT_SLOW_MODIFIER;

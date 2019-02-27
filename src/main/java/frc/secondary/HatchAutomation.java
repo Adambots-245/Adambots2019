@@ -19,6 +19,10 @@ public class HatchAutomation {
         resetAll();
     }
 
+    /*public static boolean toggle(Boolean btn){
+        
+
+    }*/
     public static void resetAll() {
         HatchIntake.centeringArms(false);
         HatchIntake.clamp(false);
@@ -149,19 +153,25 @@ public class HatchAutomation {
         case 4:
             // spear clamp
             HatchIntake.clamp(false);
-            if (toggleState || timer.get() > 2.0) {
-                floorIntakeState++;
-                timer.reset();
-                }
-            break;
-        case 5:
-            // v off
             HatchIntake.vacuum(false);
             if (toggleState) {
                 floorIntakeState = 0;
             }
             break;
         }
+            /* if (toggleState || timer.get() > 2.0) {
+                floorIntakeState++;
+                timer.reset();
+                }
+            break; */
+        /*case 5:
+            // v off
+            HatchIntake.vacuum(false);
+            if (toggleState) {
+                floorIntakeState = 0;
+            }
+            break;
+        } */
 
     }
 

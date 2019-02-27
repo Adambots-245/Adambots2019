@@ -73,6 +73,8 @@ public class Actuators {
         Right2Motor.setInverted(true);
         Right3Motor.setInverted(true);
 
+        InfeedArmMotor.setInverted(true);
+
         ArmInOutLift2.setInverted(true);
         // set drive motors to coast
         Left1Motor.setNeutralMode(NeutralMode.Coast);

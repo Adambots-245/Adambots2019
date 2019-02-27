@@ -33,6 +33,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     Gamepad.init();
     Actuators.init();
+    Sensors.init();
     Elevator.init();
     Dash.init();
     AutomatedVision.init();
@@ -53,6 +54,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+      Dash.dash();
   }
 
 
@@ -92,6 +94,7 @@ public class Robot extends TimedRobot {
 
     // secondary controls
     Elevator.elevator((Gamepad.secondary.getLeftY()), Gamepad.secondary.getTriggers());
+    Elevator.resetEncoderOnLimitSwitch();
     Cargo.cargo(Gamepad.primary.getBack().getPresses(), Gamepad.secondary.getTriggers(),
         Gamepad.secondary.getRightY().get());
     // HatchIntake.centeringArms(Gamepad.secondary.getDPadN().get());
