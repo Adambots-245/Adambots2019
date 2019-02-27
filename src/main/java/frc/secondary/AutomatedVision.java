@@ -28,7 +28,7 @@ public class AutomatedVision{
         NetworkTable table = inst.getTable("/vision/datatable");
 
         NetworkTableEntry pipe = table.getEntry("values");
-        System.out.println("Pipe:" + pipe.getString(""));
+        //System.out.println("Pipe:" + pipe.getString(""));
 
         /*angle = table.getEntry("angle");
         error = table.getEntry("error");
@@ -57,7 +57,7 @@ public class AutomatedVision{
 
         }
 
-        System.out.println("Angle: " + returnedAngle);
+        //System.out.println("Angle: " + returnedAngle);
     }
 
     public static void init(){

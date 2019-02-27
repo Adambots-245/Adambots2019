@@ -36,8 +36,8 @@ public class Robot extends TimedRobot {
     Sensors.init();
     Elevator.init();
     Dash.init();
-    AutomatedVision.init();
-    AutomatedVision.getNetValues();
+    //AutomatedVision.init();
+    //AutomatedVision.getNetValues();
     //m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     //m_chooser.addOption("My Auto", kCustomAuto);
     //SmartDashboard.putData("Auto choices", m_chooser);
