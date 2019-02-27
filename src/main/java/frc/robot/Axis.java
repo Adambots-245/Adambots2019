@@ -65,7 +65,6 @@ public class Axis {
         boolean untoggled = false;
         if (last && !isPressed) {
             untoggled = true;
-            presses++;
         }
         return untoggled;
     }

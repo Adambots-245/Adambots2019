@@ -63,8 +63,8 @@ public class Elevator {
         return targetPosition;
     }
 
-    public static void passiveGotoNearestLevel(boolean isToggled) {
-        if (!isToggled) {
+    public static void passiveGotoNearestLevel(boolean unToggled) {
+        if (unToggled) {
             int currentPosition = Actuators.getLiftMotor1().getSelectedSensorPosition();
             int targetPosition = findNearestLevel(currentPosition);
             Actuators.getLiftMotor1().set(ControlMode.Position, targetPosition);
