@@ -95,11 +95,11 @@ public class Robot extends TimedRobot {
     // HatchIntake.centeringArms(Gamepad.secondary.getDPadN().get());
     // HatchIntake.suctionArms(Gamepad.secondary.getDPadE().get());
     // HatchIntake.vacuum(Gamepad.secondary.getDPadS().get());
-    // HatchIntake.spear(Gamepad.secondary.getDPadW().get());
-    // HatchIntake.clamp(Gamepad.secondary.getB().get());
+    HatchIntake.spear(Gamepad.secondary.getX().get());
+    HatchIntake.clamp(Gamepad.secondary.getY().get());
     // HatchAutomation.cycleHatch(Gamepad.secondary.getDPadN(),
     // Gamepad.secondary.getDPadE(), Gamepad.secondary.getDPadS());
-    HatchAutomation.cycleHatch(Gamepad.secondary.getA(), Gamepad.secondary.getB(), Gamepad.secondary.getY());
+    HatchAutomation.cycleHatch(Gamepad.secondary.getA()/*, Gamepad.secondary.getB(), Gamepad.secondary.getY()*/);
     Gamepad.primary.updateLast();
     Gamepad.secondary.updateLast();
   }

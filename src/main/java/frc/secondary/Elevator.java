@@ -28,7 +28,7 @@ public class Elevator {
         //liftSpeed += Constants.ELEVATOR_HOLD_SPEED - .02;
         //updateLiftSpeedModifier();
         double liftSpeed = (liftSpeedModifier) * (liftAxis.get());
-        setLiftMotorSpeed(-liftSpeed);
+        setLiftMotorSpeed(liftSpeed);
         if (Math.abs(liftSpeed) > 0.1) {
             HatchIntake.spear(false);
         }

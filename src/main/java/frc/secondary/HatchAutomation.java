@@ -29,13 +29,13 @@ public class HatchAutomation {
     public static void timedHatch(Button floorIntakeButton, Button wallIntakeButton, Button outtakeButton){
 
     }
-    public static void cycleHatch(Button floorIntakeButton, Button wallIntakeButton, Button outtakeButton){
+    public static void cycleHatch(Button floorIntakeButton){
         if (floorIntakeButton.isToggled()) {
             wallIntakeState = 0;
             outtakeState = 0;
             cycleFloorIntake(floorIntakeButton.isToggled());
         }
-        if (wallIntakeButton.isToggled()) {
+    /*    if (wallIntakeButton.isToggled()) {
             floorIntakeState = 0;
             outtakeState = 0;
             cycleWallIntake(wallIntakeButton.isToggled());
@@ -44,7 +44,7 @@ public class HatchAutomation {
             floorIntakeState = 0;
             wallIntakeState = 0;
             cycleOuttake(outtakeButton.isToggled());
-        }
+        } */
     }
     public static void timedFloorIntake(Button intakeToggleButton) {
 
