@@ -2,6 +2,8 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.secondary.HatchAutomation;
+import frc.secondary.HatchIntake;
 
 public class Dash {
     public static void dash(){
@@ -16,9 +18,14 @@ public class Dash {
         putEncoder();
         putSensors();
         putAxis();
+        putHatchStates();
     }
     public static void init() {
         dash();
+    }
+    public static void putHatchStates(){
+        SmartDashboard.putBoolean("spear", HatchIntake.spearState());
+        SmartDashboard.putBoolean("clamp", HatchIntake.clampState());
     }
     public static void putAutoShiftEnabled(){
         SmartDashboard.putBoolean("auto shift enabled", Drive.getAutoShiftState());

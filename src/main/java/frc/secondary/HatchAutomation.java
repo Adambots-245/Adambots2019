@@ -12,7 +12,8 @@ public class HatchAutomation {
     private static int floorIntakeState;
     private static int wallIntakeState;
     private static int outtakeState;
-
+    private static int spearIntakeState;
+    
 
     public static void init() {
         timer.start();
@@ -33,22 +34,43 @@ public class HatchAutomation {
     public static void timedHatch(Button floorIntakeButton, Button wallIntakeButton, Button outtakeButton){
 
     }
-    public static void cycleHatch(Button floorIntakeButton){
+    public static void cycleHatch(Button floorIntakeButton, Button wallIntakeButton, Button spearButton){
         if (floorIntakeButton.isToggled()) {
             wallIntakeState = 0;
-            outtakeState = 0;
-            cycleFloorIntake(floorIntakeButton.isToggled());
+            spearIntakeState = 0;
+            floorIntakeState++;
+            if (floorIntakeState == 5){
+                floorIntakeState = 1;
+            }
+            cycleFloorIntake(false);
         }
-    /*    if (wallIntakeButton.isToggled()) {
+        if (wallIntakeButton.isToggled()) {
             floorIntakeState = 0;
-            outtakeState = 0;
-            cycleWallIntake(wallIntakeButton.isToggled());
+            spearIntakeState = 0;
+            wallIntakeState++;
+            if (wallIntakeState == 3){
+                wallIntakeState = 1;
+            }
+            cycleWallIntake(false);
         }
-        if (outtakeButton.isToggled()) {
+        if (spearButton.isToggled()) {
             floorIntakeState = 0;
             wallIntakeState = 0;
-            cycleOuttake(outtakeButton.isToggled());
-        } */
+            spearIntakeState++;
+            if (spearIntakeState == 3){
+                spearIntakeState = 1;
+            }
+            setSpearState(false);
+        } 
+    }
+    public static int getFloorState(){
+        return floorIntakeState;
+    }
+    public static int getClampState(){
+        return wallIntakeState;
+    }
+    public static int getSpearState(){
+        return spearIntakeState;
     }
     public static void timedFloorIntake(Button intakeToggleButton) {
 
@@ -91,7 +113,6 @@ public class HatchAutomation {
     public static void cycleOuttake(boolean isToggled) {
         setHatchOuttake(isToggled);
     }
-
     public static void setHatchFloorIntakeState(boolean toggleState) {
         System.out.println("floor state is " + floorIntakeState + " Timer is " + timer.get());
         switch (floorIntakeState) {
@@ -107,6 +128,7 @@ public class HatchAutomation {
             HatchIntake.centeringArms(true);
             HatchIntake.vacuum(false);
             HatchIntake.clamp(true);
+            HatchIntake.spear(false);
             // next state
             if (toggleState || timer.get() > 2.0) {
                 floorIntakeState++;
@@ -174,13 +196,38 @@ public class HatchAutomation {
         } */
 
     }
+    public static void setSpearState(boolean toggleState) {
+
+        switch (spearIntakeState) {
+            case 0:
+                // do nothing
+                if (toggleState) {
+                    spearIntakeState++;
+                }
+                break;
+                case 1:
+                HatchIntake.vacuum(false);
+                HatchIntake.spear(true);
+                if (toggleState) {
+                    spearIntakeState++;
+                }
+                break;
+                case 2:
+                HatchIntake.vacuum(false);
+                HatchIntake.spear(false);
+                if (toggleState) {
+                    spearIntakeState = 1;
+                }
+            
+                break;}
+        
+    }
 
     public static void setHatchWallIntakeState(boolean toggleState) {
         System.out.println("wall state is " + wallIntakeState);
         switch (wallIntakeState) {
         case 0:
             // do nothing
-            HatchIntake.vacuum(false);
             if (toggleState) {
                 wallIntakeState++;
             }
@@ -205,7 +252,7 @@ public class HatchAutomation {
             HatchIntake.vacuum(false);
             HatchIntake.clamp(false);
             if (toggleState) {
-                wallIntakeState = 0;
+                wallIntakeState = 1;
             }
             break;/*
         case 4:

@@ -15,7 +15,7 @@ public class Cargo {
 
     public static void cargo(int modeTogglePresses, double intakeSpeed, double armSpeed) {
         //invert intake roller speed
-        intakeSpeed = intakeSpeed * -1;
+        intakeSpeed = intakeSpeed;
         if (modeTogglePresses % 2 == 0) {
             setCargoIntakeWheelsSpeed(intakeSpeed);
             setCargoArmSpeed(armSpeed);

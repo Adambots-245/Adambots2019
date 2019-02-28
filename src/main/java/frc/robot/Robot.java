@@ -93,18 +93,18 @@ public class Robot extends TimedRobot {
     // Gamepad.primary.getRightTrigger().get());
 
     // secondary controls
-    Elevator.elevator((Gamepad.secondary.getLeftY()), Gamepad.secondary.getTriggers());
-    Elevator.resetEncoderOnLimitSwitch();
+    Elevator.elevator((Gamepad.secondary.getLeftY()), Gamepad.secondary.getTriggers(), Gamepad.secondary.getDPadS().get(), Gamepad.secondary.getDPadW().get(), Gamepad.secondary.getDPadN().get());
+    //Elevator.resetEncoderOnLimitSwitch();
     Cargo.cargo(Gamepad.primary.getBack().getPresses(), Gamepad.secondary.getTriggers(),
         Gamepad.secondary.getRightY().get());
     // HatchIntake.centeringArms(Gamepad.secondary.getDPadN().get());
     // HatchIntake.suctionArms(Gamepad.secondary.getDPadE().get());
     // HatchIntake.vacuum(Gamepad.secondary.getDPadS().get());
-    HatchIntake.spear(Gamepad.secondary.getX().get());
-    HatchIntake.clamp(Gamepad.secondary.getY().get());
+    //HatchAutomation.spearToggle(Gamepad.secondary.getX().getPresses());
+    //HatchAutomation.clampToggle(Gamepad.secondary.getY().getPresses());
     // HatchAutomation.cycleHatch(Gamepad.secondary.getDPadN(),
     // Gamepad.secondary.getDPadE(), Gamepad.secondary.getDPadS());
-    HatchAutomation.cycleHatch(Gamepad.secondary.getA()/*, Gamepad.secondary.getB(), Gamepad.secondary.getY()*/);
+    HatchAutomation.cycleHatch(Gamepad.secondary.getA(), Gamepad.secondary.getX(), Gamepad.secondary.getY());
     Gamepad.primary.updateLast();
     Gamepad.secondary.updateLast();
   }

@@ -24,7 +24,7 @@ public class Elevator {
         Level_3 = false;
 
     }
-    public static void elevator(Axis liftAxis, double intakeSpeed){
+    public static void elevator(Axis liftAxis, double intakeSpeed, boolean low, boolean mid, boolean high){
         //liftSpeed += Constants.ELEVATOR_HOLD_SPEED - .02;
         //updateLiftSpeedModifier();
         double liftSpeed = (liftSpeedModifier) * (liftAxis.get());
@@ -33,8 +33,9 @@ public class Elevator {
         if (Math.abs(liftSpeed) > 0.1) {
             HatchIntake.spear(false);
         }
-        //passiveGotoNearestLevel(liftAxis.isUntoggled());
+        //passiveGotoNearestLevel(liftAxis.isUntoggled(), liftAxis.get());
         setCarriageWheelsSpeed(intakeSpeed);
+        buttonsElevator(low, mid, high);
         //System.out.println("elevator pos = " + Sensors.getLiftSensorPosition());
     }
 
@@ -71,9 +72,9 @@ public class Elevator {
         return targetPosition;
     }
 
-    public static void passiveGotoNearestLevel(boolean unToggled) {
-        if (unToggled) {
-            int currentPosition = Actuators.getLiftMotor1().getSelectedSensorPosition();
+    public static void passiveGotoNearestLevel(boolean unToggled, double speed) {
+        if (speed == 0) {
+            int currentPosition = Sensors.getLiftSensorPosition();
             int targetPosition = findNearestLevel(currentPosition);
             Actuators.getLiftMotor1().set(ControlMode.Position, targetPosition);
         }
@@ -113,11 +114,11 @@ public class Elevator {
 
     public static void buttonsElevator(boolean low, boolean mid, boolean high) {
         if (low == true && mid == false && high == false) {
-            Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_1);
+            Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_1);
         } else if (low == false && mid == true && high == false) {
-            Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_2);
+            Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_2);
         } else if (low == false && mid == false && high == true) {
-            Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_3);
+            Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_3);
         }
     }
 }

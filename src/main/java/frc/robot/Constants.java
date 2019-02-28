@@ -66,7 +66,7 @@ public class Constants{
     public static final int PID_TIMEOUT = 0;
 
     public static final double LIFT_F_VALUE = .6;
-    public static final double LIFT_P_VALUE = 1;
+    public static final double LIFT_P_VALUE = .01;
     public static final double LIFT_I_VALUE = 0;
     public static final double LIFT_D_VALUE = 0;
 
