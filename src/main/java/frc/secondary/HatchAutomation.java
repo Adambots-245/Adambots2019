@@ -41,6 +41,7 @@ public class HatchAutomation {
             floorIntakeState++;
             if (floorIntakeState == 5){
                 floorIntakeState = 1;
+                
             }
             cycleFloorIntake(false);
         }

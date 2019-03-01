@@ -7,21 +7,34 @@ import frc.robot.*;
 public class Cargo {
     private static Timer timer = new Timer();
     private static boolean armPhotoEyeOpenLast;
+    
 
     public static void init() {
         timer.start();
         armPhotoEyeOpenLast = false;
+
     }
 
-    public static void cargo(int modeTogglePresses, double intakeSpeed, double armSpeed) {
+    public static void cargo(int modeTogglePresses, double intakeSpeed, double armSpeed, boolean photoEye) {
         //invert intake roller speed
-        intakeSpeed = intakeSpeed;
-        if (modeTogglePresses % 2 == 0) {
+        intakeSpeed = -intakeSpeed;
+        
+        if(photoEye){    
+            if (modeTogglePresses % 2 == 0) {
+                setCargoIntakeWheelsSpeed(intakeSpeed/2);
+                setCargoArmSpeed(armSpeed);
+                //cargoIntakeWheels(intakeSpeed);
+                //moveArm(armSpeed);
+            }
+        }else if(Gamepad.secondary.getB().get()){
             setCargoIntakeWheelsSpeed(intakeSpeed);
-            setCargoArmSpeed(armSpeed);
-            //cargoIntakeWheels(intakeSpeed);
-            //moveArm(armSpeed);
+            Actuators.getArmInOutLift1().set(-intakeSpeed);
         }
+        else{
+            setCargoIntakeWheelsSpeed(0);
+            Actuators.getArmInOutLift1().set(0);
+        }
+
     }
     public static void setCargoIntakeWheelsSpeed(double speed){
         Actuators.getInfeedArmMotor().set(ControlMode.PercentOutput, speed);

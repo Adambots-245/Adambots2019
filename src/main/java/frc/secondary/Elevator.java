@@ -28,13 +28,15 @@ public class Elevator {
         //liftSpeed += Constants.ELEVATOR_HOLD_SPEED - .02;
         //updateLiftSpeedModifier();
         double liftSpeed = (liftSpeedModifier) * (liftAxis.get());
-        setLiftMotorSpeed(liftSpeed);
+        setLiftMotorSpeed(-liftSpeed);
        
         if (Math.abs(liftSpeed) > 0.1) {
             HatchIntake.spear(false);
         }
         //passiveGotoNearestLevel(liftAxis.isUntoggled(), liftAxis.get());
-        setCarriageWheelsSpeed(intakeSpeed);
+        if((boolean)Sensors.getCargoPresentLift().get()){
+            setCarriageWheelsSpeed(intakeSpeed);
+        }
         buttonsElevator(low, mid, high);
         //System.out.println("elevator pos = " + Sensors.getLiftSensorPosition());
     }
