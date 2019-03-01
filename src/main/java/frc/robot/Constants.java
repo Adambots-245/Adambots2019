@@ -71,8 +71,8 @@ public class Constants{
     public static final double LIFT_D_VALUE = 0;
 
     //lift slowdown thresholds
-    public static final int LIFT_LOWER_SPEED_ENCODER_THRESHOLD = 45000;
-    public static final int LIFT_UPPER_SPEED_ENCODER_THRESHOLD = 1000;
+    public static final int LIFT_LOWER_SPEED_ENCODER_THRESHOLD = 40000;
+    public static final int LIFT_UPPER_SPEED_ENCODER_THRESHOLD = 15000;
     public static final double LIFT_SLOW_MODIFIER = .5;
     public static final double LIFT_NORMAL_MODIFIER = 1;
 

@@ -55,6 +55,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
       Dash.dash();
+      Elevator.resetEncoderOnLimitSwitch();
   }
 
 
@@ -66,11 +67,17 @@ public class Robot extends TimedRobot {
    * getString line to get the auto name from the text box below the Gyro
    *
    * <p>You can add additional auto modes by adding additional comparisons to
-   * the switch structure below with additional strings. If using the
+   * the\ switch structure below with additional strings. If using the
    * SendableChooser make sure to add them to the chooser code above as well.
    */
   @Override
   public void autonomousInit() {
+    HatchIntake.centeringArms(false);
+    HatchIntake.clamp(false);
+    HatchIntake.spear(false);
+    HatchIntake.suctionArms(false);
+    HatchIntake.vacuum(false);
+    
     //m_autoSelected = m_chooser.getSelected();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     //System.out.println("Auto selected: " + m_autoSelected);
@@ -82,7 +89,6 @@ public class Robot extends TimedRobot {
   public void controls() {
     Gamepad.primary.update();
     Gamepad.secondary.update();
-    Dash.dash();
     Actuators.getRingLight().set(true);
     // primary controls
     Drive.drive(Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightX().get(), Gamepad.primary.getA().get(),
@@ -94,7 +100,6 @@ public class Robot extends TimedRobot {
 
     // secondary controls
     Elevator.elevator((Gamepad.secondary.getLeftY()), Gamepad.secondary.getTriggers(), Gamepad.secondary.getDPadS().get(), Gamepad.secondary.getDPadW().get(), Gamepad.secondary.getDPadN().get());
-    //Elevator.resetEncoderOnLimitSwitch();
     Cargo.cargo(Gamepad.primary.getBack().getPresses(), Gamepad.secondary.getTriggers(),
         Gamepad.secondary.getRightY().get(), (boolean)Sensors.getCargoPresentLift().get());
     // HatchIntake.centeringArms(Gamepad.secondary.getDPadN().get());

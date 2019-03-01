@@ -2,8 +2,10 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.secondary.Elevator;
 import frc.secondary.HatchAutomation;
 import frc.secondary.HatchIntake;
+import edu.wpi.first.wpilibj.DriverStation;
 
 public class Dash {
     public static void dash(){
@@ -19,9 +21,13 @@ public class Dash {
         putSensors();
         putAxis();
         putHatchStates();
+        putMatchTime();
     }
     public static void init() {
         dash();
+    }
+    public static void putMatchTime(){
+        SmartDashboard.putNumber("match time", DriverStation.getInstance().getMatchTime());
     }
     public static void putHatchStates(){
         SmartDashboard.putBoolean("spear", HatchIntake.spearState());
@@ -50,6 +56,7 @@ public class Dash {
     } 
     public static void putLiftEncoderValue(){
         SmartDashboard.putNumber("lift encoder", Actuators.getLiftMotor1().getSelectedSensorPosition());     
+        SmartDashboard.putNumber("LiftSpeedModifier", Elevator.getLiftSpeedModifier());     
     }
     public static void putLimitSwitches() {
         SmartDashboard.putBoolean("arm limit switch", Sensors.getArmLimitSwitch().get());

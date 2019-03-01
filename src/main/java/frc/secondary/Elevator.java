@@ -25,10 +25,10 @@ public class Elevator {
 
     }
     public static void elevator(Axis liftAxis, double intakeSpeed, boolean low, boolean mid, boolean high){
-        //updateLiftSpeedModifier();
+        updateLiftSpeedModifier();
         double liftSpeed = (liftSpeedModifier) * (liftAxis.get());
         liftSpeed += -Constants.ELEVATOR_HOLD_SPEED;
-        setLiftMotorSpeed(liftSpeed);
+        //setLiftMotorSpeed(liftSpeed);
        
         if (Math.abs(liftSpeed) > 0.1) {
             HatchIntake.spear(false);
@@ -37,18 +37,20 @@ public class Elevator {
         /*if((boolean)Sensors.getCargoPresentLift().get()){
             setCarriageWheelsSpeed(intakeSpeed);
         }*/
-        //buttonsElevator(low, mid, high, -liftSpeed);
+        buttonsElevator(low, mid, high, liftSpeed);
         //System.out.println("elevator pos = " + Sensors.getLiftSensorPosition());
     }
-
+    public static double getLiftSpeedModifier(){
+        return liftSpeedModifier;
+    }
     public static void resetEncoderOnLimitSwitch() {
-		if (Sensors.getLiftLoweredLimitSwitch().get()) {
+		if (!Sensors.getLiftLoweredLimitSwitch().get()) {
 			Sensors.resetLiftEncoder();
 		}
 	}
 
     public static void updateLiftSpeedModifier(){
-        if (Actuators.getLiftMotor1().getSelectedSensorPosition() > Constants.LIFT_UPPER_SPEED_ENCODER_THRESHOLD || Actuators.getLiftMotor1().getSelectedSensorPosition() < Constants.LIFT_LOWER_SPEED_ENCODER_THRESHOLD ){
+        if (Sensors.getLiftSensorPosition() > Constants.LIFT_UPPER_SPEED_ENCODER_THRESHOLD || Sensors.getLiftSensorPosition() < Constants.LIFT_LOWER_SPEED_ENCODER_THRESHOLD ){
             liftSpeedModifier = Constants.LIFT_SLOW_MODIFIER;
         }
         else{
@@ -91,7 +93,12 @@ public class Elevator {
     }
 
     public static void setLiftMotorSpeed(double speed) {
-        Actuators.getLiftMotor1().set(ControlMode.PercentOutput, speed);
+        if (!Sensors.getDIValue(Sensors.getLiftLoweredLimitSwitch()) && speed >= 0) {
+            Actuators.getLiftMotor1().set(ControlMode.PercentOutput, 0);
+        }
+        else{
+            Actuators.getLiftMotor1().set(ControlMode.PercentOutput, speed);
+        }
     }
 
     public static void toggleElevator(double elevateSpeed, boolean height) {
@@ -116,14 +123,14 @@ public class Elevator {
 
     public static void buttonsElevator(boolean low, boolean mid, boolean high, double liftSpeed) {
         if (low == true && mid == false && high == false) {
-            Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_1);
+            Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_1);
         } else if (low == false && mid == true && high == false) {
-            Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_2);
+            Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_2);
         } else if (low == false && mid == false && high == true) {
-            Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_3);
+            Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_3);
         }
         else{
-            setLiftMotorSpeed(-liftSpeed);
+            setLiftMotorSpeed(liftSpeed);
         }
     }
 }

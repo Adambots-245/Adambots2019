@@ -89,6 +89,7 @@ public class Actuators {
         LiftMotor2.setNeutralMode(NeutralMode.Brake);
         ArmInOutLift1.setNeutralMode(NeutralMode.Brake);
         ArmInOutLift2.setNeutralMode(NeutralMode.Brake);
+        ClimbMotor.setNeutralMode(NeutralMode.Brake);
         
         // set follower motors
         ArmInOutLift2.follow(ArmInOutLift1);

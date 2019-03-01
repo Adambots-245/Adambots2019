@@ -45,7 +45,7 @@ public class Cargo {
         Actuators.getInfeedArmMotor().set(ControlMode.PercentOutput, speed);
     }
     public static void setCargoArmSpeed(double speed){
-        double pivotSpeed = speed * 0.8;
+        double pivotSpeed = speed;
         Actuators.getClimbMotor().set(ControlMode.PercentOutput, -pivotSpeed);
     }
     //stops intake motor after intakeDelayTime seconds if the photoeye is blocked
