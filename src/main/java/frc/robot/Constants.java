@@ -26,7 +26,7 @@ public class Constants{
      //TODO: Properly name these according to what they actually are (photo eye, limit switch...)
      public static final int LIFT_SENSOR_PORT = 0;
      public static final int HATCH_SENSOR_PORT = 1;
-     public static final int CARGO_ARM_SENSOR_PORT = 2;
+     public static final int CARGO_ARM_SENSOR_PORT = 4;
      public static final int CARGO_LIFT_SENSOR_PORT = 3;
     
     //PCM ports
@@ -65,7 +65,7 @@ public class Constants{
 	 */
     public static final int PID_TIMEOUT = 0;
 
-    public static final double LIFT_F_VALUE = .6;
+    public static final double LIFT_F_VALUE = 1;
     public static final double LIFT_P_VALUE = .01;
     public static final double LIFT_I_VALUE = 0;
     public static final double LIFT_D_VALUE = 0;
@@ -79,7 +79,7 @@ public class Constants{
     //motor speeds
     public static final double STOP_MOTOR_SPEED = 0.0;
     public static final double HALF_MOTOR_SPEED = 0.45;
-    public static final double MAX_MOTOR_SPEED = 0.9;
+    public static final double MAX_MOTOR_SPEED = 1;
     public static final double LIFT_MAX_MOTOR_SPEED = 1;
 
     //autoshift thresholds
@@ -99,7 +99,7 @@ public class Constants{
     public static final double MAX_LIFT_SPEED = 0.0;
     
     //set elevator hold speed
-    public static final double ELEVATOR_HOLD_SPEED = .12;
+    public static final double ELEVATOR_HOLD_SPEED = .1;
     //Misc
     public static final int LIFT_LEVEL_1 = 200;
     public static final int LIFT_LEVEL_2 = 30000;

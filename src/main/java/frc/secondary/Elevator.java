@@ -25,19 +25,19 @@ public class Elevator {
 
     }
     public static void elevator(Axis liftAxis, double intakeSpeed, boolean low, boolean mid, boolean high){
-        //liftSpeed += Constants.ELEVATOR_HOLD_SPEED - .02;
         //updateLiftSpeedModifier();
         double liftSpeed = (liftSpeedModifier) * (liftAxis.get());
-        setLiftMotorSpeed(-liftSpeed);
+        liftSpeed += -Constants.ELEVATOR_HOLD_SPEED;
+        setLiftMotorSpeed(liftSpeed);
        
         if (Math.abs(liftSpeed) > 0.1) {
             HatchIntake.spear(false);
         }
         //passiveGotoNearestLevel(liftAxis.isUntoggled(), liftAxis.get());
-        if((boolean)Sensors.getCargoPresentLift().get()){
+        /*if((boolean)Sensors.getCargoPresentLift().get()){
             setCarriageWheelsSpeed(intakeSpeed);
-        }
-        buttonsElevator(low, mid, high);
+        }*/
+        //buttonsElevator(low, mid, high, -liftSpeed);
         //System.out.println("elevator pos = " + Sensors.getLiftSensorPosition());
     }
 
@@ -114,13 +114,16 @@ public class Elevator {
         }
     }
 
-    public static void buttonsElevator(boolean low, boolean mid, boolean high) {
+    public static void buttonsElevator(boolean low, boolean mid, boolean high, double liftSpeed) {
         if (low == true && mid == false && high == false) {
-            Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_1);
+            Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_1);
         } else if (low == false && mid == true && high == false) {
-            Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_2);
+            Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_2);
         } else if (low == false && mid == false && high == true) {
-            Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_3);
+            Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_3);
+        }
+        else{
+            setLiftMotorSpeed(-liftSpeed);
         }
     }
 }

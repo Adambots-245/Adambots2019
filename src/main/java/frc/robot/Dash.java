@@ -69,7 +69,7 @@ public class Dash {
     public static void putSensors() {
        // SmartDashboard.putNumber("arm potentiometer", Sensors.getArmPotentiometerValue());
        // SmartDashboard.putBoolean("hatch present", Sensors.getHatchPresent().get());
-       // SmartDashboard.putBoolean("cargo present arm", Sensors.getCargoPresentArm().get());
-       // SmartDashboard.putBoolean("cargo present lift", Sensors.getCargoPresentLift().get());
+       //SmartDashboard.putBoolean("cargo present arm", Sensors.getDIValue(Sensors.getCargoPresentArm()));
+       //zSmartDashboard.putBoolean("cargo present lift", Sensors.getCargoPresentLift().get());
     }
 }

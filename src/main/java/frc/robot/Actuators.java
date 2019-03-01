@@ -60,18 +60,18 @@ public class Actuators {
 
         // set follower motors
         Left2Motor.follow(Left1Motor);
-        Left3Motor.follow(Left1Motor);
+        //Left3Motor.follow(Left1Motor);
         Right2Motor.follow(Right1Motor);
-        Right3Motor.follow(Right1Motor);
+        //Right3Motor.follow(Right1Motor);
 
         ArmInOutLift2.follow(ArmInOutLift1);
         // reverse motors
         Left1Motor.setInverted(false);
         Left2Motor.setInverted(false);
-        Left3Motor.setInverted(false);
+        Left3Motor.setInverted(true);
         Right1Motor.setInverted(true);
         Right2Motor.setInverted(true);
-        Right3Motor.setInverted(true);
+        Right3Motor.setInverted(false);
 
         InfeedArmMotor.setInverted(true);
 
@@ -87,6 +87,8 @@ public class Actuators {
         //set brake motors
         LiftMotor1.setNeutralMode(NeutralMode.Brake);
         LiftMotor2.setNeutralMode(NeutralMode.Brake);
+        ArmInOutLift1.setNeutralMode(NeutralMode.Brake);
+        ArmInOutLift2.setNeutralMode(NeutralMode.Brake);
         
         // set follower motors
         ArmInOutLift2.follow(ArmInOutLift1);
@@ -110,6 +112,8 @@ public class Actuators {
         LiftMotor1.configReverseSoftLimitEnable(enableDriveSoftLimit);
         LiftMotor2.configReverseSoftLimitEnable(enableDriveSoftLimit);
 
+        InfeedArmMotor.configReverseSoftLimitEnable(false);
+        InfeedArmMotor.configForwardSoftLimitEnable(false);
         double liftMaxMotorSpeed = Constants.LIFT_MAX_MOTOR_SPEED; 
         LiftMotor1.configPeakOutputForward(liftMaxMotorSpeed);
         LiftMotor1.configPeakOutputReverse(-liftMaxMotorSpeed);
