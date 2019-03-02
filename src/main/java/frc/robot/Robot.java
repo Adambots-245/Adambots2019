@@ -93,13 +93,13 @@ public class Robot extends TimedRobot {
     // primary controls
     Drive.drive(Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightX().get(), Gamepad.primary.getA().get(),
         Gamepad.primary.getY().get(), Gamepad.primary.getStart().getPresses());
-    // Climb.climb(Gamepad.primary.getBack().getPresses(),
+    // Climb.climb(Gamepad.primary.getBack().getPresses(),  
     // Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightY().get(),
     // Gamepad.primary.getLeftTrigger().get(),
     // Gamepad.primary.getRightTrigger().get());
 
     // secondary controls
-    Elevator.elevator((Gamepad.secondary.getLeftY()), Gamepad.secondary.getTriggers(), Gamepad.secondary.getDPadS().get(), Gamepad.secondary.getDPadW().get(), Gamepad.secondary.getDPadN().get());
+    Elevator.elevator((Gamepad.secondary.getLeftY()), Gamepad.secondary.getTriggers(), Gamepad.secondary.getBack().get(), Gamepad.secondary.getLB().get(), Gamepad.secondary.getRB().get());
     Cargo.cargo(Gamepad.primary.getBack().getPresses(), Gamepad.secondary.getTriggers(),
         Gamepad.secondary.getRightY().get(), (boolean)Sensors.getCargoPresentLift().get());
     // HatchIntake.centeringArms(Gamepad.secondary.getDPadN().get());

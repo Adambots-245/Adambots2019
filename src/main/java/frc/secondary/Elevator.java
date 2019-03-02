@@ -122,12 +122,31 @@ public class Elevator {
     }
 
     public static void buttonsElevator(boolean low, boolean mid, boolean high, double liftSpeed) {
+        int liftEncoder = Sensors.getLiftSensorPosition();
+        int range = 2000;
         if (low == true && mid == false && high == false) {
-            Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_1);
+            if (liftEncoder > Constants.LIFT_LEVEL_1 + range) {
+                Actuators.getLiftMotor1().set(ControlMode.PercentOutput, 0.5);
+            } else {
+                setLiftMotorSpeed(liftSpeed);
+            }
+            //Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_1);
         } else if (low == false && mid == true && high == false) {
-            Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_2);
+            if (liftEncoder > Constants.LIFT_LEVEL_2 + range) {
+                Actuators.getLiftMotor1().set(ControlMode.PercentOutput, 0.5);
+            } else if (liftEncoder < Constants.LIFT_LEVEL_2 - range) {
+                Actuators.getLiftMotor1().set(ControlMode.PercentOutput, -0.5);
+            } else {
+                setLiftMotorSpeed(liftSpeed);
+            }
+            //Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_2);
         } else if (low == false && mid == false && high == true) {
-            Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_3);
+            if (liftEncoder < Constants.LIFT_LEVEL_3 - range) {
+                Actuators.getLiftMotor1().set(ControlMode.PercentOutput, -0.5);
+            } else {
+                setLiftMotorSpeed(liftSpeed);
+            }
+            //Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_3);
         }
         else{
             setLiftMotorSpeed(liftSpeed);
