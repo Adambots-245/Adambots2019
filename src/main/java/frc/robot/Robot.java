@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.secondary.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,9 +31,17 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
-    SmartDashboard.putData("Auto choices", m_chooser);
+    Gamepad.init();
+    Actuators.init();
+    Sensors.init();
+    Elevator.init();
+    Dash.init();
+    //AutomatedVision.init();
+    //AutomatedVision.getNetValues();
+    //m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    //m_chooser.addOption("My Auto", kCustomAuto);
+    //SmartDashboard.putData("Auto choices", m_chooser);
+
   }
 
   /**
@@ -45,7 +54,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+      Dash.dash();
+      Elevator.resetEncoderOnLimitSwitch();
   }
+
 
   /**
    * This autonomous (along with the chooser code above) shows how to select
@@ -55,14 +67,51 @@ public class Robot extends TimedRobot {
    * getString line to get the auto name from the text box below the Gyro
    *
    * <p>You can add additional auto modes by adding additional comparisons to
-   * the switch structure below with additional strings. If using the
+   * the\ switch structure below with additional strings. If using the
    * SendableChooser make sure to add them to the chooser code above as well.
    */
   @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
+    HatchIntake.centeringArms(false);
+    HatchIntake.clamp(false);
+    HatchIntake.spear(false);
+    HatchIntake.suctionArms(false);
+    HatchIntake.vacuum(false);
+    
+    //m_autoSelected = m_chooser.getSelected();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
+    //System.out.println("Auto selected: " + m_autoSelected);
+  }
+
+  /**
+   * This is a function for all the robot controlls
+   */
+  public void controls() {
+    Gamepad.primary.update();
+    Gamepad.secondary.update();
+    Actuators.getRingLight().set(true);
+    // primary controls
+    Drive.drive(Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightX().get(), Gamepad.primary.getA().get(),
+        Gamepad.primary.getY().get(), Gamepad.primary.getStart().getPresses());
+    // Climb.climb(Gamepad.primary.getBack().getPresses(),  
+    // Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightY().get(),
+    // Gamepad.primary.getLeftTrigger().get(),
+    // Gamepad.primary.getRightTrigger().get());
+
+    // secondary controls
+    Elevator.elevator((Gamepad.secondary.getLeftY()), Gamepad.secondary.getTriggers(), Gamepad.secondary.getBack().get(), Gamepad.secondary.getLB().get(), Gamepad.secondary.getRB().get());
+    Cargo.cargo(Gamepad.primary.getBack().getPresses(), Gamepad.secondary.getTriggers(),
+        Gamepad.secondary.getRightY().get(), (boolean)Sensors.getCargoPresentLift().get());
+    // HatchIntake.centeringArms(Gamepad.secondary.getDPadN().get());
+    // HatchIntake.suctionArms(Gamepad.secondary.getDPadE().get());
+    // HatchIntake.vacuum(Gamepad.secondary.getDPadS().get());
+    //HatchAutomation.spearToggle(Gamepad.secondary.getX().getPresses());
+    //HatchAutomation.clampToggle(Gamepad.secondary.getY().getPresses());
+    // HatchAutomation.cycleHatch(Gamepad.secondary.getDPadN(),
+    // Gamepad.secondary.getDPadE(), Gamepad.secondary.getDPadS());
+    HatchAutomation.cycleHatch(Gamepad.secondary.getA(), Gamepad.secondary.getX(), Gamepad.secondary.getY());
+    Gamepad.primary.updateLast();
+    Gamepad.secondary.updateLast();
   }
 
   /**
@@ -70,7 +119,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    switch (m_autoSelected) {
+    /*switch (m_autoSelected) {
       case kCustomAuto:
         // Put custom auto code here
         break;
@@ -78,20 +127,33 @@ public class Robot extends TimedRobot {
       default:
         // Put default auto code here
         break;
-    }
+    }*/
+    controls();
+    AutomatedVision.getNetValues();
+    AutomatedVision.track();
   }
-
+  
   /**
    * This function is called periodically during operator control.
    */
   @Override
   public void teleopPeriodic() {
+    controls();
+    AutomatedVision.getNetValues();
+    AutomatedVision.track();
   }
-
+ 
   /**
    * This function is called periodically during test mode.
    */
   @Override
   public void testPeriodic() {
+    Gamepad.primary.update();
+    Gamepad.secondary.update();
+
+    ToggleDrive.toggleDrive(Gamepad.primary.getA().getPresses());
+    
+    Gamepad.primary.updateLast();
+    Gamepad.secondary.updateLast();
   }
 }
