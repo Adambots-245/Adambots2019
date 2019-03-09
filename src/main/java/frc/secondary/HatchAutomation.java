@@ -1,10 +1,10 @@
 package frc.secondary;
 
-import frc.robot.Actuators;
+//import frc.robot.Actuators;
 import frc.robot.Button;
-import frc.robot.Sensors;
+//import frc.robot.Sensors;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+//import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class HatchAutomation {
 

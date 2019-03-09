@@ -1,7 +1,7 @@
 package frc.secondary;
 
 import frc.robot.*;
-import frc.secondary.*;
+//import frc.secondary.*;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -43,16 +43,16 @@ public class AutomatedVision{
             
             switch (keyValuePair[0]){
                 case "angle":
-                    returnedAngle = new Double(keyValuePair[1]);
+                    returnedAngle = Double.valueOf(keyValuePair[1]);
                     break;
                 case "distance":
-                    returnedDistance = new Integer(keyValuePair[1]);
+                    returnedDistance = Integer.valueOf(keyValuePair[1]);
                     break;
                 case "width":
-                    returnedWidth = new Double(keyValuePair[1]);
+                    returnedWidth = Double.valueOf(keyValuePair[1]);
                     break;
                 case "error":
-                    returnedError = new Double(keyValuePair[1]);
+                    returnedError = Double.valueOf(keyValuePair[1]);
             }
 
         }
