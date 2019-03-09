@@ -110,6 +110,7 @@ public class Robot extends TimedRobot {
     // HatchAutomation.cycleHatch(Gamepad.secondary.getDPadN(),
     // Gamepad.secondary.getDPadE(), Gamepad.secondary.getDPadS());
     HatchAutomation.cycleHatch(Gamepad.secondary.getA(), Gamepad.secondary.getX(), Gamepad.secondary.getY());
+    HatchAutomation.timedWallIntake(Gamepad.secondary.getB());
     Gamepad.primary.updateLast();
     Gamepad.secondary.updateLast();
   }

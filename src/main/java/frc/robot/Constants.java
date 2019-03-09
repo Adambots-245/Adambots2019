@@ -104,6 +104,7 @@ public class Constants{
     public static final int LIFT_LEVEL_1 = 200;
     public static final int LIFT_LEVEL_2 = 28000;
     public static final int LIFT_LEVEL_3 = 54000; 
+    public static final double TIMED_WALL_INTAKE_DELAY = 0.50;
 
     //Limiters TODO: UPDATE MAX AND MIN CLIMB SPEEDS TO CORRECT VALUES
     public static final double MAX_CLIMB_SPEED = 0.9;
