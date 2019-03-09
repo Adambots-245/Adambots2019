@@ -60,9 +60,9 @@ public class Actuators {
 
         // set follower motors
         Left2Motor.follow(Left1Motor);
-        //Left3Motor.follow(Left1Motor);
+        Left3Motor.follow(Left1Motor);
         Right2Motor.follow(Right1Motor);
-        //Right3Motor.follow(Right1Motor);
+        Right3Motor.follow(Right1Motor);
 
         ArmInOutLift2.follow(ArmInOutLift1);
         // reverse motors

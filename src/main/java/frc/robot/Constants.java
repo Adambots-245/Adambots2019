@@ -16,8 +16,8 @@ public class Constants{
     public static final int INFEED_BAG_MOTOR_ARM = 8;
     public static final int INFEED_BAG_MOTOR_LIFT1 = 9;
     public static final int INFEED_BAG_MOTOR_LIFT2 = 10;
-    public static final int LEFT_DRIVE_MOTOR_VICTORSPX2 = 11;
-    public static final int RIGHT_DRIVE_MOTOR_VICTORSPX2 = 12;
+    public static final int LEFT_DRIVE_MOTOR_VICTORSPX2 = 11; // LDrive Victor 2 is 11 on practice, 12 on comp
+    public static final int RIGHT_DRIVE_MOTOR_VICTORSPX2 = 12; // RDrive Victor 2 is 12 on practice, 11 on comp
 
      //Analog Input ports
      public static final int ARM_POTENTIOMETER_PORT = 0;

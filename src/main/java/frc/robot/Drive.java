@@ -77,8 +77,6 @@ public class Drive {
          speed = speed * -1; // fix forward = back
         double leftSpeed = Math.min(speed + turnSpeed, Constants.MAX_MOTOR_SPEED);
         double rightSpeed = Math.min(speed - turnSpeed, Constants.MAX_MOTOR_SPEED);
-        double left3 = Math.min(speed - turnSpeed, Constants.MAX_MOTOR_SPEED);
-        double right3 = Math.min(speed + turnSpeed, Constants.MAX_MOTOR_SPEED);
     //double leftSpeed = Gamepad.primary.getLeftY().get();
     //      double rightSpeed = -Gamepad.primary.getLeftY().get();
     //    leftSpeed = Gamepad.primary.getRightX().get();
@@ -91,8 +89,6 @@ public class Drive {
         // Sets the speeds
         Actuators.getLeft1Motor().set(ControlMode.PercentOutput, leftSpeed);
         Actuators.getRight1Motor().set(ControlMode.PercentOutput, rightSpeed);
-        Actuators.getLeft3Motor().set(ControlMode.PercentOutput, left3);
-        Actuators.getRight3Motor().set(ControlMode.PercentOutput, right3);
    
         Actuators.getShiftHighGear().set(shiftingValue(state));
     }
