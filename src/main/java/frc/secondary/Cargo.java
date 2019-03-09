@@ -15,7 +15,7 @@ public class Cargo {
 
     }
 
-    public static void cargo(int modeTogglePresses, double intakeSpeed, double armSpeed, boolean carriagePhotoEye) {
+    public static void cargo(int modeTogglePresses, double intakeSpeed, double armSpeed, boolean carriagePhotoEye, boolean override) {
         //invert intake roller speed
         //intakeSpeed = intakeSpeed;
         //boolean armPhotoEyeOpenCurrent = Sensors.getDIValue(Sensors.getCargoPresentArm());
@@ -39,8 +39,9 @@ public class Cargo {
                 Actuators.getArmInOutLift1().set(0);
             }
         }
-
+        bringElevatorDown(override);
     }
+
     public static void setCargoIntakeWheelsSpeed(double speed){
         Actuators.getInfeedArmMotor().set(ControlMode.PercentOutput, speed);
     }
@@ -48,6 +49,13 @@ public class Cargo {
         double pivotSpeed = speed;
         Actuators.getClimbMotor().set(ControlMode.PercentOutput, -pivotSpeed);
     }
+
+    public static void bringElevatorDown(boolean override){
+        if (override) {
+            Elevator.buttonsElevator(true, false, false, 0);
+        }
+    }
+
     //stops intake motor after intakeDelayTime seconds if the photoeye is blocked
     //otherwise sets the intake speed to intakeSpeed 
     public static void cargoIntakeWheels(double intakeSpeed){
