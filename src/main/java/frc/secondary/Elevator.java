@@ -135,14 +135,14 @@ public class Elevator {
             if (liftEncoder > Constants.LIFT_LEVEL_2 + range) {
                 Actuators.getLiftMotor1().set(ControlMode.PercentOutput, 0.5);
             } else if (liftEncoder < Constants.LIFT_LEVEL_2 - range) {
-                Actuators.getLiftMotor1().set(ControlMode.PercentOutput, -0.5);
+                Actuators.getLiftMotor1().set(ControlMode.PercentOutput, -0.75);
             } else {
                 setLiftMotorSpeed(liftSpeed);
             }
             //Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_2);
         } else if (low == false && mid == false && high == true) {
             if (liftEncoder < Constants.LIFT_LEVEL_3 - range) {
-                Actuators.getLiftMotor1().set(ControlMode.PercentOutput, -0.5);
+                Actuators.getLiftMotor1().set(ControlMode.PercentOutput, -0.75);
             } else {
                 setLiftMotorSpeed(liftSpeed);
             }

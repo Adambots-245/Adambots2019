@@ -67,8 +67,8 @@ public class Drive {
             f_leftSpeed = Constants.MAX_MOTOR_SPEED;
             f_rightSpeed = Constants.MAX_MOTOR_SPEED;
         }
-        Actuators.getLeft1Motor().set(ControlMode.PercentOutput, Math.max(f_leftSpeed, -Constants.MAX_MOTOR_SPEED));
-        Actuators.getRight1Motor().set(ControlMode.PercentOutput, Math.max(f_rightSpeed, -Constants.MAX_MOTOR_SPEED));
+        Actuators.getLeft1Motor().set(ControlMode.PercentOutput, Math.max(f_rightSpeed, -Constants.MAX_MOTOR_SPEED));
+        Actuators.getRight1Motor().set(ControlMode.PercentOutput, Math.max(f_leftSpeed, -Constants.MAX_MOTOR_SPEED));
     }
 
     public static void tankDrive(double speed, double turnSpeed, boolean shiftLow, boolean shiftHigh) {
