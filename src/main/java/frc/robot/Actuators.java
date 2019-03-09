@@ -32,6 +32,8 @@ public class Actuators {
     private static DoubleSolenoid ShiftHighGear;
     private static Solenoid RingLight;
 
+    private static Compressor Compressor1;
+
     public static void init() {
 
         // TODO: add 3rd motor, talk to Mars
@@ -57,6 +59,8 @@ public class Actuators {
         CargoHatchDelivery = new Solenoid(Constants.ADVANCE_CARGO_HATCH_DELVERY);
         ShiftHighGear = new DoubleSolenoid(Constants.SHIFT_HIGH_SPEED, Constants.SHIFT_LOW_SPEED);
         RingLight = new Solenoid(1, Constants.RING_LIGHT);
+
+        Compressor1 = new Compressor(Constants.COMPRESSOR_1_PORT);        
 
         // set follower motors
         Left2Motor.follow(Left1Motor);
@@ -200,6 +204,10 @@ public class Actuators {
 
     public static WPI_VictorSPX getRight3Motor() {
         return Right3Motor;
+    }
+
+    public static Compressor getCompressor1() {
+        return Compressor1;
     }
 
 }

@@ -33,22 +33,28 @@ public class Dash {
         SmartDashboard.putBoolean("spear", HatchIntake.spearState());
         SmartDashboard.putBoolean("clamp", HatchIntake.clampState());
     }
-    public static void putAutoShiftEnabled(){
+
+    public static void putAutoShiftEnabled() {
         SmartDashboard.putBoolean("auto shift enabled", Drive.getAutoShiftState());
     }
-    public static void putMotorOutputs(){
+
+    public static void putMotorOutputs() {
         SmartDashboard.putNumber("left 1", Actuators.getLeft1Motor().getMotorOutputPercent());
         SmartDashboard.putNumber("left 2", Actuators.getLeft2Motor().getMotorOutputPercent());
         SmartDashboard.putNumber("left 3", Actuators.getLeft3Motor().getMotorOutputPercent());
         SmartDashboard.putNumber("right 1", Actuators.getRight1Motor().getMotorOutputPercent());
         SmartDashboard.putNumber("right 2", Actuators.getRight2Motor().getMotorOutputPercent());
         SmartDashboard.putNumber("right 3", Actuators.getRight3Motor().getMotorOutputPercent());
+
     }
-    public static void putDriveVelocity(){
+
+    public static void putDriveVelocity() {
         SmartDashboard.putNumber("left velocity", Actuators.getLeft1Motor().getSelectedSensorVelocity());
         SmartDashboard.putNumber("right velocity", Actuators.getRight1Motor().getSelectedSensorVelocity());
+
     }
-    public static void putSecondaryLeftYValue(){
+
+    public static void putSecondaryLeftYValue() {
         SmartDashboard.putNumber("secondary left y", -Gamepad.secondary.getLeftY().get());
     }
     public static void putLiftOutput(){

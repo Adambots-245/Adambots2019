@@ -38,6 +38,7 @@ public class Constants{
     public static final int OPEN_HATCH_CLAMP = 1; //pcm 1
     public static final int RAISE_HATCH_VACUUM_ARM = 4; //5?
     public static final int LOWER_HATCH_VACUUM_ARM = 5; //4?
+    public static final int COMPRESSOR_1_PORT = 8;
     
     public static final int SHIFT_HIGH_SPEED = 6;
     public static final int SHIFT_LOW_SPEED = 7;
