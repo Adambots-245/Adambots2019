@@ -15,7 +15,7 @@ public class Cargo {
 
     public static void cargo(int modeTogglePresses, double intakeSpeed, double armSpeed) {
         //invert intake roller speed
-        intakeSpeed = intakeSpeed * -1;
+        intakeSpeed = intakeSpeed;
         if (modeTogglePresses % 2 == 0) {
             setCargoIntakeWheelsSpeed(intakeSpeed);
             setCargoArmSpeed(armSpeed);
@@ -27,7 +27,8 @@ public class Cargo {
         Actuators.getInfeedArmMotor().set(ControlMode.PercentOutput, speed);
     }
     public static void setCargoArmSpeed(double speed){
-        Actuators.getClimbMotor().set(ControlMode.PercentOutput, speed);
+        double pivotSpeed = speed * 0.8;
+        Actuators.getClimbMotor().set(ControlMode.PercentOutput, -pivotSpeed);
     }
     //stops intake motor after intakeDelayTime seconds if the photoeye is blocked
     //otherwise sets the intake speed to intakeSpeed 

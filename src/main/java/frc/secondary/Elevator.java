@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.Actuators;
 import frc.robot.Constants;
 import frc.robot.Sensors;
+import frc.robot.Axis;;
 
 public class Elevator {
     private static boolean Level_1;
@@ -15,19 +16,42 @@ public class Elevator {
     private static int level3Dist;
     private static int nearestDistance;
     private static int targetPosition;
-
+    private static double liftSpeedModifier;
     public static void init() {
+        liftSpeedModifier = Constants.LIFT_NORMAL_MODIFIER;
         Level_1 = true;
         Level_2 = false;
         Level_3 = false;
 
     }
-    public static void elevator(double liftSpeed, double intakeSpeed){
-        liftSpeed += Constants.ELEVATOR_HOLD_SPEED - .02;
+    public static void elevator(Axis liftAxis, double intakeSpeed, boolean low, boolean mid, boolean high){
+        //liftSpeed += Constants.ELEVATOR_HOLD_SPEED - .02;
+        //updateLiftSpeedModifier();
+        double liftSpeed = (liftSpeedModifier) * (liftAxis.get());
         setLiftMotorSpeed(liftSpeed);
-        //passiveGotoNearestLevel(liftSpeed);
+       
+        if (Math.abs(liftSpeed) > 0.1) {
+            HatchIntake.spear(false);
+        }
+        //passiveGotoNearestLevel(liftAxis.isUntoggled(), liftAxis.get());
         setCarriageWheelsSpeed(intakeSpeed);
+        buttonsElevator(low, mid, high);
         //System.out.println("elevator pos = " + Sensors.getLiftSensorPosition());
+    }
+
+    public static void resetEncoderOnLimitSwitch() {
+		if (Sensors.getLiftLoweredLimitSwitch().get()) {
+			Sensors.resetLiftEncoder();
+		}
+	}
+
+    public static void updateLiftSpeedModifier(){
+        if (Actuators.getLiftMotor1().getSelectedSensorPosition() > Constants.LIFT_UPPER_SPEED_ENCODER_THRESHOLD || Actuators.getLiftMotor1().getSelectedSensorPosition() < Constants.LIFT_LOWER_SPEED_ENCODER_THRESHOLD ){
+            liftSpeedModifier = Constants.LIFT_SLOW_MODIFIER;
+        }
+        else{
+            liftSpeedModifier = Constants.LIFT_NORMAL_MODIFIER;
+        }
     }
     public static void setCarriageWheelsSpeed(double speed){
         Actuators.getArmInOutLift1().set(ControlMode.PercentOutput, speed);
@@ -48,9 +72,9 @@ public class Elevator {
         return targetPosition;
     }
 
-    public static void passiveGotoNearestLevel(boolean isToggled) {
-        if (!isToggled) {
-            int currentPosition = Actuators.getLiftMotor1().getSelectedSensorPosition();
+    public static void passiveGotoNearestLevel(boolean unToggled, double speed) {
+        if (speed == 0) {
+            int currentPosition = Sensors.getLiftSensorPosition();
             int targetPosition = findNearestLevel(currentPosition);
             Actuators.getLiftMotor1().set(ControlMode.Position, targetPosition);
         }
@@ -90,11 +114,11 @@ public class Elevator {
 
     public static void buttonsElevator(boolean low, boolean mid, boolean high) {
         if (low == true && mid == false && high == false) {
-            Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_1);
+            Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_1);
         } else if (low == false && mid == true && high == false) {
-            Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_2);
+            Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_2);
         } else if (low == false && mid == false && high == true) {
-            Actuators.getLiftMotor1().set(ControlMode.Position, Constants.LIFT_LEVEL_3);
+            Actuators.getLiftMotor1().set(ControlMode.Position, -Constants.LIFT_LEVEL_3);
         }
     }
 }

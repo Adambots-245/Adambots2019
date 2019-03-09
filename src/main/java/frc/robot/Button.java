@@ -52,6 +52,17 @@ public class Button {
         }
         return toggled;
     }
+    
+    // checks if the isPressed state goes from pressed to unpressed (meaning the
+    // button has been untoggled)
+    public boolean isUntoggled() {
+        boolean untoggled = false;
+        if (last && !store) {
+            untoggled = true;
+            presses++;
+        }
+        return untoggled;
+    }
 
     // resets the total # of presses to 0 if needed
     public void resetPresses() {

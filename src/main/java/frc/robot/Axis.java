@@ -58,6 +58,15 @@ public class Axis {
             presses++;
         }
         return toggled;
+    }    
+    // checks if the isPressed state goes from pressed to unpressed (meaning the
+    // button has been untoggled)
+    public boolean isUntoggled() {
+        boolean untoggled = false;
+        if (last && !isPressed) {
+            untoggled = true;
+        }
+        return untoggled;
     }
 
     // resets the total # of presses to 0 if needed

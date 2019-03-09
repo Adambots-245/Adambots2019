@@ -2,6 +2,8 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.secondary.HatchAutomation;
+import frc.secondary.HatchIntake;
 
 public class Dash {
 

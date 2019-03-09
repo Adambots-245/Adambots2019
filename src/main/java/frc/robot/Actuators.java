@@ -1,27 +1,26 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.*;
 
 public class Actuators {
 
     // Motors through motor controllers
-    private static TalonSRX Left1Motor;
-    private static VictorSPX Left2Motor;
-    private static TalonSRX Right1Motor;
-    private static VictorSPX Right2Motor;
-    private static VictorSPX Left3Motor;
-    private static VictorSPX Right3Motor;
-    private static TalonSRX ClimbMotor;
-    private static TalonSRX LinearActuator;
-    private static VictorSPX InfeedArmMotor;
-    private static VictorSPX ArmInOutLift1;
-    private static VictorSPX ArmInOutLift2;
-    private static TalonSRX LiftMotor1;
-    private static VictorSPX LiftMotor2;
+    private static WPI_TalonSRX Left1Motor;
+    private static WPI_VictorSPX Left2Motor;
+    private static WPI_TalonSRX Right1Motor;
+    private static WPI_VictorSPX Right2Motor;
+    private static WPI_VictorSPX Left3Motor;
+    private static WPI_VictorSPX Right3Motor;
+    private static WPI_TalonSRX ClimbMotor;
+    private static WPI_TalonSRX LinearActuator;
+    private static WPI_VictorSPX InfeedArmMotor;
+    private static WPI_VictorSPX ArmInOutLift1;
+    private static WPI_VictorSPX ArmInOutLift2;
+    private static WPI_TalonSRX LiftMotor1;
+    private static WPI_VictorSPX LiftMotor2;
 
     // Pneumatics
 
@@ -31,26 +30,27 @@ public class Actuators {
     private static Solenoid HatchClampOpen;
     private static Solenoid CargoHatchDelivery;
     private static DoubleSolenoid ShiftHighGear;
+    private static Solenoid RingLight;
 
     private static Compressor Compressor1;
 
     public static void init() {
 
         // TODO: add 3rd motor, talk to Mars
-        Left1Motor = new TalonSRX(Constants.LEFT_DRIVE_MOTOR_TALONSRX);
-        Left2Motor = new VictorSPX(Constants.LEFT_DRIVE_MOTOR_VICTORSPX1);
-        Left3Motor = new VictorSPX(Constants.LEFT_DRIVE_MOTOR_VICTORSPX2);
-        Right1Motor = new TalonSRX(Constants.RIGHT_DRIVE_MOTOR_TALONSRX);
-        Right2Motor = new VictorSPX(Constants.RIGHT_DRIVE_MOTOR_VICTORSPX1);
-        Right3Motor = new VictorSPX(Constants.RIGHT_DRIVE_MOTOR_VICTORSPX2);
+        Left1Motor = new WPI_TalonSRX(Constants.LEFT_DRIVE_MOTOR_TALONSRX);
+        Left2Motor = new WPI_VictorSPX(Constants.LEFT_DRIVE_MOTOR_VICTORSPX1);
+        Left3Motor = new WPI_VictorSPX(Constants.LEFT_DRIVE_MOTOR_VICTORSPX2);
+        Right1Motor = new WPI_TalonSRX(Constants.RIGHT_DRIVE_MOTOR_TALONSRX);
+        Right2Motor = new WPI_VictorSPX(Constants.RIGHT_DRIVE_MOTOR_VICTORSPX1);
+        Right3Motor = new WPI_VictorSPX(Constants.RIGHT_DRIVE_MOTOR_VICTORSPX2);
 
-        ClimbMotor = new TalonSRX(Constants.CLIMBING_ARM_CARGO_ACQUISITION);
-        LinearActuator = new TalonSRX(Constants.LINEAR_ACTUATOR_MOTOR);
-        InfeedArmMotor = new VictorSPX(Constants.INFEED_BAG_MOTOR_ARM);
-        ArmInOutLift1 = new VictorSPX(Constants.INFEED_BAG_MOTOR_LIFT1);
-        ArmInOutLift2 = new VictorSPX(Constants.INFEED_BAG_MOTOR_LIFT2);
-        LiftMotor1 = new TalonSRX(Constants.LIFT_MOTOR_TALONSRX);
-        LiftMotor2 = new VictorSPX(Constants.LIFT_MOTOR_VICTORSPX);
+        ClimbMotor = new WPI_TalonSRX(Constants.CLIMBING_ARM_CARGO_ACQUISITION);
+        LinearActuator = new WPI_TalonSRX(Constants.LINEAR_ACTUATOR_MOTOR);
+        InfeedArmMotor = new WPI_VictorSPX(Constants.INFEED_BAG_MOTOR_ARM);
+        ArmInOutLift1 = new WPI_VictorSPX(Constants.INFEED_BAG_MOTOR_LIFT1);
+        ArmInOutLift2 = new WPI_VictorSPX(Constants.INFEED_BAG_MOTOR_LIFT2);
+        LiftMotor1 = new WPI_TalonSRX(Constants.LIFT_MOTOR_TALONSRX);
+        LiftMotor2 = new WPI_VictorSPX(Constants.LIFT_MOTOR_VICTORSPX);
 
         Vacuum = new Solenoid(Constants.VACUUM_ON);
         ArmRaiseLower = new DoubleSolenoid(Constants.RAISE_HATCH_VACUUM_ARM, Constants.LOWER_HATCH_VACUUM_ARM);
@@ -58,6 +58,7 @@ public class Actuators {
         HatchClampOpen = new Solenoid(1, Constants.OPEN_HATCH_CLAMP);
         CargoHatchDelivery = new Solenoid(Constants.ADVANCE_CARGO_HATCH_DELVERY);
         ShiftHighGear = new DoubleSolenoid(Constants.SHIFT_HIGH_SPEED, Constants.SHIFT_LOW_SPEED);
+        RingLight = new Solenoid(1, Constants.RING_LIGHT);
 
         Compressor1 = new Compressor(Constants.COMPRESSOR_1_PORT);        
 
@@ -76,6 +77,8 @@ public class Actuators {
         Right2Motor.setInverted(true);
         Right3Motor.setInverted(true);
 
+        InfeedArmMotor.setInverted(true);
+
         ArmInOutLift2.setInverted(true);
         // set drive motors to coast
         Left1Motor.setNeutralMode(NeutralMode.Coast);
@@ -93,39 +96,56 @@ public class Actuators {
         ArmInOutLift2.follow(ArmInOutLift1);
         LiftMotor2.follow(LiftMotor1);
 
-        //disable limits
-        Right1Motor.configForwardSoftLimitEnable(false);
-        Right1Motor.configReverseSoftLimitEnable(false);
-        Right2Motor.configForwardSoftLimitEnable(false);
-        Right2Motor.configReverseSoftLimitEnable(false);
-        Right3Motor.configForwardSoftLimitEnable(false);
-        Right3Motor.configReverseSoftLimitEnable(false);
-        Left1Motor.configForwardSoftLimitEnable(false);
-        Left1Motor.configReverseSoftLimitEnable(false);;
-        Left2Motor.configForwardSoftLimitEnable(false);
-        Left2Motor.configReverseSoftLimitEnable(false);;
-        Left3Motor.configForwardSoftLimitEnable(false);
-        Left3Motor.configReverseSoftLimitEnable(false);
+        //limits
+        boolean enableDriveSoftLimit = false;
+        Right1Motor.configForwardSoftLimitEnable(enableDriveSoftLimit);
+        Right1Motor.configReverseSoftLimitEnable(enableDriveSoftLimit);
+        Right2Motor.configForwardSoftLimitEnable(enableDriveSoftLimit);
+        Right2Motor.configReverseSoftLimitEnable(enableDriveSoftLimit);
+        Right3Motor.configForwardSoftLimitEnable(enableDriveSoftLimit);
+        Right3Motor.configReverseSoftLimitEnable(enableDriveSoftLimit);
+        Left1Motor.configForwardSoftLimitEnable(enableDriveSoftLimit);
+        Left1Motor.configReverseSoftLimitEnable(enableDriveSoftLimit);
+        Left2Motor.configForwardSoftLimitEnable(enableDriveSoftLimit);
+        Left2Motor.configReverseSoftLimitEnable(enableDriveSoftLimit);
+        Left3Motor.configForwardSoftLimitEnable(enableDriveSoftLimit);
+        Left3Motor.configReverseSoftLimitEnable(enableDriveSoftLimit);
+
+        LiftMotor1.configReverseSoftLimitEnable(enableDriveSoftLimit);
+        LiftMotor2.configReverseSoftLimitEnable(enableDriveSoftLimit);
+
+        double liftMaxMotorSpeed = Constants.LIFT_MAX_MOTOR_SPEED; 
+        LiftMotor1.configPeakOutputForward(liftMaxMotorSpeed);
+        LiftMotor1.configPeakOutputReverse(-liftMaxMotorSpeed);
+        LiftMotor2.configPeakOutputForward(liftMaxMotorSpeed);
+        LiftMotor2.configPeakOutputReverse(-liftMaxMotorSpeed);
+
+        //PID Config
+        LiftMotor1.selectProfileSlot(Constants.PID_SLOT, Constants.PID_LOOP);
+        LiftMotor1.config_kF(Constants.PID_SLOT, Constants.LIFT_F_VALUE, Constants.PID_TIMEOUT);
+        LiftMotor1.config_kP(Constants.PID_SLOT, Constants.LIFT_P_VALUE, Constants.PID_TIMEOUT);
+        LiftMotor1.config_kI(Constants.PID_SLOT, Constants.LIFT_I_VALUE, Constants.PID_TIMEOUT);
+        LiftMotor1.config_kD(Constants.PID_SLOT, Constants.LIFT_D_VALUE, Constants.PID_TIMEOUT);
        
     }
 
-    public static TalonSRX getClimbMotor() {
+    public static WPI_TalonSRX getClimbMotor() {
         return ClimbMotor;
     }
 
-    public static VictorSPX getArmInOutLift1() {
+    public static WPI_VictorSPX getArmInOutLift1() {
         return ArmInOutLift1;
     }
 
-    public static TalonSRX getLinearActuator() {
+    public static WPI_TalonSRX getLinearActuator() {
         return LinearActuator;
     }
 
-    public static VictorSPX getInfeedArmMotor() {
+    public static WPI_VictorSPX getInfeedArmMotor() {
         return InfeedArmMotor;
     }
 
-    public static TalonSRX getLiftMotor1() {
+    public static WPI_TalonSRX getLiftMotor1() {
         return LiftMotor1;
     }
 
@@ -153,27 +173,31 @@ public class Actuators {
         return CargoHatchDelivery;
     }
 
-    public static TalonSRX getLeft1Motor() {
+    public static Solenoid getRingLight() {
+        return RingLight;
+    }
+
+    public static WPI_TalonSRX getLeft1Motor() {
         return Left1Motor;
     }
 
-    public static VictorSPX getLeft2Motor() {
+    public static WPI_VictorSPX getLeft2Motor() {
         return Left2Motor;
     }
 
-    public static VictorSPX getLeft3Motor() {
+    public static WPI_VictorSPX getLeft3Motor() {
         return Left3Motor;
     }
 
-    public static TalonSRX getRight1Motor() {
+    public static WPI_TalonSRX getRight1Motor() {
         return Right1Motor;
     }
 
-    public static VictorSPX getRight2Motor() {
+    public static WPI_VictorSPX getRight2Motor() {
         return Right2Motor;
     }
 
-    public static VictorSPX getRight3Motor() {
+    public static WPI_VictorSPX getRight3Motor() {
         return Right3Motor;
     }
 

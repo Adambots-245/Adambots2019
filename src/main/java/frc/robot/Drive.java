@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
+
 public class Drive {
     private static Timer timer = new Timer();
     private static boolean state;
@@ -49,6 +50,25 @@ public class Drive {
         //System.out.println("Left Velocity: " + -
         //Actuators.getLeft2Motor().getSelectedSensorVelocity());
         //System.out.println("Right Velocity: " + Actuators.getRight2Motor().getSelectedSensorVelocity());
+    }
+    public static void autonMotor(double error){
+        double f_leftSpeed = Constants.MAX_MOTOR_SPEED;
+        double f_rightSpeed = Constants.MAX_MOTOR_SPEED;
+        System.out.println("Error:" + error);
+        if(error > 0.1){
+            f_rightSpeed = (Constants.MAX_MOTOR_SPEED - Constants.MAX_MOTOR_SPEED * Math.abs(error));
+            System.out.println("Right Speed:" + f_rightSpeed);     
+        }
+        else if(error < -0.1){
+            f_leftSpeed = (Constants.MAX_MOTOR_SPEED - Constants.MAX_MOTOR_SPEED * Math.abs(error));
+            System.out.println("Left Speed:" + f_leftSpeed);
+        }
+        else{
+            f_leftSpeed = Constants.MAX_MOTOR_SPEED;
+            f_rightSpeed = Constants.MAX_MOTOR_SPEED;
+        }
+        Actuators.getLeft1Motor().set(ControlMode.PercentOutput, Math.max(f_leftSpeed, -Constants.MAX_MOTOR_SPEED));
+        Actuators.getRight1Motor().set(ControlMode.PercentOutput, Math.max(f_rightSpeed, -Constants.MAX_MOTOR_SPEED));
     }
 
     public static void tankDrive(double speed, double turnSpeed, boolean shiftLow, boolean shiftHigh) {
@@ -116,5 +136,10 @@ public class Drive {
         lastShift = currentShift;
         Actuators.getLeft1Motor().set(ControlMode.PercentOutput, leftSpeed);
         Actuators.getRight1Motor().set(ControlMode.PercentOutput, rightSpeed);
+    }
+
+    public static void rotate(double speed){
+        Actuators.getLeft1Motor().set(ControlMode.PercentOutput, speed);
+        Actuators.getRight1Motor().set(ControlMode.PercentOutput, -speed);
     }
 }

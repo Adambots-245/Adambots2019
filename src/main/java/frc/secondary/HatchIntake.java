@@ -13,7 +13,10 @@ public class HatchIntake {
     private static int suctionCounter;
     private static int suctionArmsCounter;
     private static int spearCounter;
-
+    private static boolean vacuumState;
+    private static boolean spearState;
+    private static boolean clampState;
+    
     public static void init() {
 
     }
@@ -36,16 +39,28 @@ public class HatchIntake {
 
     public static void vacuum(boolean pos) {
         Actuators.getVacuum().set(pos);
+        vacuumState = pos;
     }
 
     public static void spear(boolean pos) {
         Actuators.getSpearExtend().set(pos);
+        spearState = pos;
     }
 
     public static void clamp(boolean pos) {
         Actuators.getHatchClampOpen().set(pos);
+        clampState = pos;
     }
-
+    public static boolean spearState(){
+        return spearState;
+    }
+    public static boolean clampState(){
+        return clampState;
+    }
+    public static boolean vacuumState(){
+        return vacuumState;
+    }
+    
     public static void hatchIntake(boolean centering, boolean suctionArms, boolean suction, boolean spear){
 
         /*

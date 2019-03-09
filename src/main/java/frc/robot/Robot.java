@@ -33,11 +33,14 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     Gamepad.init();
     Actuators.init();
+    Sensors.init();
     Elevator.init();
     Dash.init();
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
-    SmartDashboard.putData("Auto choices", m_chooser);
+    //AutomatedVision.init();
+    //AutomatedVision.getNetValues();
+    //m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    //m_chooser.addOption("My Auto", kCustomAuto);
+    //SmartDashboard.putData("Auto choices", m_chooser);
 
   }
 
@@ -51,6 +54,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+      Dash.dash();
   }
 
 
@@ -89,17 +93,18 @@ public class Robot extends TimedRobot {
     // Gamepad.primary.getRightTrigger().get());
 
     // secondary controls
-    Elevator.elevator(Gamepad.secondary.getLeftY().get(), Gamepad.secondary.getTriggers());
+    Elevator.elevator((Gamepad.secondary.getLeftY()), Gamepad.secondary.getTriggers(), Gamepad.secondary.getDPadS().get(), Gamepad.secondary.getDPadW().get(), Gamepad.secondary.getDPadN().get());
+    //Elevator.resetEncoderOnLimitSwitch();
     Cargo.cargo(Gamepad.primary.getBack().getPresses(), Gamepad.secondary.getTriggers(),
         Gamepad.secondary.getRightY().get());
     // HatchIntake.centeringArms(Gamepad.secondary.getDPadN().get());
     // HatchIntake.suctionArms(Gamepad.secondary.getDPadE().get());
     // HatchIntake.vacuum(Gamepad.secondary.getDPadS().get());
-    // HatchIntake.spear(Gamepad.secondary.getDPadW().get());
-    // HatchIntake.clamp(Gamepad.secondary.getB().get());
+    //HatchAutomation.spearToggle(Gamepad.secondary.getX().getPresses());
+    //HatchAutomation.clampToggle(Gamepad.secondary.getY().getPresses());
     // HatchAutomation.cycleHatch(Gamepad.secondary.getDPadN(),
     // Gamepad.secondary.getDPadE(), Gamepad.secondary.getDPadS());
-    HatchAutomation.cycleHatch(Gamepad.secondary.getY(), Gamepad.secondary.getB(), Gamepad.secondary.getA());
+    HatchAutomation.cycleHatch(Gamepad.secondary.getA(), Gamepad.secondary.getX(), Gamepad.secondary.getY());
     Gamepad.primary.updateLast();
     Gamepad.secondary.updateLast();
   }
@@ -127,6 +132,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     controls();
+    AutomatedVision.getNetValues();
+    AutomatedVision.track();
   }
  
   /**
