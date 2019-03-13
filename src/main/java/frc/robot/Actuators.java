@@ -68,10 +68,10 @@ public class Actuators {
         // reverse motors
         Left1Motor.setInverted(false);
         Left2Motor.setInverted(false);
-        Left3Motor.setInverted(true);
+        Left3Motor.setInverted(false);
         Right1Motor.setInverted(true);
         Right2Motor.setInverted(true);
-        Right3Motor.setInverted(false);
+        Right3Motor.setInverted(true);
 
         InfeedArmMotor.setInverted(true);
 

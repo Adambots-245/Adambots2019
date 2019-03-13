@@ -51,9 +51,9 @@ public class Cargo {
     }
 
     public static void bringElevatorDown(boolean override){
-        if (override) {
-            Elevator.buttonsElevator(true, false, false, 0);
-        }
+        //if (override) {
+        //   Elevator.buttonsElevator(true, false, false, 0);
+        //}
     }
 
     //stops intake motor after intakeDelayTime seconds if the photoeye is blocked
