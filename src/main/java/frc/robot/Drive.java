@@ -2,7 +2,7 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+//import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 
@@ -74,7 +74,14 @@ public class Drive {
     public static void tankDrive(double speed, double turnSpeed, boolean shiftLow, boolean shiftHigh) {
 
         // Makes sure speed does not go above max
-         speed = speed * -1; // fix forward = back
+        speed = speed * -1; // fix forward = back
+        if (speed > 0) {
+            speed = Math.pow(speed, 2);
+        } else if (speed < 0) {
+            speed = -Math.pow(speed, 2);
+        } else {
+            speed = 0;
+        }
         double leftSpeed = Math.min(speed + turnSpeed, Constants.MAX_MOTOR_SPEED);
         double rightSpeed = Math.min(speed - turnSpeed, Constants.MAX_MOTOR_SPEED);
     //double leftSpeed = Gamepad.primary.getLeftY().get();
