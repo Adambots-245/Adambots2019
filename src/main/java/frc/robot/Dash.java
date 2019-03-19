@@ -16,7 +16,7 @@ public class Dash {
         putLiftOutput();
         putLiftEncoderValue();
         putLimitSwitches();
-        putCameraData();
+        //putCameraData();
         putEncoder();
         putSensors();
         putAxis();
@@ -62,9 +62,9 @@ public class Dash {
         SmartDashboard.putBoolean("arm limit switch", Sensors.getArmLimitSwitch().get());
         SmartDashboard.putBoolean("lift limit switch", Sensors.getLiftLoweredLimitSwitch().get());
     }
-    public static void putCameraData() {
-       // CameraServer.getInstance().startAutomaticCapture();
-    }
+    //public static void putCameraData() {
+    //   CameraServer.getInstance().startAutomaticCapture();
+    //}
     public static void putEncoder() {
         SmartDashboard.putNumber("l drive encoder", Actuators.getLeft1Motor().getSelectedSensorPosition());
         SmartDashboard.putNumber("r drive encoder", Actuators.getRight1Motor().getSelectedSensorPosition());        
