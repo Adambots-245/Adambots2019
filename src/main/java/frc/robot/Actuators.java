@@ -34,7 +34,7 @@ public class Actuators {
 
     public static void init() {
 
-        // TODO: add 3rd motor, talk to Mars
+        
         Left1Motor = new WPI_TalonSRX(Constants.LEFT_DRIVE_MOTOR_TALONSRX);
         Left2Motor = new WPI_VictorSPX(Constants.LEFT_DRIVE_MOTOR_VICTORSPX1);
         Left3Motor = new WPI_VictorSPX(Constants.LEFT_DRIVE_MOTOR_VICTORSPX2);

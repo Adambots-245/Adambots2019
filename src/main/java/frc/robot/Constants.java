@@ -94,7 +94,6 @@ public class Constants{
     public static final double ARM_POTENTIOMETER_MIN = 0;
     public static final double ARM_INTAKE_STOP_DELAY_TIME = .25;
     
-    //TODO: UPDATE ALL VALUES BELOW TO THEIR TRUE, ACCURATE VALUES
     //Limiters
     public static final double MAX_LIFT_SPEED = 0.0;
     
@@ -105,7 +104,6 @@ public class Constants{
     public static final int LIFT_LEVEL_2 = 28000;
     public static final int LIFT_LEVEL_3 = 54000; 
 
-    //Limiters TODO: UPDATE MAX AND MIN CLIMB SPEEDS TO CORRECT VALUES
     public static final double MAX_CLIMB_SPEED = 0.9;
     public static final double MIN_CLIMB_SPEED = -0.9;
 
