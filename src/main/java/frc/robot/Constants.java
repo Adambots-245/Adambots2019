@@ -95,7 +95,10 @@ public class Constants{
     public static final double ARM_INTAKE_STOP_DELAY_TIME = .25;
     
     //Limiters
+    //TODO: Actually define climb amp limit and timeout
     public static final double MAX_LIFT_SPEED = 0.0;
+    public static final int CLIMB_AMP_LIMIT = 40;
+    public static final int CLIMB_TIMEOUT = 500;
     
     //set elevator hold speed
     public static final double ELEVATOR_HOLD_SPEED = .1;

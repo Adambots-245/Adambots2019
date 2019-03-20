@@ -113,6 +113,9 @@ public class Actuators {
         LiftMotor1.configReverseSoftLimitEnable(enableDriveSoftLimit);
         LiftMotor2.configReverseSoftLimitEnable(enableDriveSoftLimit);
 
+        ClimbMotor.configContinuousCurrentLimit(Constants.CLIMB_AMP_LIMIT, Constants.CLIMB_TIMEOUT);
+        ClimbMotor.enableCurrentLimit(true);
+
         InfeedArmMotor.configReverseSoftLimitEnable(false);
         InfeedArmMotor.configForwardSoftLimitEnable(false);
         double liftMaxMotorSpeed = Constants.LIFT_MAX_MOTOR_SPEED; 
