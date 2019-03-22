@@ -5,12 +5,18 @@ import frc.robot.Constants;
 import frc.robot.Actuators;
 
 public class Climb {
-    public static void climb(int modeTogglePresses, double driveSpeed, double armSpeed, double armWheelsSpeed, double stiltSpeed){
-        if (modeTogglePresses % 2 == 1){
-            climbMode(armSpeed, stiltSpeed);
-        }
+    public static void climb(int modeTogglePresses, double stiltSpeed){
+        //if (modeTogglePresses % 2 == 1){
+            //climbMode(stiltSpeed);
+            Actuators.getClimbMotor().set(ControlMode.PercentOutput, stiltSpeed);
+        //}
     }
-    public static void climbMode(double climbArmSpeed, double linearActuatorSpeed) {
+
+    public static void testClimb(double stiltSpeed) {
+        Actuators.getLinearActuator().set(ControlMode.PercentOutput, stiltSpeed);
+    }
+
+    /*public static void climbMode(double linearActuatorSpeed) {
         double climbSpeed = Math.min(climbArmSpeed, Constants.MAX_CLIMB_SPEED);
         double linearSpeed = Math.min(linearActuatorSpeed, Constants.MAX_CLIMB_SPEED);
         if (climbSpeed > Constants.MIN_CLIMB_SPEED && linearSpeed > Constants.MIN_CLIMB_SPEED) {
@@ -20,5 +26,5 @@ public class Climb {
             Actuators.getClimbMotor().set(ControlMode.PercentOutput, Constants.MIN_CLIMB_SPEED);
             Actuators.getLinearActuator().set(ControlMode.PercentOutput, Constants.MIN_CLIMB_SPEED);
         }
-    }
+    }*/
 }
