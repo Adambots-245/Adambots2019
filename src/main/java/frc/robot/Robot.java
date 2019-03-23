@@ -95,7 +95,8 @@ public class Robot extends TimedRobot {
         Gamepad.primary.getY().get(), Gamepad.primary.getStart().getPresses());
     //Climb.climb(Gamepad.primary.getBack().getPresses(), Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightY().get(), 
             //Gamepad.primary.getLeftTrigger().get(), Gamepad.primary.getRightTrigger().get());
-    Climb.testClimb(-Gamepad.primary.getTriggers());
+    Climb.testClimb(Gamepad.primary.getTriggers());
+    System.out.println(Gamepad.primary.getTriggers());
 
     // secondary controls
     Elevator.elevator((Gamepad.secondary.getLeftY()), Gamepad.secondary.getTriggers(), Gamepad.secondary.getBack().get(), Gamepad.secondary.getLB().get(), Gamepad.secondary.getRB().get());

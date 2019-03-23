@@ -90,6 +90,7 @@ public class Actuators {
         ArmInOutLift1.setNeutralMode(NeutralMode.Brake);
         ArmInOutLift2.setNeutralMode(NeutralMode.Brake);
         ClimbMotor.setNeutralMode(NeutralMode.Brake);
+        LinearActuator.setNeutralMode(NeutralMode.Brake);
         
         // set follower motors
         ArmInOutLift2.follow(ArmInOutLift1);
@@ -112,6 +113,9 @@ public class Actuators {
 
         LiftMotor1.configReverseSoftLimitEnable(enableDriveSoftLimit);
         LiftMotor2.configReverseSoftLimitEnable(enableDriveSoftLimit);
+
+        LinearActuator.configReverseSoftLimitEnable(false);
+        LinearActuator.configForwardSoftLimitEnable(false);
 
         InfeedArmMotor.configReverseSoftLimitEnable(false);
         InfeedArmMotor.configForwardSoftLimitEnable(false);

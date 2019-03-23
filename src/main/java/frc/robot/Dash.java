@@ -48,8 +48,9 @@ public class Dash {
         SmartDashboard.putNumber("left velocity", Actuators.getLeft1Motor().getSelectedSensorVelocity());
         SmartDashboard.putNumber("right velocity", Actuators.getRight1Motor().getSelectedSensorVelocity());
     }
-    public static void putSecondaryLeftYValue(){
+    public static void putSecondaryControllerValues(){
         SmartDashboard.putNumber("secondary left y", -Gamepad.secondary.getLeftY().get());
+        SmartDashboard.putNumber("secondary triggers", Gamepad.secondary.getTriggers());
     }
     public static void putLiftOutput(){
         SmartDashboard.putNumber("lift output", Actuators.getLiftMotor1().getMotorOutputPercent());
