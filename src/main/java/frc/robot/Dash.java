@@ -1,18 +1,18 @@
 package frc.robot;
 
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.secondary.Elevator;
-import frc.secondary.HatchAutomation;
 import frc.secondary.HatchIntake;
 import edu.wpi.first.wpilibj.DriverStation;
 
 public class Dash {
     public static void dash(){
+        putState();
         putMotorOutputs();
         putAutoShiftEnabled();
         putDriveVelocity();
-        putSecondaryLeftYValue();
+        putSecondaryControllerValues();
+        putPrimaryControllerValues();
         putLiftOutput();
         putLiftEncoderValue();
         putLimitSwitches();
@@ -22,9 +22,14 @@ public class Dash {
         putAxis();
         putHatchStates();
         putMatchTime();
+        putCurrentDraw(); 
     }
     public static void init() {
         dash();
+    }
+    public static void putState(){
+        SmartDashboard.putString("robotState", RobotState.getRobotState());
+        SmartDashboard.putString("enabledState", RobotState.getEnabledState());
     }
     public static void putMatchTime(){
         SmartDashboard.putNumber("match time", DriverStation.getInstance().getMatchTime());
@@ -36,6 +41,10 @@ public class Dash {
     public static void putAutoShiftEnabled(){
         SmartDashboard.putBoolean("auto shift enabled", Drive.getAutoShiftState());
     }
+    public static void putCurrentDraw(){
+        SmartDashboard.putNumber("PDP 12 output (stilt)", Actuators.getPdpCurrentOnPort(12));
+        SmartDashboard.putNumber("linear actuator current", Actuators.getLinearActuator().getOutputCurrent());
+    }
     public static void putMotorOutputs(){
         SmartDashboard.putNumber("left 1", Actuators.getLeft1Motor().getMotorOutputPercent());
         SmartDashboard.putNumber("left 2", Actuators.getLeft2Motor().getMotorOutputPercent());
@@ -43,6 +52,7 @@ public class Dash {
         SmartDashboard.putNumber("right 1", Actuators.getRight1Motor().getMotorOutputPercent());
         SmartDashboard.putNumber("right 2", Actuators.getRight2Motor().getMotorOutputPercent());
         SmartDashboard.putNumber("right 3", Actuators.getRight3Motor().getMotorOutputPercent());
+        SmartDashboard.putNumber("stilt output", Actuators.getLinearActuator().getMotorOutputPercent());
     }
     public static void putDriveVelocity(){
         SmartDashboard.putNumber("left velocity", Actuators.getLeft1Motor().getSelectedSensorVelocity());
@@ -51,6 +61,9 @@ public class Dash {
     public static void putSecondaryControllerValues(){
         SmartDashboard.putNumber("secondary left y", -Gamepad.secondary.getLeftY().get());
         SmartDashboard.putNumber("secondary triggers", Gamepad.secondary.getTriggers());
+    }
+    public static void putPrimaryControllerValues(){
+        SmartDashboard.putNumber("primary triggers", Gamepad.primary.getTriggers());
     }
     public static void putLiftOutput(){
         SmartDashboard.putNumber("lift output", Actuators.getLiftMotor1().getMotorOutputPercent());

@@ -1,7 +1,7 @@
 package frc.secondary;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import frc.robot.Constants;
+//import frc.robot.Constants;
 import frc.robot.Actuators;
 
 public class Climb {
@@ -13,7 +13,7 @@ public class Climb {
     }
 
     public static void testClimb(double stiltSpeed) {
-        Actuators.getLinearActuator().set(ControlMode.PercentOutput, stiltSpeed);
+        Actuators.getLinearActuator().set(ControlMode.PercentOutput, -stiltSpeed);
     }
 
     /*public static void climbMode(double linearActuatorSpeed) {

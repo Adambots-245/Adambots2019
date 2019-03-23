@@ -1,10 +1,11 @@
 package frc.secondary;
 
 import frc.robot.Actuators;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+//import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class HatchIntake {
+    /* 
     private static DoubleSolenoid.Value previousCentering;
     private static boolean previousSuction;
     private static DoubleSolenoid.Value previousSuctionArms;
@@ -13,6 +14,7 @@ public class HatchIntake {
     private static int suctionCounter;
     private static int suctionArmsCounter;
     private static int spearCounter;
+    */
     private static boolean vacuumState;
     private static boolean spearState;
     private static boolean clampState;
