@@ -12,19 +12,24 @@ public class RobotState {
     }
 
     public static void stateUpdate() {
+        // check if enabled
         if (isDisabled()) {
             enabledState = "disabled";
         } else if (isEnabled()) {
             enabledState = "enabled";
-            if (isAuton()) {
-                robotState = "auton";
-            } else if (isTeleop()) {
-                robotState = "teleop";
-            } else if (isTest()) {
-                robotState = "test";
-            } else {
-                robotState = "?";
-            }
+        }
+        else{
+            enabledState = "?";
+        }
+        // check mode (robotState)
+        if (isAuton()) {
+            robotState = "auton";
+        } else if (isTeleop()) {
+            robotState = "teleop";
+        } else if (isTest()) {
+            robotState = "test";
+        } else {
+            robotState = "?";
         }
     }
 
