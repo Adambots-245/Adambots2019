@@ -91,15 +91,12 @@ public class Robot extends TimedRobot {
         Gamepad.primary.update();
         Gamepad.secondary.update();
         Actuators.getRingLight().set(true);
+        
         // primary controls
         Drive.drive(Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightX().get(), Gamepad.primary.getA().get(),
                 Gamepad.primary.getY().get(), Gamepad.primary.getStart().getPresses());
-        // Climb.climb(Gamepad.primary.getBack().getPresses(),
-        // Gamepad.primary.getLeftY().get(), Gamepad.primary.getRightY().get(),
-        // Gamepad.primary.getLeftTrigger().get(),
-        // Gamepad.primary.getRightTrigger().get());
         Climb.testClimb(Gamepad.primary.getTriggers());
-        System.out.println(Gamepad.primary.getTriggers());
+        //System.out.println(Gamepad.primary.getTriggers());
 
         // secondary controls
         Elevator.elevator((Gamepad.secondary.getLeftY()), Gamepad.secondary.getTriggers(),
@@ -107,13 +104,6 @@ public class Robot extends TimedRobot {
         Cargo.cargo(Gamepad.primary.getStart().getPresses(), Gamepad.secondary.getTriggers(),
                 Gamepad.secondary.getRightY().get(), (boolean) Sensors.getCargoPresentLift().get(),
                 Gamepad.secondary.getB().get());
-        // HatchIntake.centeringArms(Gamepad.secondary.getDPadN().get());
-        // HatchIntake.suctionArms(Gamepad.secondary.getDPadE().get());
-        // HatchIntake.vacuum(Gamepad.secondary.getDPadS().get());
-        // HatchAutomation.spearToggle(Gamepad.secondary.getX().getPresses());
-        // HatchAutomation.clampToggle(Gamepad.secondary.getY().getPresses());
-        // HatchAutomation.cycleHatch(Gamepad.secondary.getDPadN(),
-        // Gamepad.secondary.getDPadE(), Gamepad.secondary.getDPadS());
         HatchAutomation.cycleHatch(Gamepad.secondary.getA(), Gamepad.secondary.getX(), Gamepad.secondary.getY());
         Gamepad.primary.updateLast();
         Gamepad.secondary.updateLast();

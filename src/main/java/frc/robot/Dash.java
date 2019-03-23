@@ -41,6 +41,11 @@ public class Dash {
     public static void putAutoShiftEnabled(){
         SmartDashboard.putBoolean("auto shift enabled", Drive.getAutoShiftState());
     }
+    public static void putGyroValues(){
+        SmartDashboard.putNumber("xAngle", 0);
+        SmartDashboard.putNumber("yAngle", 0);
+        SmartDashboard.putNumber("zAngle", 0);
+    }
     public static void putCurrentDraw(){
         SmartDashboard.putNumber("PDP 12 output (stilt)", Actuators.getPdpCurrentOnPort(12));
         SmartDashboard.putNumber("linear actuator current", Actuators.getLinearActuator().getOutputCurrent());
@@ -91,6 +96,6 @@ public class Dash {
        // SmartDashboard.putNumber("arm potentiometer", Sensors.getArmPotentiometerValue());
        // SmartDashboard.putBoolean("hatch present", Sensors.getHatchPresent().get());
        //SmartDashboard.putBoolean("cargo present arm", Sensors.getDIValue(Sensors.getCargoPresentArm()));
-       //zSmartDashboard.putBoolean("cargo present lift", Sensors.getCargoPresentLift().get());
+       //SmartDashboard.putBoolean("cargo present lift", Sensors.getCargoPresentLift().get());
     }
 }

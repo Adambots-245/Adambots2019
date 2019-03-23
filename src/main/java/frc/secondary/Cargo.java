@@ -17,7 +17,7 @@ public class Cargo {
 
     public static void cargo(int modeTogglePresses, double intakeSpeed, double armSpeed, boolean carriagePhotoEye, boolean override) {
         //invert intake roller speed
-        //intakeSpeed = intakeSpeed;
+        //intakeSpeed = -intakeSpeed;
         //boolean armPhotoEyeOpenCurrent = Sensors.getDIValue(Sensors.getCargoPresentArm());
         if (modeTogglePresses % 2 == 0) {
             setCargoArmSpeed(armSpeed);
@@ -25,14 +25,14 @@ public class Cargo {
                 //Actuators.getInfeedArmMotor().set(0);
             //}
             if (carriagePhotoEye) {
-                setCargoIntakeWheelsSpeed(-intakeSpeed);
+                setCargoIntakeWheelsSpeed(intakeSpeed);
                 double carriageWheelSpeed = intakeSpeed *.85;
                 Actuators.getArmInOutLift1().set(carriageWheelSpeed);
                 
                 // cargoIntakeWheels(intakeSpeed);
                 // moveArm(armSpeed);
             } else if (Gamepad.secondary.getB().get()) {
-                setCargoIntakeWheelsSpeed(-intakeSpeed);
+                setCargoIntakeWheelsSpeed(intakeSpeed);
                 Actuators.getArmInOutLift1().set(intakeSpeed);
             } else {
                 setCargoIntakeWheelsSpeed(0);
