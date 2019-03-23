@@ -6,6 +6,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.*;
 
 public class Actuators {
+    //pdp (not necessary to make pdp object to run the robot)
+    private static PowerDistributionPanel pdp;
 
     // Motors through motor controllers
     private static WPI_TalonSRX Left1Motor;
@@ -33,7 +35,7 @@ public class Actuators {
     private static Solenoid RingLight;
 
     public static void init() {
-
+        pdp = new PowerDistributionPanel();
         
         Left1Motor = new WPI_TalonSRX(Constants.LEFT_DRIVE_MOTOR_TALONSRX);
         Left2Motor = new WPI_VictorSPX(Constants.LEFT_DRIVE_MOTOR_VICTORSPX1);
@@ -57,6 +59,9 @@ public class Actuators {
         CargoHatchDelivery = new Solenoid(Constants.ADVANCE_CARGO_HATCH_DELVERY);
         ShiftHighGear = new DoubleSolenoid(Constants.SHIFT_HIGH_SPEED, Constants.SHIFT_LOW_SPEED);
         RingLight = new Solenoid(1, Constants.RING_LIGHT);
+
+        //current
+        
 
         // set follower motors
         Left2Motor.follow(Left1Motor);
@@ -134,6 +139,9 @@ public class Actuators {
        
     }
 
+    public static double getPdpCurrentOnPort(int port){
+        return pdp.getCurrent(port);
+    }
     public static WPI_TalonSRX getClimbMotor() {
         return ClimbMotor;
     }
