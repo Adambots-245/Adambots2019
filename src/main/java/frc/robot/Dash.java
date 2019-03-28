@@ -23,6 +23,7 @@ public class Dash {
         putHatchStates();
         putMatchTime();
         putCurrentDraw(); 
+        putLowDriveState();
     }
     public static void init() {
         dash();
@@ -40,6 +41,9 @@ public class Dash {
     }
     public static void putAutoShiftEnabled(){
         SmartDashboard.putBoolean("auto shift enabled", Drive.getAutoShiftState());
+    }
+    public static void putLowDriveState(){
+        SmartDashboard.putBoolean("low state", Drive.getLowDriveState());
     }
     public static void putGyroValues(){
         SmartDashboard.putNumber("xAngle", 0);

@@ -14,6 +14,7 @@ public class Drive {
     private static int downShiftState;
     private static int upShiftState;
     private static boolean autoShiftState;
+    private static boolean lowDriveState;
     public static void init() {
         timer.start();
         state = false;
@@ -21,9 +22,13 @@ public class Drive {
         lastShift = false;
         downShiftState = 0;
         upShiftState = 0;
+        lowDriveState = false;
     }
     public static boolean getAutoShiftState(){
         return autoShiftState;
+    }
+    public static boolean getLowDriveState(){
+        return lowDriveState;
     }
     public static Value shiftingValue(boolean state){
         Value value;
@@ -35,19 +40,25 @@ public class Drive {
         return value;
     }
 
-    public static void drive(double speed, double turnSpeed, boolean shiftLow, boolean shiftHigh, int override) {
+    public static void drive(double speed, double turnSpeed, boolean shiftLow, boolean shiftHigh, boolean slowSpeed, boolean normalSpeed) {
         // if override has been pressd an even # of times, then manual shifting. else
         tankDrive(speed, turnSpeed, shiftLow, shiftHigh);
-        // autoshift
-        /*if (override % 2 == 0) {
+        if (slowSpeed){
+            lowDriveState = true;
+        }
+        else if (normalSpeed){
+            lowDriveState = false;
+        }
+        if (lowDriveState) {
             //System.out.println("tank");
-            autoShiftState = false;
+            //autoShiftState = false;
             tankDrive(speed, turnSpeed, shiftLow, shiftHigh);
-        } else {
+        } else if (!lowDriveState){
             //System.out.println("shift");
-            autoShiftState = true;
-            shiftDrive(speed, turnSpeed);
-        }*/
+            //autoShiftState = true;
+            //shiftDrive(speed, turnSpeed);
+            tankDrive(speed/2, turnSpeed/2, shiftLow, shiftHigh);
+        }
         //System.out.println("Left Velocity: " + -
         //Actuators.getLeft2Motor().getSelectedSensorVelocity());
         //System.out.println("Right Velocity: " + Actuators.getRight2Motor().getSelectedSensorVelocity());
