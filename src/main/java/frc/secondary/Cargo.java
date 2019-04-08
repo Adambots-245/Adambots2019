@@ -1,6 +1,7 @@
 package frc.secondary;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.*;
 
@@ -19,7 +20,7 @@ public class Cargo {
         //invert intake roller speed
         //intakeSpeed = -intakeSpeed;
         //boolean armPhotoEyeOpenCurrent = Sensors.getDIValue(Sensors.getCargoPresentArm());
-        if (modeTogglePresses % 2 == 0) {
+        //if (modeTogglePresses % 2 == 0) {
             setCargoArmSpeed(armSpeed);
           //  if( armPhotoEyeOpenCurrent) {
                 //Actuators.getInfeedArmMotor().set(0);
@@ -38,8 +39,9 @@ public class Cargo {
                 setCargoIntakeWheelsSpeed(0);
                 Actuators.getArmInOutLift1().set(0);
             }
-        }
-        bringElevatorDown(override);
+        //}
+        //bringElevatorDown(override);
+        //stopArm(armSpeed);
     }
 
     public static void setCargoIntakeWheelsSpeed(double speed){
@@ -105,6 +107,17 @@ public class Cargo {
             armSpeed = Constants.STOP_MOTOR_SPEED;
         } else {
             armSpeed = speed;
+        }
+        Actuators.getClimbMotor().set(ControlMode.PercentOutput, armSpeed);
+    }
+
+    private static void stopArm(double speed) {
+        double armSpeed;
+        boolean limitSwitchPressed = Sensors.getDIValue(Sensors.getArmLimitSwitch());
+        if (limitSwitchPressed && speed <= 0) {
+            armSpeed = Constants.STOP_MOTOR_SPEED;
+        } else {
+            armSpeed = -speed;
         }
         Actuators.getClimbMotor().set(ControlMode.PercentOutput, armSpeed);
     }

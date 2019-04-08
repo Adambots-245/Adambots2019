@@ -42,22 +42,23 @@ public class Drive {
 
     public static void drive(double speed, double turnSpeed, boolean shiftLow, boolean shiftHigh, boolean slowSpeed, boolean normalSpeed) {
         // if override has been pressd an even # of times, then manual shifting. else
-        tankDrive(speed, turnSpeed, shiftLow, shiftHigh);
-        if (slowSpeed){
-            lowDriveState = true;
-        }
-        else if (normalSpeed){
+        //tankDrive(speed, turnSpeed, shiftLow, shiftHigh);
+        if (normalSpeed){
             lowDriveState = false;
         }
+        else if (slowSpeed){
+            lowDriveState = true;
+        }
+
         if (lowDriveState) {
             //System.out.println("tank");
             //autoShiftState = false;
-            tankDrive(speed, turnSpeed, shiftLow, shiftHigh);
-        } else if (!lowDriveState){
+            tankDrive(speed/2, turnSpeed/2, shiftLow, shiftHigh);
+        } else{
             //System.out.println("shift");
             //autoShiftState = true;
             //shiftDrive(speed, turnSpeed);
-            tankDrive(speed/2, turnSpeed/2, shiftLow, shiftHigh);
+            tankDrive(speed, turnSpeed, shiftLow, shiftHigh);
         }
         //System.out.println("Left Velocity: " + -
         //Actuators.getLeft2Motor().getSelectedSensorVelocity());
