@@ -15,6 +15,8 @@ public class Drive {
     private static int upShiftState;
     private static boolean autoShiftState;
     private static boolean lowDriveState;
+    private static int output;
+
     public static void init() {
         timer.start();
         state = false;
@@ -73,15 +75,18 @@ public class Drive {
             System.out.println("Right Speed:" + f_rightSpeed);     
         }
         else if(error < -0.1){
-            f_leftSpeed = (Constants.MAX_MOTOR_SPEED - Constants.MAX_MOTOR_SPEED * Math.abs(error));
+            f_rightSpeed = (Constants.MAX_MOTOR_SPEED - Constants.MAX_MOTOR_SPEED * Math.abs(error));
             System.out.println("Left Speed:" + f_leftSpeed);
         }
         else{
             f_leftSpeed = Constants.MAX_MOTOR_SPEED;
             f_rightSpeed = Constants.MAX_MOTOR_SPEED;
         }
-        Actuators.getLeft1Motor().set(ControlMode.PercentOutput, Math.max(f_rightSpeed, -Constants.MAX_MOTOR_SPEED));
-        Actuators.getRight1Motor().set(ControlMode.PercentOutput, Math.max(f_leftSpeed, -Constants.MAX_MOTOR_SPEED));
+        Actuators.getLeft1Motor().set(ControlMode.PercentOutput, Math.max(f_leftSpeed, -Constants.MAX_MOTOR_SPEED));
+        Actuators.getRight1Motor().set(ControlMode.PercentOutput, Math.max(f_rightSpeed, -Constants.MAX_MOTOR_SPEED));
+        Actuators.getRight2Motor().set(ControlMode.PercentOutput, Math.max(f_rightSpeed, -Constants.MAX_MOTOR_SPEED));
+        Actuators.getRight3Motor().set(ControlMode.PercentOutput, Math.max(f_rightSpeed, -Constants.MAX_MOTOR_SPEED));
+    
     }
 
     public static void tankDrive(double speed, double turnSpeed, boolean shiftLow, boolean shiftHigh) {
@@ -91,7 +96,7 @@ public class Drive {
         if (speed > 0) {
             speed = Math.pow(speed, 2);
         } else if (speed < 0) {
-            speed = -Math.pow(speed, 2);
+            speed = -Math.pow(Math.abs(speed), 2);
         } else {
             speed = 0;
         }
@@ -109,7 +114,9 @@ public class Drive {
         // Sets the speeds
         Actuators.getLeft1Motor().set(ControlMode.PercentOutput, leftSpeed);
         Actuators.getRight1Motor().set(ControlMode.PercentOutput, rightSpeed);
-   
+        Actuators.getRight2Motor().set(ControlMode.PercentOutput, rightSpeed);
+        Actuators.getRight3Motor().set(ControlMode.PercentOutput, rightSpeed);
+
         Actuators.getShiftHighGear().set(shiftingValue(state));
     }
 

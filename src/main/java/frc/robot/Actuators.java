@@ -66,8 +66,8 @@ public class Actuators {
         // set follower motors
         Left2Motor.follow(Left1Motor);
         Left3Motor.follow(Left1Motor);
-        Right2Motor.follow(Right1Motor);
-        Right3Motor.follow(Right1Motor);
+        //Right2Motor.follow(Right1Motor);
+        //Right3Motor.follow(Right1Motor);
 
         ArmInOutLift2.follow(ArmInOutLift1);
         // reverse motors
@@ -137,6 +137,7 @@ public class Actuators {
         LiftMotor1.config_kI(Constants.PID_SLOT, Constants.LIFT_I_VALUE, Constants.PID_TIMEOUT);
         LiftMotor1.config_kD(Constants.PID_SLOT, Constants.LIFT_D_VALUE, Constants.PID_TIMEOUT);
        
+        
     }
 
     public static double getPdpCurrentOnPort(int port){
