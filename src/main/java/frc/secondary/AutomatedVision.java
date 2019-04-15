@@ -18,7 +18,7 @@ public class AutomatedVision{
     private static double totalAngle = 27;
     private static double returnedError;
     private static double returnedAngle;
-	private static Integer returnedDistance;
+	private static Float returnedDistance;
 	private static Double returnedWidth;
 
     // add initial variable to stop or start processing
@@ -46,7 +46,7 @@ public class AutomatedVision{
                     returnedAngle = Double.valueOf(keyValuePair[1]);
                     break;
                 case "distance":
-                    returnedDistance = Integer.valueOf(keyValuePair[1]);
+                    returnedDistance = Float.valueOf(keyValuePair[1]);
                     break;
                 case "width":
                     returnedWidth = Double.valueOf(keyValuePair[1]);

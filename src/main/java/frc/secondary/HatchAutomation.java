@@ -88,6 +88,24 @@ public class HatchAutomation {
 
     }
 
+    public static void toggleSpear(int presses) {
+        boolean pos = false;
+        if (presses % 2 == 1) {
+            pos = true;
+        }
+        if (Math.abs(Elevator.getLiftSpeed()) > 0.1){
+            pos = false;
+        }
+        HatchIntake.spear(pos);
+    }
+
+    public static void toggleClamp(int presses){
+        boolean pos = false;
+        if (presses % 2 == 1) {
+            pos = true;
+        }
+        HatchIntake.clamp(pos);
+    }
 
     public static void cycleFloorIntake(boolean isToggled) {
         setHatchFloorIntakeState(isToggled);

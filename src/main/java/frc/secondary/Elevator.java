@@ -17,6 +17,7 @@ public class Elevator {
     private static int nearestDistance;
     private static int targetPosition;
     private static double liftSpeedModifier;
+    private static double elevatorSpeed;
     public static void init() {
         liftSpeedModifier = Constants.LIFT_NORMAL_MODIFIER;
         Level_1 = true;
@@ -28,11 +29,9 @@ public class Elevator {
         updateLiftSpeedModifier();
         double liftSpeed = (liftSpeedModifier) * (liftAxis.get());
         liftSpeed += -Constants.ELEVATOR_HOLD_SPEED;
+        elevatorSpeed = liftSpeed;
         //setLiftMotorSpeed(liftSpeed);
-       
-        if (Math.abs(liftSpeed) > 0.1) {
-            HatchIntake.spear(false);
-        }
+    
         //passiveGotoNearestLevel(liftAxis.isUntoggled(), liftAxis.get());
         /*if((boolean)Sensors.getCargoPresentLift().get()){
             setCarriageWheelsSpeed(intakeSpeed);
@@ -42,6 +41,9 @@ public class Elevator {
     }
     public static double getLiftSpeedModifier(){
         return liftSpeedModifier;
+    }
+    public static double getLiftSpeed(){
+        return elevatorSpeed;
     }
     public static void resetEncoderOnLimitSwitch() {
 		if (!Sensors.getLiftLoweredLimitSwitch().get()) {

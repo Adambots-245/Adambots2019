@@ -104,7 +104,8 @@ public class Robot extends TimedRobot {
         Cargo.cargo(Gamepad.primary.getStart().getPresses(), Gamepad.secondary.getTriggers(),
                 Gamepad.secondary.getRightY().get(), (boolean) Sensors.getCargoPresentLift().get(),
                 Gamepad.secondary.getB().get());
-        HatchAutomation.cycleHatch(Gamepad.secondary.getA(), Gamepad.secondary.getX(), Gamepad.secondary.getY());
+        HatchAutomation.toggleSpear(Gamepad.secondary.getY().getPresses());
+        HatchAutomation.toggleClamp(Gamepad.secondary.getX().getPresses());
         Gamepad.primary.updateLast();
         Gamepad.secondary.updateLast();
     }
