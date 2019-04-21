@@ -30,7 +30,7 @@ public class Axis {
     // and toggles
     public void update() {
         store = joy.getRawAxis(port);
-        if (Math.abs(store) > .05) {
+        if (Math.abs(store) > .15) {
             isPressed = true;
         } else {
             isPressed = false;

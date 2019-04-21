@@ -2,6 +2,7 @@ package frc.secondary;
 
 //import frc.robot.Actuators;
 import frc.robot.Button;
+import frc.robot.Axis;
 //import frc.robot.Sensors;
 import edu.wpi.first.wpilibj.Timer;
 //import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -13,17 +14,29 @@ public class HatchAutomation {
     private static int wallIntakeState;
     private static int outtakeState;
     private static int spearIntakeState;
-    
+    private static int spearPresses;
 
     public static void init() {
         timer.start();
         resetAll();
+        spearPresses = 0;
     }
 
-    /*public static boolean toggle(Boolean btn){
-        
+    public static void hatch(Button spearButton, Button clampButton, Axis liftAxis){
+        updateSpearPresses(spearButton, liftAxis);
+        toggleSpear(spearPresses);
+        toggleClamp(clampButton.getPresses());
+    }
 
-    }*/
+    public static void updateSpearPresses(Button spearButton, Axis liftAxis){
+        if (spearButton.isToggled()){
+            spearPresses++;
+        }
+        if (liftAxis.isToggled() && spearPresses % 2 == 1){
+            spearPresses++;
+        }
+    }        
+
     public static void resetAll() {
         HatchIntake.centeringArms(false);
         HatchIntake.clamp(false);
@@ -92,9 +105,6 @@ public class HatchAutomation {
         boolean pos = false;
         if (presses % 2 == 1) {
             pos = true;
-        }
-        if (Math.abs(Elevator.getLiftSpeed()) > 0.1){
-            pos = false;
         }
         HatchIntake.spear(pos);
     }
