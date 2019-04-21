@@ -73,12 +73,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
-        HatchIntake.centeringArms(false);
-        HatchIntake.clamp(false);
-        HatchIntake.spear(false);
-        HatchIntake.suctionArms(false);
-        HatchIntake.vacuum(false);
-
+        HatchAutomation.resetAll();
         // m_autoSelected = m_chooser.getSelected();
         // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
         // System.out.println("Auto selected: " + m_autoSelected);
